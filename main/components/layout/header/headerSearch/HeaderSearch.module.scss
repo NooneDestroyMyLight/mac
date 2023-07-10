@@ -1,0 +1,63 @@
+@import "../../../../../src/app/page.module.scss";
+
+$fs: 400px;
+$circlesize: $fs * 1.6;
+
+.searchDiv {
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  border-radius: 2px;
+  background-color: white;
+  border-radius: $main-radius;
+  box-shadow: $shadow;
+
+  width: $fs;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  transition-duration: $main-duration;
+  position: relative;
+
+  .searchForm {
+    padding-left: 9px;
+    padding-right: 5px;
+    padding-bottom: 2px;
+    outline: none;
+
+    width: 100%;
+    font-size: $font-size-input;
+    border-radius: $main-radius;
+
+    &::-webkit-search-cancel-button {
+      appearance: none;
+      width: 16px;
+      height: 16px;
+      background-image: url("/images/crossREADY1.png");
+      background-size: cover;
+      cursor: pointer;
+    }
+  }
+  .LupeImg {
+    width: 28px;
+    height: 28px;
+    padding: 5px;
+  }
+  border-bottom: solid 2px $font-color;
+
+  //ITS ORANGE CYRCLE
+  &::before {
+    content: "";
+    position: absolute;
+    height: $circlesize;
+    width: $circlesize;
+    background-color: #fdbb13;
+    z-index: -1;
+    right: -127px;
+    opacity: 0.3;
+
+    border-radius: 100%;
+    top: -300px;
+  }
+}

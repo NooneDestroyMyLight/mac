@@ -1,0 +1,8 @@
+@import "../../.././/src/app/page.module.scss";
+.containter {
+  font-size: $font-size-big;
+  color: $main-red-color;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

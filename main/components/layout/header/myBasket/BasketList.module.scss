@@ -1,0 +1,31 @@
+@import "../../../../../src/app/page.module.scss";
+.content {
+  .basket {
+    font-weight: 600;
+    color: black;
+    position: relative;
+    // transition-duration: 0.5s;
+    // @include currentButton;
+  }
+  .dropdown {
+    // visibility: hidden;
+    // opacity: 0;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    // opacity: 1;
+    // visibility: visible;
+
+    border-bottom: solid 2px $font-color;
+    border-radius: $main-radius;
+    background-color: white;
+    box-shadow: $shadow;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+}
+// .dropdown {
+//   @include dropdownCart;
+// }

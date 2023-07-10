@@ -1,0 +1,36 @@
+@import "../../../../../../src/app/page.module.scss";
+
+.menuItem {
+  text-transform: uppercase;
+  position: relative;
+  transition-duration: $main-duration;
+  font-weight: 600;
+  @include currentButton;
+
+  &:hover {
+    .dropdown {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  //padding and left have the same value
+  .dropdown {
+    font-size: 19px;
+    color: white;
+    padding: 10px;
+    visibility: hidden;
+    position: absolute;
+    width: 290px;
+    z-index: 1000;
+    left: -10px;
+
+    border-bottom: solid 2px $font-color;
+    border-radius: $main-radius;
+    background-color: $main-red-color;
+    box-shadow: $shadow;
+
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+  }
+}
