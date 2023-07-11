@@ -37,12 +37,14 @@ $main-red-color: #e0200b;
 }
 
 @mixin dropdownCart {
-  visibility: hidden;
-  position: absolute;
-  right: 0px;
-
   display: flex;
   flex-direction: column;
+  position: absolute;
+  right: 0;
+  padding: 10px;
+
+  visibility: hidden;
+  opacity: 0;
 
   border-bottom: solid 2px $font-color;
   border-radius: $main-radius;
@@ -50,5 +52,4 @@ $main-red-color: #e0200b;
   box-shadow: $shadow;
 
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  opacity: 0;
 }

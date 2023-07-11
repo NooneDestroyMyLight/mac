@@ -9,7 +9,7 @@ import { menuData } from "./header-menu/menuItemData.data";
 import Image from "next/image";
 import Link from "next/link";
 
-const Header: FC = item => {
+const Header: FC = () => {
   return (
     <header className={style.header}>
       <div className={style.logo}>

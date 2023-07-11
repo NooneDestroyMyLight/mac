@@ -31,8 +31,6 @@ const Product: FC<IproductsItems> = ({ product }) => {
     state.basket.cart.filter(item => item.name === product.name)
   );
 
-  console.log(isOnCart ? true : false);
-  console.log(isOnCart);
   return (
     <div
       onClick={e => (!open ? setOpen(true) : setOpen(false))}
@@ -66,14 +64,13 @@ const Product: FC<IproductsItems> = ({ product }) => {
             <li>{protein}g</li>
           </ul>
         </div>
-      ) : null}
-      {open ? (
+      ) : (
         <div className={style.description}>
           <span>Ingredients:</span>
           <br /> Regular Bun 100%, Beef Patty, Ketchup, Pickle Slices, Onions,
           Mustard
         </div>
-      ) : null}
+      )}
 
       <div className={style.price}>{price}₴</div>
       <button
@@ -90,5 +87,5 @@ const Product: FC<IproductsItems> = ({ product }) => {
     </div>
   );
 };
-
+//Need add USESTATE to isOnCART
 export default Product;

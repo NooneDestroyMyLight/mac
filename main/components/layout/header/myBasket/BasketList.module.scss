@@ -1,31 +1,59 @@
 @import "../../../../../src/app/page.module.scss";
 .content {
   .basket {
-    font-weight: 600;
     color: black;
     position: relative;
-    // transition-duration: 0.5s;
-    // @include currentButton;
-  }
-  .dropdown {
-    // visibility: hidden;
-    // opacity: 0;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    right: 0;
-    padding: 10px;
-    // opacity: 1;
-    // visibility: visible;
 
-    border-bottom: solid 2px $font-color;
-    border-radius: $main-radius;
-    background-color: white;
-    box-shadow: $shadow;
+    .dropdown {
+      @include dropdownCart;
+      width: 395px;
+      height: 400px;
+      padding: 25px;
+      z-index: 1000;
+      .container {
+        background-color: rgba(167, 158, 158, 0.35);
+        border-radius: 10px;
+        height: 300px;
+      }
 
-    transition: opacity 0.3s ease, visibility 0.3s ease;
+      .totalcost {
+        font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+        color: rgb(76, 72, 72);
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+
+        height: 50px;
+
+        .cost {
+          font-weight: 600;
+          font-size: 30px;
+        }
+        button {
+          color: white;
+          font-weight: 600;
+          text-transform: uppercase;
+
+          padding-left: 10px;
+          padding-right: 10px;
+
+          border-radius: $main-radius;
+          box-shadow: $shadow;
+          border-bottom: solid 2px $font-color;
+          background-color: $main-red-color;
+          &:hover {
+            opacity: 0.8;
+          }
+          &:active {
+          }
+        }
+      }
+    }
+    .open {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }
-// .dropdown {
-//   @include dropdownCart;
-// }

@@ -7,8 +7,8 @@ $circlesize: $fs * 1.6;
   margin-top: 5px;
   margin-bottom: 5px;
 
-  border-radius: 2px;
   background-color: white;
+  border-bottom: solid 2px $font-color;
   border-radius: $main-radius;
   box-shadow: $shadow;
 
@@ -44,7 +44,6 @@ $circlesize: $fs * 1.6;
     height: 28px;
     padding: 5px;
   }
-  border-bottom: solid 2px $font-color;
 
   //ITS ORANGE CYRCLE
   &::before {
