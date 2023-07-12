@@ -4,16 +4,27 @@
   color: black;
   position: relative;
   margin-left: auto;
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: $main-green-colorOP0;
+    border-radius: 5px;
+  }
+
   .title {
     font-weight: 600;
     display: flex;
+
     position: relative;
     transition: 0.6s ease;
+    div {
+      align-self: center;
+    }
     .countProductInBasket {
       font-size: 15px;
       color: $main-yellow-color;
-      text-overflow: ellipsis;
-      overflow: hidden;
 
       height: 22px;
       width: 22px;
@@ -43,7 +54,7 @@
 
     button {
       text-transform: uppercase;
-    }
+    }             
   }
 
   .dropdown {
@@ -54,8 +65,9 @@
     z-index: 1000;
     .itemsList {
       background-color: rgba(167, 158, 158, 0.35);
-      border-radius: 10px;
+      border-radius: 10px;  
       height: 300px;
+      overflow-y: scroll;
 
       .emptyBasket {
         color: rgb(76, 72, 72);

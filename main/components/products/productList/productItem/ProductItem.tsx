@@ -37,7 +37,9 @@ const Product: FC<IproductsItems> = ({ product }) => {
       <div className={style.image}>
         <Image src={imageSrc} alt={alt} width={200} height={200} />
       </div>
-      <div className={style.title}>{name}</div>
+      <div className={style.title}>
+        <span>{name}</span>
+      </div>
 
       {!open ? (
         <div className={style.description}>

@@ -1,9 +1,9 @@
 "use client";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IbasketItem } from "../../../../../main/components/layout/header/myBasket/basketItem/basketI.interface";
+import { IBasketItem } from "../../../../../main/components/layout/header/myBasket/basketItem/basketI.interface";
 
 interface IbasketSlice {
-  cart: IbasketItem[];
+  cart: IBasketItem[];
 }
 
 const initialState: IbasketSlice = {
@@ -20,13 +20,13 @@ export const basketSlice = createSlice({
     removeFromCart(state, { payload: product }) {
       state.cart = state.cart.filter(item => item.name !== product.name);
     },
-    addOneMoreProduct(state, { payload: product }: PayloadAction<IbasketItem>) {
+    addOneMoreProduct(state, { payload: product }: PayloadAction<IBasketItem>) {
       state.cart.filter(item => {
         item.name === product.name ? item.count++ : item;
       });
       console.log("THIS ONE", state.cart);
     },
-    removeOneProduct(state, { payload: product }: PayloadAction<IbasketItem>) {
+    removeOneProduct(state, { payload: product }: PayloadAction<IBasketItem>) {
       product.count - 1 === 0
         ? (state.cart = state.cart.filter(item => item.name !== product.name))
         : state.cart.filter(item => {

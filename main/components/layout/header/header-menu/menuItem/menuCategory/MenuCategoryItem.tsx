@@ -1,20 +1,21 @@
 "use client";
 import { FC } from "react";
-import { Link } from "react-router-dom";
-import { IMenuCategoryLink } from "./menuCategoryI.interface";
+
+import { IMenuCategory } from "./menuCategoryI.interface";
 import style from "./MenuCategory.module.scss";
+import { useActions } from "@/hooksuseActions";
 
 interface IMenuCategoryItem {
-  props: IMenuCategoryLink;
+  props: IMenuCategory;
 }
 
 const MenuCategoryItem: FC<IMenuCategoryItem> = ({ props }) => {
-  const { name, link } = props;
+  const { filterByCategory } = useActions();
+  const { name } = props;
+
   return (
     <div className={style.menuCategoryItem}>
-      <Link to={link}>
-        <div>{name}</div>
-      </Link>
+      <button onClick={e => filterByCategory(name)}>{name}</button>
     </div>
   );
 };

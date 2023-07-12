@@ -5,19 +5,18 @@ import { Iproduct } from "../../types/productI.interface";
 
 interface IcategoryPage {
   category: string;
-  product: Iproduct[];
+  products: Iproduct[];
 }
 
-const Products: FC<IcategoryPage> = ({ category, product }) => {
-  console.log("productCHECK", product);
+const Products: FC<IcategoryPage> = ({ category, products }) => {
   //This Page!
   //Change on CATEGORY component
 
   //useSelect product there!!!
   return (
     <div className={style.categoryWrapper}>
-      <div className={style.title}>{category}</div>
-      <ProductsList />
+      <div className={style.title}>{category.toUpperCase()}</div>
+      <ProductsList products={products} />
     </div>
   );
 };

@@ -1,4 +1,3 @@
-export interface IMenuCategoryLink {
+export interface IMenuCategory {
   name: string;
-  link: string;
 }

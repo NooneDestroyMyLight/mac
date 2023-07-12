@@ -3,18 +3,18 @@ import { FC } from "react";
 import { useState } from "react";
 import style from "./HeaderSearch.module.scss";
 import Image from "next/image";
-import { productData } from "../../../products/productList/productData.data";
+import { useTypedSelector } from "@/hooksuseTypedSelector";
 
 const HeaderSearch: FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const products = useTypedSelector(state => state.productList.productList);
 
-  const resultFilter = productData.filter(item =>
+  const resultFilter = products.filter(item =>
     item.name
       .toUpperCase()
       .replace(/\s/g, "")
       .includes(searchTerm.toUpperCase().replace(/\s/g, ""))
   );
-  console.log(resultFilter);
 
   return (
     <div className={style.searchDiv}>

@@ -2,6 +2,7 @@ export interface Iproduct {
   imageSrc: string;
   alt: string;
   name: string;
+  category: string;
   calories: number;
   totalWeight: number;
   totalFat: number;

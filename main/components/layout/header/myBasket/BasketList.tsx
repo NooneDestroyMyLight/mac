@@ -38,6 +38,7 @@ const Basket: FC = () => {
         >
           My Basket
         </button>
+        <div></div>
       </ul>
       <ul className={`${style.dropdown} ${isDropdownOpen ? style.open : null}`}>
         <li className={style.itemsList}>

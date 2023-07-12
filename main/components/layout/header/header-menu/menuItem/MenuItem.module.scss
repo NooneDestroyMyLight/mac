@@ -1,11 +1,13 @@
 @import "../../../../../../src/app/page.module.scss";
 
 .menuItem {
-  text-transform: uppercase;
   position: relative;
   transition-duration: $main-duration;
   font-weight: 600;
   @include currentButtonEffect;
+  button {
+    text-transform: uppercase;
+  }
 
   &:hover {
     .dropdown {

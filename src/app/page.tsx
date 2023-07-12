@@ -1,30 +1,23 @@
 "use client";
 import style from "./page.module.scss";
 import Products from "../../main/components/products/Products";
+import { FC, useEffect } from "react";
+import { useTypedSelector } from "@/hooksuseTypedSelector";
+import { useActions } from "@/hooksuseActions";
+import { usePathname } from "next/navigation";
 
-import { Route, Routes } from "react-router-dom";
-
-import { productData } from "@/componentsproducts/productList/productData.data";
-import { menuCategoryData } from "@/componentslayout/header/header-menu/menuItem/menuCategory/menuCategoryData.data";
+import { defaultValueCategory } from "./globalRedux/feature/productList/productList.slice";
 
 export default function Home() {
+  const { productList, category } = useTypedSelector(
+    state => state.productList
+  );
+  const { filterByCategory } = useActions();
+
+  console.log("render...");
   return (
     <div className={style.content}>
-      <Routes>
-        {menuCategoryData.map(item => (
-          <Route
-            path={item.link}
-            element={
-              <Products
-                category={item.name}
-                product={productData.filter(
-                  product => product.name === item.name
-                )}
-              />
-            }
-          />
-        ))}
-      </Routes>
+      <Products category={category} products={productList} />
     </div>
   );
 }

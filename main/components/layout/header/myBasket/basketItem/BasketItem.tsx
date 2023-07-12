@@ -30,7 +30,9 @@ const BasketItem: FC<IProductItem> = ({ product }) => {
         <img src={imageSrc} alt={alt} />
       </div>
       <ul className={style.info}>
-        <li className={style.title}>{name}</li>
+        <li className={style.title}>
+          <span>{name}</span>
+        </li>
         <li className={style.count}>
           <section className={style.operation}>
             <div className={style.price}>{price + "₴"}</div>

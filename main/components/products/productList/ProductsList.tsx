@@ -3,11 +3,16 @@ import style from "./ProductsList.module.scss";
 import Product from "./productItem/ProductItem";
 
 import { productData } from "./productData.data";
+import { Iproduct } from "../../../types/productI.interface";
 
-const ProductsList: FC = () => {
+interface IproductList {
+  products: Iproduct[];
+}
+
+const ProductsList: FC<IproductList> = ({ products }) => {
   return (
     <div className={style.container}>
-      {productData.map(item => (
+      {products.map(item => (
         <Product key={item.imageSrc} product={item} />
       ))}
     </div>
