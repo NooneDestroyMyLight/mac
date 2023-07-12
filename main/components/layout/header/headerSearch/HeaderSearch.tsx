@@ -3,9 +3,19 @@ import { FC } from "react";
 import { useState } from "react";
 import style from "./HeaderSearch.module.scss";
 import Image from "next/image";
+import { productData } from "../../../products/productList/productData.data";
 
 const HeaderSearch: FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  const resultFilter = productData.filter(item =>
+    item.name
+      .toUpperCase()
+      .replace(/\s/g, "")
+      .includes(searchTerm.toUpperCase().replace(/\s/g, ""))
+  );
+  console.log(resultFilter);
+
   return (
     <div className={style.searchDiv}>
       <input

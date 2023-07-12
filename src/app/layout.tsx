@@ -1,6 +1,9 @@
+"use client";
 import "./globals.css";
 import { Inter, Signika } from "next/font/google";
 import { Providers } from "./globalRedux/provider";
+import Header from "../../main/components/layout/header/Header";
+import { BrowserRouter } from "react-router-dom";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,10 +25,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       {/* Put <Header/> there */}
-
-      <body className={signika.className}>
-        <Providers>{children}</Providers>
-      </body>
+      <BrowserRouter>
+        <body className={signika.className}>
+          <Providers>
+            <Header />
+            {children}
+          </Providers>
+        </body>
+      </BrowserRouter>
       {/* Put <Footer/> there */}
     </html>
   );

@@ -43,6 +43,6 @@ export const menuCategoryData: IMenuCategoryLink[] = [
   },
   {
     name: "Menu",
-    link: "/mcMenu",
+    link: "/",
   },
 ];

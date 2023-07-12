@@ -2,14 +2,14 @@
 import { FC } from "react";
 import style from "./BasketItem.module.scss";
 
-import { IbasketItem } from "./basketI.interface";
-import { useActions } from "../../../../../hooks/useActions";
+import { IBasketItem } from "./basketI.interface";
+import { useActions } from "@/hooksuseActions";
 
-interface IproductItem {
-  product: IbasketItem;
+interface IProductItem {
+  product: IBasketItem;
 }
 
-const BasketItem: FC<IproductItem> = ({ product }) => {
+const BasketItem: FC<IProductItem> = ({ product }) => {
   const { addOneMoreProduct, removeOneProduct, removeFromCart } = useActions();
   const {
     imageSrc,
@@ -25,15 +25,16 @@ const BasketItem: FC<IproductItem> = ({ product }) => {
   } = product;
 
   return (
-    <div className={style.container}>
+    <div className={style.basketItemWrapper}>
       <div className={style.image}>
         <img src={imageSrc} alt={alt} />
       </div>
       <ul className={style.info}>
         <li className={style.title}>{name}</li>
         <li className={style.count}>
-          <div className={style.price}>{price + "₴"}</div>
-          <div className={style.operation}>
+          <section className={style.operation}>
+            <div className={style.price}>{price + "₴"}</div>
+
             <button
               onClick={e => removeOneProduct(product)}
               className={style.countButton}
@@ -47,11 +48,11 @@ const BasketItem: FC<IproductItem> = ({ product }) => {
             >
               +
             </button>
-            <button
-              onClick={e => removeFromCart(product)}
-              className={style.removeButton}
-            ></button>
-          </div>
+          </section>
+          <button
+            onClick={e => removeFromCart(product)}
+            className={style.removeButton}
+          ></button>
         </li>
       </ul>
     </div>

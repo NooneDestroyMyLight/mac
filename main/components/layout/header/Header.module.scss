@@ -4,6 +4,12 @@
   display: flex;
   padding-top: 60px;
   padding-bottom: 5px;
+
+  // position: sticky;
+  // top: 0;
+  // width: 100%;
+  // z-index: 100000;
+  // background-color: white;
   nav {
     width: 100%;
     font-size: $font-size-large;

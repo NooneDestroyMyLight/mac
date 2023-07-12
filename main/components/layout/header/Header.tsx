@@ -7,13 +7,13 @@ import MenuItem from "./header-menu/menuItem/MenuItem";
 import { menuData } from "./header-menu/menuItemData.data";
 
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from "react-router-dom";
 
 const Header: FC = () => {
   return (
     <header className={style.header}>
       <div className={style.logo}>
-        <Link href={"/"}>
+        <Link to={"/"}>
           <Image
             src="/images/mcdonalds-logoREADY.png"
             alt="MacDonaldsLogo"

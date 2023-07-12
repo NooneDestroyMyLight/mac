@@ -3,11 +3,9 @@ import { FC, useState } from "react";
 import style from "./ProductItem.module.scss";
 
 import Image from "next/image";
-import { Iproduct } from "../productI.interface";
-import { useTypedSelector } from "../../../../hooks/useTypedSelector";
-import { RootState } from "@/app/globalRedux/store";
-import { useActions } from "../../../../hooks/useActions";
-import { flattenDiagnosticMessageText } from "typescript";
+import { Iproduct } from "../../../../types/productI.interface";
+import { useTypedSelector } from "@/hooksuseTypedSelector";
+import { useActions } from "@/hooksuseActions";
 
 interface IproductsItems {
   product: Iproduct;

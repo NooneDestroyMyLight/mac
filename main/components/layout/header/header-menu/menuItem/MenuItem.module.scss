@@ -5,7 +5,7 @@
   position: relative;
   transition-duration: $main-duration;
   font-weight: 600;
-  @include currentButton;
+  @include currentButtonEffect;
 
   &:hover {
     .dropdown {

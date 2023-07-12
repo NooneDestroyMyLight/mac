@@ -1,4 +1,4 @@
-import { Iproduct } from "../../../../products/productList/productI.interface";
-export interface IbasketItem extends Iproduct {
+import { Iproduct } from "../../../../../types/productI.interface";
+export interface IBasketItem extends Iproduct {
   count: number;
 }

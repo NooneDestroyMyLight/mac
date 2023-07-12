@@ -1,6 +1,6 @@
+"use client";
 import { FC } from "react";
-import Link from "next/link";
-
+import { Link } from "react-router-dom";
 import { IMenuCategoryLink } from "./menuCategoryI.interface";
 import style from "./MenuCategory.module.scss";
 
@@ -12,7 +12,7 @@ const MenuCategoryItem: FC<IMenuCategoryItem> = ({ props }) => {
   const { name, link } = props;
   return (
     <div className={style.menuCategoryItem}>
-      <Link href={link}>
+      <Link to={link}>
         <div>{name}</div>
       </Link>
     </div>

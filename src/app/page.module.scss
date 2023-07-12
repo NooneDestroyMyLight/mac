@@ -1,7 +1,7 @@
 //FONT-SIZE
 //NEED TO DEVIDE IT INTO OWN CONTAINER
 $font-size-small: 14px;
-$font-size-medium: 20px;
+$font-size-medium: 18px;
 $font-size-large: 25px;
 $font-size-input: 20px;
 $font-size-big: 100px;
@@ -14,12 +14,10 @@ $main-duration: 0.5s;
 $font-color: black;
 $main-yellow-color: #fdbb13;
 $main-red-color: #e0200b;
-.content {
-  max-width: 1300px;
-  margin: auto;
-}
+$main-green-color: rgba(28, 104, 28, 0.698);
+$main-green-colorOP0: rgba(28, 104, 28);
 
-@mixin currentButton {
+@mixin currentButtonEffect {
   &::after {
     content: "";
     position: absolute;
@@ -52,4 +50,8 @@ $main-red-color: #e0200b;
   box-shadow: $shadow;
 
   transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+@mixin overflowText {
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
