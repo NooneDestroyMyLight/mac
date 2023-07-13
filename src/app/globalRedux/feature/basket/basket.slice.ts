@@ -24,7 +24,6 @@ export const basketSlice = createSlice({
       state.cart.filter(item => {
         item.name === product.name ? item.count++ : item;
       });
-      console.log("THIS ONE", state.cart);
     },
     removeOneProduct(state, { payload: product }: PayloadAction<IBasketItem>) {
       product.count - 1 === 0

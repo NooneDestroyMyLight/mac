@@ -1,8 +1,8 @@
 "use client";
 import { FC, useState } from "react";
 import style from "./ProductItem.module.scss";
-
 import Image from "next/image";
+
 import { Iproduct } from "../../../../types/productI.interface";
 import { useTypedSelector } from "@/hooksuseTypedSelector";
 import { useActions } from "@/hooksuseActions";
@@ -12,8 +12,12 @@ interface IproductsItems {
 }
 
 const Product: FC<IproductsItems> = ({ product }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const { addToCart } = useActions();
+  const isOnCart = useTypedSelector(state =>
+    state.basket.cart.filter(item => item.name === product.name)
+  );
+
   const {
     imageSrc,
     alt,
@@ -25,9 +29,6 @@ const Product: FC<IproductsItems> = ({ product }) => {
     protein,
     price,
   } = product;
-  const isOnCart = useTypedSelector(state =>
-    state.basket.cart.filter(item => item.name === product.name)
-  );
 
   return (
     <div

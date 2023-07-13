@@ -26,7 +26,7 @@ export const productListSlice = createSlice({
       defaultValueCategory.toUpperCase() === category.toUpperCase()
         ? (state.productList = productData)
         : (state.productList = productData.filter(
-            product => product.category === category
+            product => product.category.toUpperCase() === category.toUpperCase()
           ));
     },
   },

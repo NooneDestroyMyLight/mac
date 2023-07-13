@@ -1,8 +1,10 @@
 "use client";
 import { FC, useEffect, useRef } from "react";
 import style from "./BasketList.module.scss";
+
 import { useTypedSelector } from "@/hooksuseTypedSelector";
 import { useState } from "react";
+
 import BasketItem from "./basketItem/BasketItem";
 import { IBasketItem } from "./basketItem/basketI.interface";
 import Link from "next/link";
@@ -21,8 +23,6 @@ const Basket: FC = () => {
     );
   }, [cartArray]);
 
-  const emptySpaceRef = useRef(null);
-
   return (
     <div className={style.wrapperBasket}>
       <ul className={style.title}>
@@ -38,7 +38,7 @@ const Basket: FC = () => {
         >
           My Basket
         </button>
-        <div></div>
+        {/* <button className={style.basketIcon}></button> */}
       </ul>
       <ul className={`${style.dropdown} ${isDropdownOpen ? style.open : null}`}>
         <li className={style.itemsList}>

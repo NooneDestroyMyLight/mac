@@ -12,6 +12,7 @@ export const productData: Iproduct[] = [
     totalCarbs: 30,
     protein: 13,
     price: 30,
+    ingredients: "",
   },
   {
     imageSrc: "/images/Product/Item2.png",
@@ -24,6 +25,7 @@ export const productData: Iproduct[] = [
     totalCarbs: 43,
     protein: 48,
     price: 109,
+    ingredients: "",
   },
   {
     imageSrc: "/images/Product/Item4.png",
@@ -36,17 +38,19 @@ export const productData: Iproduct[] = [
     totalCarbs: 48,
     protein: 23,
     price: 107,
+    ingredients: "",
   },
   {
     imageSrc: "/images/Product/Item4.png",
     alt: "McChicken",
     name: "sdfsdf",
-    category: "Burgers and rolls",
+    category: "SNACKS",
     calories: 464,
     totalWeight: 175,
     totalFat: 19,
     totalCarbs: 48,
     protein: 23,
     price: 107,
+    ingredients: "",
   },
 ];
