@@ -1,0 +1,33 @@
+@import "../../../../src/app/page.module.scss";
+
+.userOrderSection {
+  @include paddingMarginForParagraph;
+  position: relative;
+  .userInfoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    .orderProductListTitle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    @media (max-width: 420px) {
+      .orderProductListTitle {
+        padding-left: 3em;
+      }
+    }
+    .orderInfo {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+@media (max-width: 420px) {
+  .userOrderSection {
+    padding-left: 0;
+  }
+}
+.sectionNumber {
+  @include sectionNumber;
+}

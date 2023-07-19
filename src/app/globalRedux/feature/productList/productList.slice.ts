@@ -8,6 +8,11 @@ interface IProductSlice {
   category: string;
 }
 
+interface ICurrentOnFocusProduct {
+  name: string;
+  onFocus: boolean;
+}
+
 export const defaultValueCategory = "Menu";
 const initialState: IProductSlice = {
   productList: [],
@@ -28,6 +33,31 @@ export const productListSlice = createSlice({
         : (state.productList = productData.filter(
             product => product.category.toUpperCase() === category.toUpperCase()
           ));
+    },
+    filterBySearch(state, { payload: searchTerm }: PayloadAction<string>) {
+      state.category = defaultValueCategory;
+      state.productList = productData.filter(item =>
+        item.name
+          .toUpperCase()
+          .replace(/\s/g, "")
+          .includes(searchTerm.toUpperCase().replace(/\s/g, ""))
+      );
+    },
+
+    focusCurrentProduct(
+      state,
+      { payload: onFocusProduct }: PayloadAction<ICurrentOnFocusProduct>
+    ) {
+      state.productList.filter(product =>
+        product.name === onFocusProduct.name
+          ? onFocusProduct.onFocus === true
+            ? (product.onFocus = false)
+            : (product.onFocus = true)
+          : (product.onFocus = false)
+      );
+    },
+    removeFocusCurrentProduct(state) {
+      state.productList.map(product => (product.onFocus = false));
     },
   },
 });

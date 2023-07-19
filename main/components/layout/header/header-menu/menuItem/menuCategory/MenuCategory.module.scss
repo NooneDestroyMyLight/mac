@@ -1,3 +1,8 @@
+@import "../../../../../../../src/app/page.module.scss";
+
 .menuCategoryItem {
   margin: 2px;
+
+  @include overflowText;
+  white-space: nowrap;
 }

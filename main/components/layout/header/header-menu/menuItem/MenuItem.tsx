@@ -30,12 +30,13 @@ const MenuItem: FC<IMenuItem> = ({ props }) => {
           {name}
         </button>
       </Link>
+
       {name === menu ? (
-        <ul className={style.dropdown}>
+        <div className={style.dropdown}>
           {menuCategoryData.map(item => (
             <MenuCategoryItem key={item.name} props={item} />
           ))}
-        </ul>
+        </div>
       ) : null}
     </div>
   );

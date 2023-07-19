@@ -11,11 +11,14 @@ $shadow: 0px 4px 6px rgba(63, 58, 58, 0.753);
 $main-duration: 0.5s;
 
 //COLOR
+
 $font-color: black;
 $main-yellow-color: #fdbb13;
 $main-red-color: #e0200b;
 $main-green-color: rgba(28, 104, 28, 0.698);
 $main-green-colorOP0: rgba(28, 104, 28);
+$main-color-gray: rgba(219, 219, 219, 0.7);
+$main-border-color: rgba(0, 0, 0, 0.5);
 
 @mixin currentButtonEffect {
   &::after {
@@ -54,4 +57,44 @@ $main-green-colorOP0: rgba(28, 104, 28);
 @mixin overflowText {
   text-overflow: ellipsis;
   overflow: hidden;
+}
+@mixin checkoutPageButton {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  background-color: $main-green-color;
+  // border: 3px solid $main-green-color;
+  border-radius: 1em;
+  // box-shadow: $shadow;
+
+  padding: 0.3em 1em 0.3em 1em;
+  transition: 0.5 ease;
+  &:hover {
+    opacity: 0.7;
+  }
+  &:active {
+  }
+}
+@mixin sectionNumber {
+  background-color: $main-color-gray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  // border: 1px solid $main-border-color;
+  border-radius: 50%;
+  width: 0em;
+  height: 0em;
+  padding: 1em;
+  position: absolute;
+  left: 0;
+}
+@mixin paddingMarginForParagraph {
+  margin: 1em 0 1em 0;
+  padding: 0.5rem 0 0.5rem 3em;
+  border-bottom: 1px solid $main-color-gray;
+}
+
+@mixin section {
+  position: relative;
+  padding-left: 3em;
 }

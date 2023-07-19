@@ -18,18 +18,7 @@
   flex-direction: row;
 
   border-bottom: 1px solid black;
-  .image {
-    display: flex;
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-    img {
-      align-self: center;
-      width: 100%;
-      height: auto;
-      filter: brightness(80%);
-    }
-  }
+
   .info {
     display: flex;
     flex-direction: column;

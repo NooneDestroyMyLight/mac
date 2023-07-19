@@ -1,7 +1,14 @@
+"use client";
 import { FC } from "react";
 import style from "./itemDiscription.module.scss";
+import { ICompaund } from "../../../../../types/productI.interface";
 
-const itemDiscription: FC = ({}) => {
+interface IitemDiscription {
+  compaund: ICompaund;
+}
+
+const ItemDiscription: FC<IitemDiscription> = ({ compaund }) => {
+  const { calories, totalWeight, totalFat, totalCarbs, protein } = compaund;
   return (
     <div className={style.description}>
       <ul>
@@ -27,4 +34,4 @@ const itemDiscription: FC = ({}) => {
     </div>
   );
 };
-export default itemDiscription;
+export default ItemDiscription;

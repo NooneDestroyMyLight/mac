@@ -3,13 +3,10 @@ export interface Iproduct {
   alt: string;
   name: string;
   category: string;
-  calories: number;
-  totalWeight: number;
-  totalFat: number;
-  totalCarbs: number;
-  protein: number;
-  price: number;
+  compaund: ICompaund;
   ingredients: string;
+  price: number;
+  onFocus: boolean;
   //id:number;
 }
 
@@ -19,7 +16,6 @@ export interface ICompaund {
   totalFat: number;
   totalCarbs: number;
   protein: number;
-  price: number;
 }
 
 // export type Tproduct = {

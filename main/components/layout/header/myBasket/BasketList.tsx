@@ -8,14 +8,32 @@ import { useState } from "react";
 import BasketItem from "./basketItem/BasketItem";
 import { IBasketItem } from "./basketItem/basketI.interface";
 import Link from "next/link";
+import { useActions } from "@/hooksuseActions";
 
 const Basket: FC = () => {
-  const { cart: cartArray } = useTypedSelector(state => state.basket);
+  const { setTotalAmountCost } = useActions();
+
+  const { cart: cartArray, totalАmountСost } = useTypedSelector(
+    state => state.basket
+  );
+
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const [totalCost, setTotalcost] = useState(0);
+
+  // const dropdownMenu = useRef<HTMLDivElement>(null);
+  // useEffect(() => {
+  //   const handler = (e: MouseEvent) => {
+  //     if (!dropdownMenu.current?.contains(e.target as Node))
+  //       setDropdownOpen(false);
+  //   };
+  //   document.addEventListener("mousedown", handler);
+
+  //   return () => {
+  //     document.removeEventListener("mousedown", handler);
+  //   };
+  // });
 
   useEffect(() => {
-    setTotalcost(
+    setTotalAmountCost(
       cartArray.reduce(
         (total: number, item: IBasketItem) => total + item.price * item.count,
         0
@@ -45,13 +63,13 @@ const Basket: FC = () => {
           {cartArray.length === 0 ? (
             <div className={style.emptyBasket}>Your basket is Empty</div>
           ) : (
-            cartArray.map(item => (
-              <BasketItem key={item.imageSrc} product={item} />
-            ))
+            cartArray.map(item => <BasketItem key={item.name} product={item} />)
           )}
         </li>
         <li className={style.totalcost}>
-          <div className={style.cost}>{totalCost}₴</div>
+          <div className={style.cost}>
+            {new Intl.NumberFormat("uk-UA").format(totalАmountСost)}₴
+          </div>
           <Link href={"/checkout"}>
             <button disabled={cartArray.length === 0 ? true : false}>
               checkout

@@ -13,7 +13,7 @@ const ProductsList: FC<IproductList> = ({ products }) => {
   return (
     <div className={style.container}>
       {products.map(item => (
-        <Product key={item.imageSrc} product={item} />
+        <Product key={item.name} product={item} />
       ))}
     </div>
   );

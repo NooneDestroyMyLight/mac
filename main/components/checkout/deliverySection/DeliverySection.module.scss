@@ -1,0 +1,13 @@
+@import "../../../../src/app/page.module.scss";
+.deliverySection {
+  position: relative;
+  padding-left: 3em;
+  .mapContainer {
+    height: 300px;
+    width: 500px;
+    border-radius: 50px;
+  }
+}
+.sectionNumber {
+  @include sectionNumber;
+}

@@ -28,7 +28,7 @@ export default function RootLayout({
       <BrowserRouter>
         <body className={signika.className}>
           <Providers>
-            <Header />
+            {/* <Header /> */}
             {children}
           </Providers>
         </body>

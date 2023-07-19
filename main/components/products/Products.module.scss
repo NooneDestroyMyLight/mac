@@ -5,4 +5,10 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  .title {
+    transition: 0.3 ease;
+    text-align: center;
+    width: 100%;
+    @include overflowText;
+  }
 }

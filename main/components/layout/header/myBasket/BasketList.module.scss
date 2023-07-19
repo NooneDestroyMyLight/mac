@@ -4,27 +4,26 @@
   color: black;
   position: relative;
   margin-left: auto;
-
   ::-webkit-scrollbar {
     width: 4px;
   }
   ::-webkit-scrollbar-thumb {
     background-color: $main-green-colorOP0;
     border-radius: 5px;
+    opacity: 0.2;
   }
-
   .title {
     font-weight: 600;
     display: flex;
-
     position: relative;
     transition: 0.6s ease;
     .basketIcon {
       align-self: center;
+
       height: 24px;
       width: 24px;
-      background-image: url("../../../../../public/images/dropDown.png");
 
+      background-image: url("../../../../../public/images/dropDown.png");
       background-size: 25px;
     }
     div {
@@ -54,12 +53,11 @@
       left: 124px;
 
       opacity: 0;
-      transition: opacity 0.3s ease-in;
+      transition: opacity 1s ease;
     }
     .countProductInBasket.show {
       opacity: 1;
     }
-
     button {
       text-transform: uppercase;
     }
@@ -74,9 +72,9 @@
     .itemsList {
       background-color: rgba(167, 158, 158, 0.35);
       border-radius: 10px;
+
       height: 300px;
       overflow-y: scroll;
-
       .emptyBasket {
         color: rgb(76, 72, 72);
         font-weight: 600;
