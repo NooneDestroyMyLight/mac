@@ -8,8 +8,8 @@ export interface ImapCenter {
 
 const initialState = {
   center: {
-    lat: -3.745,
-    lng: -38.523,
+    lat: 49.9935,
+    lng: 36.230383,
   },
 };
 

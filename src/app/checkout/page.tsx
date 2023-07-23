@@ -3,14 +3,14 @@ import { FC } from "react";
 import style from "./checkout.module.scss";
 import Image from "next/image";
 
-import { useTypedSelector } from "@/hooksuseTypedSelector";
+import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { Libraries, useJsApiLoader } from "@react-google-maps/api";
-import Map from "@/componentscheckout/deliverySection/map/Map";
-import Autocomplete from "@/componentscheckout/deliverySection/autocomplete/Autocomplete";
+import Map from "@/components/checkout/deliverySection/map/Map";
+import Autocomplete from "@/components/checkout/deliverySection/autocomplete/Autocomplete";
 
-import UserInfoSection from "@/componentscheckout/userInfoSection/UserInfoSection";
-import UserOrderSection from "@/componentscheckout/userOrderSection/UserOrderSection";
-import DeliverySection from "@/componentscheckout/deliverySection/DeliverySection";
+import UserInfoSection from "@/components/checkout/userInfoSection/UserInfoSection";
+import UserOrderSection from "@/components/checkout/userOrderSection/UserOrderSection";
+import DeliverySection from "@/components/checkout/deliverySection/DeliverySection";
 
 const API_KEY = process.env.API_KEY;
 

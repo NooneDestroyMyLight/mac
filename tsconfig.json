@@ -26,7 +26,8 @@
       "@/hooks*": ["./main/hooks/*"],
       "@/assets*": ["./main/assets/*"],
       "@/globalRedux*": ["./src/app/globalRedux"],
-      "@/images*": ["./public/images"]
+      "@/images*": ["./public/images"],
+      "@/page*": ["./src/app/page.module.scss"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

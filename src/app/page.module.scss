@@ -98,3 +98,20 @@ $main-border-color: rgba(0, 0, 0, 0.5);
   position: relative;
   padding-left: 3em;
 }
+
+@mixin uperText {
+  padding-left: 1em;
+  font-size: 0.8em;
+  color: gray;
+}
+
+.uperInputText {
+  @include uperText;
+}
+
+.h2Title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0.5em 0 0.5em 0;
+}
