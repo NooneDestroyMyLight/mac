@@ -1,0 +1,9 @@
+.dropdown {
+  background-color: red;
+  display: flex;
+  opacity: 1;
+  position: absolute;
+}
+.activeDropdown {
+  opacity: 0;
+}

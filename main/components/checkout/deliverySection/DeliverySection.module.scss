@@ -2,10 +2,33 @@
 .deliverySection {
   position: relative;
   padding-left: 3em;
-  .mapContainer {
-    height: 300px;
-    width: 500px;
-    border-radius: 50px;
+
+  .deliveryContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    .sectionTitle {
+      display: flex;
+      align-items: center;
+    }
+    .mapContainer {
+      height: 300px;
+      width: 100%;
+      border-radius: 50px;
+    }
+    .deliveryInfosInput {
+      display: grid;
+      grid-template-columns: 0.5fr;
+      row-gap: 1em;
+
+      .currentAdress {
+        color: gray;
+        font-weight: 700;
+        margin-right: 0.5em;
+        background-color: #f9f5ed;
+        border: none;
+      }
+    }
   }
 }
 .sectionNumber {

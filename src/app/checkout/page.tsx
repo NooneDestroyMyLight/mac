@@ -44,12 +44,12 @@ const Checkout: FC = () => {
       <div className={style.main}>
         <h1>Checkout page</h1>
         <UserInfoSection />
-        <section className={style.userLocationSection}>
+        {/* <section className={style.userLocationSection}>
           <div className={style.imageContainer}>
             <img src="/images/mapIcon.png" alt="location icon" />
           </div>
           Choose your city
-        </section>
+        </section> */}
         <div className={style.orderTitle}>
           Order
           <div className={style.orderTotalCost}>

@@ -9,6 +9,7 @@ import style from "./Map.module.scss";
 const containerStyle = {
   width: "100%",
   height: "100%",
+  borderRadius: "1rem",
 };
 
 interface Imap {
