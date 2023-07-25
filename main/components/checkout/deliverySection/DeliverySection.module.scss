@@ -19,14 +19,23 @@
     .deliveryInfosInput {
       display: grid;
       grid-template-columns: 0.5fr;
-      row-gap: 1em;
+      row-gap: 0.5em;
 
-      .currentAdress {
-        color: gray;
+      li {
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .deliveryButton {
         font-weight: 700;
         margin-right: 0.5em;
-        background-color: #f9f5ed;
+        background-color: #eacbcb;
         border: none;
+        cursor: pointer;
+        &:hover {
+          opacity: 0.5;
+        }
       }
     }
   }

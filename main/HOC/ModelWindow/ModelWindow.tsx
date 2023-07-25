@@ -23,12 +23,6 @@ const ModelWindow: FC<ImodelWindow> = ({ active, setActive, children }) => {
         onClick={e => e.stopPropagation()}
       >
         {children}
-        {/* <div className={style.autocomplete}>
-          <Autocomplete isLoaded={isLoaded} />
-        </div>
-        <div className={style.map}>
-          {isLoaded ? <Map center={center} /> : <div>EMPTY</div>}
-        </div> */}
       </div>
     </div>
   );

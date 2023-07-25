@@ -1,5 +1,5 @@
 "use client";
-import { FC, ReactNode, useState } from "react";
+import { FC, ReactNode, useRef, useState } from "react";
 import style from "./Dropdown.module.scss";
 import useOnclickOutside from "react-cool-onclickoutside";
 
@@ -10,10 +10,6 @@ interface Idropdown {
 }
 
 const Dropdown: FC<Idropdown> = ({ children, active, setActive }) => {
-  const ref = useOnclickOutside(() => {
-    setActive(false);
-  });
-
   return (
     <div
       className={

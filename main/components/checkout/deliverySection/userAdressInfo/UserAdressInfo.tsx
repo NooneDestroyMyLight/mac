@@ -1,13 +1,28 @@
 "use client";
-import { FC, ReactNode, useState } from "react";
-import style from "./userAdressInfo.module.scss";
+import { FC, useCallback } from "react";
+import style from "./UserAdressInfo.module.scss";
 import useOnclickOutside from "react-cool-onclickoutside";
 
-const UserAdressInfo: FC = () => {
+interface IuserAdressInfo {
+  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const UserAdressInfo: FC<IuserAdressInfo> = ({ setActive, setOpen }) => {
+  const toggle = useCallback(() => {
+    setActive(true);
+    setOpen(false);
+  }, []);
   return (
-    <ul>
-      <li>Another Adrsess</li>
-      <li>Click and show model window</li>
+    <ul className={style.adreess}>
+      <li>
+        <button className={style.dropdownItem}>Another Adrsess</button>
+      </li>
+      <li>
+        <button className={style.dropdownItem} onClick={toggle}>
+          Click and show model window
+        </button>
+      </li>
     </ul>
   );
 };

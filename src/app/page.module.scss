@@ -19,6 +19,7 @@ $main-green-color: rgba(28, 104, 28, 0.698);
 $main-green-colorOP0: rgba(28, 104, 28);
 $main-color-gray: rgba(219, 219, 219, 0.7);
 $main-border-color: rgba(0, 0, 0, 0.5);
+$delivery-Info-Map-color: #eacbcb;
 
 @mixin currentButtonEffect {
   &::after {
@@ -103,6 +104,10 @@ $main-border-color: rgba(0, 0, 0, 0.5);
   padding-left: 1em;
   font-size: 0.8em;
   color: gray;
+}
+
+.checkoutPageButton {
+  @include checkoutPageButton;
 }
 
 .uperInputText {

@@ -1,6 +1,8 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useState, useRef } from "react";
 import style from "./DeliverySection.module.scss";
+
+import useOnclickOutside from "react-cool-onclickoutside";
 
 import Autocomplete from "./autocomplete/Autocomplete";
 import Map from "./map/Map";
@@ -22,6 +24,10 @@ const DeliverySection: FC<IdeliverySection> = ({ isLoaded, center }) => {
   const [active, setActive] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
 
+  const ref = useOnclickOutside(() => {
+    setOpen(false);
+  });
+
   return (
     <section className={style.deliverySection}>
       <div className={style.deliveryContent}>
@@ -31,27 +37,43 @@ const DeliverySection: FC<IdeliverySection> = ({ isLoaded, center }) => {
         <div className={style.mapContainer}>
           {isLoaded ? <Map center={center} /> : <div>EMPTY MAP</div>}
         </div>
-        {/* <Autocomplete isLoaded={isLoaded} /> */}
-        {/* <button
-          onClick={() => {
-            setActive(true);
-          }}
-        >
-          BUTTON
-        </button> */}
         <div className={style.deliveryInfosInput}>
-          <input
-            type="text"
-            value={"Peremohy Avenue, 75, Kharkiv, Kharkiv Oblast"}
-            className={style.currentAdress}
-            readOnly
-          />
-          <input type="text" className={style.currentAdress} />
+          <li ref={ref}>
+            <input
+              type="text"
+              value={"Peremohy Avenue, 75, Kharkiv, Kharkiv Oblast"}
+              className={style.deliveryButton}
+              readOnly
+              onClick={e => {
+                setOpen(!open);
+              }}
+            />
+            {open ? (
+              <Dropdown active={open} setActive={setOpen}>
+                <UserAdressInfo setOpen={setOpen} setActive={setActive} />
+              </Dropdown>
+            ) : null}
+          </li>
+          <li>
+            <span className={style.uperInputText}>
+              Sending to another person?
+            </span>
+            <input
+              value={"Add recipient details to help the courier"}
+              type="text"
+              readOnly
+              className={style.deliveryButton}
+            />
+          </li>
         </div>
-        <ModelWindow active={active} setActive={setActive}>
-          <UserLocation isLoaded={isLoaded} center={center} />
-        </ModelWindow>
       </div>
+      <ModelWindow active={active} setActive={setActive}>
+        <UserLocation
+          setActive={setActive}
+          isLoaded={isLoaded}
+          center={center}
+        />
+      </ModelWindow>
     </section>
   );
 };

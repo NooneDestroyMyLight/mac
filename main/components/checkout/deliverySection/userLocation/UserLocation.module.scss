@@ -1,21 +1,58 @@
 @import "../../../../../src/app/page.module.scss";
 .mainContainer {
+  width: 700px;
+  height: 600px;
+
   display: flex;
   flex-direction: column;
-  padding: 1em;
-  gap: 1em;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+
+  padding: 1em;
+  position: relative;
+  .closeIcon {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
   .content {
     display: flex;
-    gap: 1em;
-    .autocompleteContainer {
-      width: 240px;
+    gap: 2em;
+    .mapAndDiscriptionWrapper {
       display: flex;
       flex-direction: column;
-      button {
+      align-items: center;
+      gap: 1em;
+      .map {
+        width: 600px;
+        height: 300px;
+      }
+      .discription {
+        font-weight: 700;
+        font-size: 1.1rem;
+        text-align: center;
+        word-wrap: break-word;
+        width: 400px;
+      }
+    }
+
+    .autocompleteContainer {
+      width: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      li {
         display: flex;
-        justify-content: flex-end;
+        flex-direction: column;
+        gap: 0.5em;
+        .inputField {
+          input {
+            width: 100%;
+          }
+        }
+      }
+      button {
+        background-color: $delivery-Info-Map-color;
       }
     }
     .mapContainer {
