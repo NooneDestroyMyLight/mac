@@ -1,22 +1,22 @@
 "use client";
 import { FC } from "react";
-import style from "./checkout.module.scss";
+import style from "./Checkout.module.scss";
 import Image from "next/image";
 
 import { useTypedSelector } from "@/hooks/useTypedSelector";
 import { Libraries, useJsApiLoader } from "@react-google-maps/api";
-import Map from "@/components/checkout/deliverySection/map/Map";
-import Autocomplete from "@/components/checkout/deliverySection/autocomplete/Autocomplete";
 
 import UserInfoSection from "@/components/checkout/userInfoSection/UserInfoSection";
 import UserOrderSection from "@/components/checkout/userOrderSection/UserOrderSection";
 import DeliverySection from "@/components/checkout/deliverySection/DeliverySection";
+import PaymentSection from "@/componentscheckout/paymentSection/PaymentSection";
 
 const API_KEY = process.env.API_KEY;
 
 const libraries: Libraries = ["places"];
 
 const Checkout: FC = () => {
+  const { center } = useTypedSelector(state => state.googleMap);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: API_KEY,
@@ -26,8 +26,6 @@ const Checkout: FC = () => {
   const { cart: cartArray, totalАmountСost } = useTypedSelector(
     state => state.basket
   );
-
-  const { center } = useTypedSelector(state => state.googleMap);
 
   return (
     <div className={style.container}>
@@ -61,16 +59,7 @@ const Checkout: FC = () => {
         </div>
         <UserOrderSection cartArray={cartArray} />
         <DeliverySection center={center} isLoaded={isLoaded} />
-        <section className={style.paymentSection}>
-          <div>
-            <div className={style.sectionNumber}>3</div> Payment
-          </div>
-          <div></div>
-        </section>
-        <section>
-          <div>add Comments</div>
-          <div></div>
-        </section>
+        <PaymentSection />
       </div>
     </div>
   );

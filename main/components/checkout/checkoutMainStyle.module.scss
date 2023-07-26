@@ -1,0 +1,60 @@
+@import "@/page";
+
+$main-green-color: rgba(28, 104, 28, 0.698);
+$main-green-colorOP0: rgba(28, 104, 28);
+
+.section {
+  @include paddingMarginForParagraph;
+  position: relative;
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+
+  .sectionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    .sectionTitle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    @media (max-width: 420px) {
+      .sectionTitle {
+        padding-left: 3em;
+      }
+    }
+  }
+}
+@media (max-width: 420px) {
+  .section {
+    padding-left: 0;
+  }
+}
+
+///////small detail
+.sectionNumber {
+  @include sectionNumber;
+}
+
+.uperInputText {
+  @include uperText;
+}
+
+.inputColumn {
+  display: flex;
+  flex-direction: column;
+  input {
+    padding-left: 1em;
+  }
+}

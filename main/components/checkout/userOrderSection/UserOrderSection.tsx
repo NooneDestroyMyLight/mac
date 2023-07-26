@@ -5,19 +5,19 @@ import style from "./UserOrderSection.module.scss";
 import OrderProductItem from "../orderProductItem/OrderProductItem";
 import { IBasketItem } from "@/componentslayout/header/myBasket/basketItem/basketI.interface";
 
-interface IuserOrderSection {
+interface IUserOrderSection {
   cartArray: IBasketItem[];
 }
 
-const UserOrderSection: FC<IuserOrderSection> = ({ cartArray }) => {
+const UserOrderSection: FC<IUserOrderSection> = ({ cartArray }) => {
   return (
-    <section className={style.userOrderSection}>
-      <div className={style.userInfoContainer}>
-        <div className={style.orderProductListTitle}>
-          <div className={style.sectionNumber}>1</div>
-          <div>Your product list</div>
-          <div>Edit</div>
-        </div>
+    <section className={style.section}>
+      <div className={style.sectionContainer}>
+        <ul className={style.sectionTitle}>
+          <li className={style.sectionNumber}>1</li>
+          <li>Your product list</li>
+          <li>Edit</li>
+        </ul>
         <div className={style.orderInfo}>
           {cartArray.map(product => (
             <OrderProductItem product={product} />

@@ -1,7 +1,7 @@
 "use client";
 import { FC, useState, useCallback, useRef } from "react";
 
-import { GoogleMap } from "@react-google-maps/api";
+import { GoogleMap, Marker } from "@react-google-maps/api";
 import { mapDefaultTheme } from "./mapTheme";
 
 import style from "./Map.module.scss";
@@ -53,7 +53,7 @@ const Map: FC<Imap> = ({ center }) => {
         onUnmount={onUnmount}
       >
         {/* Child components, such as markers, info windows, etc. */}
-        <></>
+        <Marker position={center} />
       </GoogleMap>
     </div>
   );

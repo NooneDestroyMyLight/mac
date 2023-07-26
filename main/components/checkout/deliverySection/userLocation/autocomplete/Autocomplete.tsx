@@ -23,15 +23,19 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
     init,
     clearSuggestions,
   } = usePlacesAutocomplete({
+    requestOptions: {
+      radius: 5000,
+
+      componentRestrictions: { country: "ua" },
+      types: ["address"],
+    },
+
     initOnMount: false,
     debounce: 300,
   });
-
   const { setCoordinates } = useActions();
 
   const ref = useOnclickOutside(() => {
-    // When user clicks outside of the component, we can dismiss
-    // the searched suggestions by calling this method
     clearSuggestions();
   });
 
@@ -47,7 +51,6 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
       // by setting the second parameter to "false"
       setValue(description, false);
       clearSuggestions();
-      console.log(description);
       // Get latitude and longitude via utility functions
 
       getGeocode({ address: description }).then(results => {
@@ -70,11 +73,7 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
       } = suggestion;
 
       return (
-        <li
-          className={style.hints}
-          key={place_id}
-          onClick={handleSelect(suggestion)}
-        >
+        <li key={place_id} onClick={handleSelect(suggestion)}>
           <strong>{main_text}</strong> <small>{secondary_text}</small>
         </li>
       );
@@ -89,7 +88,9 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
         placeholder="Where are you going?"
       />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
-      {status === "OK" && <ul>{renderSuggestions()}</ul>}
+      {status === "OK" && (
+        <ul className={style.hints}>{renderSuggestions()}</ul>
+      )}
     </div>
   );
 };

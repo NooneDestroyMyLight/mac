@@ -21,6 +21,8 @@ $main-color-gray: rgba(219, 219, 219, 0.7);
 $main-border-color: rgba(0, 0, 0, 0.5);
 $delivery-Info-Map-color: #eacbcb;
 
+$default-opacity: 0.7;
+
 @mixin currentButtonEffect {
   &::after {
     content: "";
@@ -104,6 +106,10 @@ $delivery-Info-Map-color: #eacbcb;
   padding-left: 1em;
   font-size: 0.8em;
   color: gray;
+}
+
+@mixin hoverOpacity {
+  opacity: $default-opacity;
 }
 
 .checkoutPageButton {

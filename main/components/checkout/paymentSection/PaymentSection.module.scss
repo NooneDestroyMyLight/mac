@@ -1,0 +1,43 @@
+@import "../checkoutMainStyle.module.scss";
+.paymentSelectContainer {
+  display: grid;
+  grid-template-columns: 0.5fr;
+
+  .selector {
+    position: relative;
+
+    input {
+      color: aliceblue;
+
+      border: none;
+      cursor: pointer;
+      width: 100%;
+
+      background-color: $main-green-color;
+      padding-right: 40px;
+      &:hover {
+        opacity: 0.8;
+      }
+    }
+    .selectorIcon {
+      cursor: pointer;
+
+      top: 15px;
+      right: 20px;
+
+      width: 10px;
+      height: 10px;
+
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+      border-bottom-right-radius: 2px;
+
+      position: absolute;
+      transform: rotate(45deg);
+      transition: 0.3s;
+    }
+    .selectorIconActive {
+      transform: rotate(135deg);
+    }
+  }
+}

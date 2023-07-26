@@ -1,138 +1,94 @@
-@import "../../../../src/app/page.module.scss";
+@import "../checkoutMainStyle.module.scss";
 
-@mixin uperText {
-  padding-left: 1em;
-  font-size: 0.8em;
-  color: gray;
+.userInfoButton {
+  display: flex;
+  gap: 1em;
+  button {
+    @include checkoutPageButton;
+  }
 }
-
-.userInfoSection {
-  position: relative;
-  padding-left: 3em;
-  .userInfoContainer {
+.userInputContainer {
+  .userAuth {
     display: flex;
-    flex-direction: column;
     gap: 1em;
+    .authInputs {
+      display: grid;
+      grid-template-columns: 1fr;
+      row-gap: 0.5em;
 
-    .userInfoTitle {
-      display: flex;
-      align-items: center;
-    }
-    @media (max-width: 420px) {
-      .userInfoTitle {
-        padding-left: 3em;
+      width: 50%;
+      li {
+        display: flex;
+        flex-direction: column;
       }
-    }
-    .userInfoButton {
-      display: flex;
-      gap: 1em;
       button {
+        font-size: 1.3em;
+        width: 100%;
         @include checkoutPageButton;
       }
-    }
-    .userInputContainer {
-      .userAuth {
-        display: flex;
-        gap: 1em;
-        .authInputs {
-          display: grid;
-          grid-template-columns: 1fr;
-
-          row-gap: 0.5em;
-
-          width: 50%;
-          li {
-            display: flex;
-            flex-direction: column;
-          }
-          button {
-            font-size: 1.3em;
-            width: 100%;
-            @include checkoutPageButton;
-          }
-          .password {
-            .passwordInput {
-              display: flex;
-              flex-direction: row;
-              align-items: center;
-              input {
-                width: 100%;
-              }
-              .hidePassword {
-                margin: 0 1em 0 1em;
-                width: 1.5em;
-                height: 1.5em;
-                img {
-                  width: 100%;
-                  height: 100%;
-                }
-              }
-            }
-          }
-        }
-        .authByService {
+      .password {
+        .passwordInput {
           display: flex;
-          justify-content: center;
+          flex-direction: row;
           align-items: center;
-          width: 50%;
-          flex-direction: column;
-          .loginGoogle {
-            padding: 1em 1em 1em 1em;
-            border-radius: 1rem;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5em;
+          input {
             width: 100%;
-
-            background-color: $main-color-gray;
-            border-radius: 0.5rem;
-            .googleIconContainer {
-              width: 1em;
-              height: 1em;
+          }
+          .hidePassword {
+            width: 1.5em;
+            height: 1.5em;
+            margin: 0 1em 0 1em;
+            img {
+              width: 100%;
+              height: 100%;
             }
           }
         }
       }
+    }
 
-      //==================
-      .userInfoInputs {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    .authByService {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 50%;
+      .loginGoogle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5em;
 
-        column-gap: 1em;
-        row-gap: 0.5em;
+        width: 100%;
 
-        li {
-          display: flex;
-          flex-direction: column;
-          input {
-            padding-left: 1em;
-          }
-        }
-      }
-      @media (max-width: 420px) {
-        .userInfoInputs {
-          grid-template-columns: repeat(1, 100%);
+        padding: 1em 1em 1em 1em;
+
+        background-color: $main-color-gray;
+        border-radius: 0.5rem;
+        .googleIconContainer {
+          width: 1em;
+          height: 1em;
         }
       }
     }
+  }
 
-    .saveButton {
-      width: 5em;
-      @include checkoutPageButton;
+  //==================
+  .userInfoInputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 1em;
+    row-gap: 0.5em;
+  }
+  @media (max-width: 420px) {
+    .userInfoInputs {
+      grid-template-columns: repeat(1, 100%);
     }
   }
 }
-@media (max-width: 420px) {
-  .userInfoSection {
-    padding-left: 0;
-  }
-}
-.sectionNumber {
-  @include sectionNumber;
-}
-.uperInputText {
-  @include uperText;
+
+.saveButton {
+  width: 5em;
+  @include checkoutPageButton;
 }

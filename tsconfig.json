@@ -27,7 +27,8 @@
       "@/assets*": ["./main/assets/*"],
       "@/globalRedux*": ["./src/app/globalRedux"],
       "@/images*": ["./public/images"],
-      "@/page*": ["./src/app/page.module.scss"]
+      "@/page*": ["./src/app/page.module.scss"],
+      "@/HOC*": ["./main/HOC"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -1,4 +1,4 @@
-@import "../../../../../src/app/page.module.scss";
+@import "@/page";
 .mainContainer {
   width: 700px;
   height: 600px;
@@ -11,9 +11,22 @@
   padding: 1em;
   position: relative;
   .closeIcon {
+    cursor: pointer;
+    &:hover {
+      @include hoverOpacity;
+    }
     position: absolute;
     top: 0;
     right: 0;
+  }
+  .previousPageIcon {
+    cursor: pointer;
+    &:hover {
+      @include hoverOpacity;
+    }
+    position: absolute;
+    top: 0;
+    left: 0;
   }
   .content {
     display: flex;
