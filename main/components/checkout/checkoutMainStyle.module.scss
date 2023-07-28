@@ -1,8 +1,5 @@
 @import "@/page";
 
-$main-green-color: rgba(28, 104, 28, 0.698);
-$main-green-colorOP0: rgba(28, 104, 28);
-
 .section {
   @include paddingMarginForParagraph;
   position: relative;
@@ -54,6 +51,11 @@ $main-green-colorOP0: rgba(28, 104, 28);
 .inputColumn {
   display: flex;
   flex-direction: column;
+  position: relative;
+  span {
+    position: absolute;
+    top: -10px;
+  }
   input {
     padding-left: 1em;
   }

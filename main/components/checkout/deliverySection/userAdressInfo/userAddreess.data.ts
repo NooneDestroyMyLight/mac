@@ -1,43 +1,45 @@
-export interface IUserAddress {
-  adreess: string;
+export interface IUserAddressData {
+  address: string;
 }
 
-export const userAdressData: IUserAddress[] = [
+export const userAddressData: IUserAddressData[] = [
   {
-    adreess: "Пр.Поремоги, 75",
+    address: "Пр.Поремоги, 75",
     //ADD LOCATION COORDINATE THERE
   },
   {
-    adreess: "Гвардійців-Широнінців, 33",
+    address: "Гвардійців-Широнінців, 33",
   },
   {
-    adreess: "Сумська, 125",
+    address: "Сумська, 125",
   },
   {
-    adreess: "Наукова, 55",
+    address: "Наукова, 55",
   },
   {
-    adreess: "Героїв праці, 63",
+    address: "Героїв праці, 63",
   },
   {
-    adreess: "Студенська,123",
+    address: "Студенська,123",
   },
   {
-    adreess: "Пр.Поремоги, 75",
+    address: "Пр.Поремоги, 75",
   },
   {
-    adreess: "Гвардійців-Широнінців, 33",
+    address: "Гвардійців-Широнінців, 33",
   },
   {
-    adreess: "Сумська, 125",
+    address: "Сумська, 125",
   },
   {
-    adreess: "Наукова, 55",
+    address: "Наукова, 55",
   },
   {
-    adreess: "Героїв праці, 63",
+    address: "Героїв праці, 63",
   },
   {
-    adreess: "Студенська,123",
+    address: "Студенська,123",
   },
 ];
+
+export const userAdressKey: keyof IUserAddressData = "address";

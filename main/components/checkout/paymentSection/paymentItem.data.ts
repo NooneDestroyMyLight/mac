@@ -1,7 +1,8 @@
 export interface IPaymentMethodData {
   method: string;
 }
-export const paymentMethodData = [
+
+export const paymentMethodData: IPaymentMethodData[] = [
   {
     method: "Cash after delivery",
   },
@@ -10,4 +11,4 @@ export const paymentMethodData = [
   },
 ];
 
-export const method = Object.keys(paymentMethodData);
+export const paymentMethod: keyof IPaymentMethodData = "method";

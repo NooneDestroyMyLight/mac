@@ -3,11 +3,11 @@ import style from "./PaymentSection.module.scss";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
-import Dropdown from "../../../HOC/dropdown/Dropdown";
+import { paymentMethodData } from "./paymentItem.data";
 
-import PaymentItem from "./paymentItem/PaymentItem";
+import Selector from "../../../HOC/selector/Selesctor";
 
-import { paymentMethodData } from "./paymentItem/paymentItem.data";
+import { paymentMethod } from "./paymentItem.data";
 
 const PaymentSection: FC = () => {
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
@@ -23,27 +23,11 @@ const PaymentSection: FC = () => {
           <div className={style.sectionNumber}>3</div> Payment
         </div>
         <ul className={style.paymentSelectContainer}>
-          <li
-            ref={ref}
-            className={style.selector}
-            onClick={e => {
-              setDropDownOpen(!isDropDownOpen);
-            }}
-          >
-            <input type="text" value="Selector" readOnly />
-            <div
-              className={`${style.selectorIcon} ${
-                isDropDownOpen ? style.selectorIconActive : null
-              }`}
-            ></div>
-            {isDropDownOpen ? (
-              <Dropdown
-                active={isDropDownOpen}
-                array={paymentMethodData}
-                property="method"
-              ></Dropdown>
-            ) : null}
-          </li>
+          <Selector
+            array={paymentMethodData}
+            property={paymentMethod}
+            selectorValue="Select"
+          />
         </ul>
       </div>
     </section>

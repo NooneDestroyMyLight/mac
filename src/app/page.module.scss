@@ -15,7 +15,7 @@ $main-duration: 0.5s;
 $font-color: black;
 $main-yellow-color: #fdbb13;
 $main-red-color: #e0200b;
-$main-green-color: rgba(28, 104, 28, 0.698);
+$main-green-color: rgba(73, 145, 73);
 $main-green-colorOP0: rgba(28, 104, 28);
 $main-color-gray: rgba(219, 219, 219, 0.7);
 $main-border-color: rgba(0, 0, 0, 0.5);
@@ -64,8 +64,9 @@ $default-opacity: 0.7;
 @mixin checkoutPageButton {
   display: flex;
   justify-content: center;
-  font-weight: 600;
+  // font-weight: 600;
   background-color: $main-green-color;
+  color: white;
   // border: 3px solid $main-green-color;
   border-radius: 1em;
   // box-shadow: $shadow;
@@ -103,7 +104,8 @@ $default-opacity: 0.7;
 }
 
 @mixin uperText {
-  padding-left: 1em;
+  background-color: white;
+  margin-left: 1em;
   font-size: 0.8em;
   color: gray;
 }

@@ -24,10 +24,9 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
     clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
-      radius: 5000,
-
+      // radius: 5000,
       componentRestrictions: { country: "ua" },
-      types: ["address"],
+      // types: ["address"],
     },
 
     initOnMount: false,
@@ -50,11 +49,13 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
       setValue(description, false);
+      console.log(description);
       clearSuggestions();
       // Get latitude and longitude via utility functions
 
       getGeocode({ address: description }).then(results => {
         const { lat, lng } = getLatLng(results[0]);
+
         setCoordinates({ lat, lng });
       });
     };
