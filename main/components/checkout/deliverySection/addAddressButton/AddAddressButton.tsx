@@ -1,13 +1,13 @@
 "use client";
 import { FC, useCallback } from "react";
-import style from "./UserAddressInfo.module.scss";
+import style from "./AddAddressButton.module.scss";
 
 interface IuserAddressInfo {
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UserAdressInfo: FC<IuserAddressInfo> = ({ setActive, setOpen }) => {
+const AddAddressButton: FC<IuserAddressInfo> = ({ setActive, setOpen }) => {
   const toggle = useCallback(() => {
     setActive(true);
     setOpen(false);
@@ -22,4 +22,4 @@ const UserAdressInfo: FC<IuserAddressInfo> = ({ setActive, setOpen }) => {
     </button>
   );
 };
-export default UserAdressInfo;
+export default AddAddressButton;

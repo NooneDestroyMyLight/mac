@@ -40,9 +40,13 @@ const UserInfoSection: FC = () => {
                   <input type="text" />
                 </li>
                 <li className={style.password}>
-                  <span className={style.uperInputText}>Password</span>
                   <div className={style.passwordInput}>
-                    <input type={stateObj.showPassword ? "text" : "password"} />
+                    <li className={style.inputColumn}>
+                      <span className={style.uperInputText}>Password</span>
+                      <input
+                        type={stateObj.showPassword ? "text" : "password"}
+                      />
+                    </li>
                     <div
                       className={style.hidePassword}
                       onClick={() =>

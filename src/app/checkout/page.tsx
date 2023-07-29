@@ -10,6 +10,7 @@ import UserInfoSection from "@/components/checkout/userInfoSection/UserInfoSecti
 import UserOrderSection from "@/components/checkout/userOrderSection/UserOrderSection";
 import DeliverySection from "@/components/checkout/deliverySection/DeliverySection";
 import PaymentSection from "@/componentscheckout/paymentSection/PaymentSection";
+import Sidebar from "@/componentscheckout/sideBar/SideBar";
 
 const API_KEY = process.env.API_KEY;
 
@@ -28,7 +29,7 @@ const Checkout: FC = () => {
   );
 
   return (
-    <div className={style.container}>
+    <div className={style.checkoutPage}>
       <div className={style.title}>
         <Image
           src="/images/mcdonalds-logoREADY.png"
@@ -39,27 +40,30 @@ const Checkout: FC = () => {
         />
         Macdonalds
       </div>
-      <div className={style.main}>
-        <h1>Checkout page</h1>
-        <UserInfoSection />
-        {/* <section className={style.userLocationSection}>
+      <h1>Checkout page</h1>
+      <div className={style.container}>
+        <div className={style.main}>
+          <UserInfoSection />
+          {/* <section className={style.userLocationSection}>
           <div className={style.imageContainer}>
             <img src="/images/mapIcon.png" alt="location icon" />
           </div>
           Choose your city
         </section> */}
-        <div className={style.orderTitle}>
-          Order
-          <div className={style.orderTotalCost}>
-            amount:{" "}
-            <span>
-              {new Intl.NumberFormat("uk-UA").format(totalАmountСost)} ₴
-            </span>
+          <div className={style.orderTitle}>
+            Order
+            <div className={style.orderTotalCost}>
+              amount:{" "}
+              <span>
+                {new Intl.NumberFormat("uk-UA").format(totalАmountСost)} ₴
+              </span>
+            </div>
           </div>
+          <UserOrderSection cartArray={cartArray} />
+          <DeliverySection center={center} isLoaded={isLoaded} />
+          <PaymentSection />
         </div>
-        <UserOrderSection cartArray={cartArray} />
-        <DeliverySection center={center} isLoaded={isLoaded} />
-        <PaymentSection />
+        <Sidebar />
       </div>
     </div>
   );

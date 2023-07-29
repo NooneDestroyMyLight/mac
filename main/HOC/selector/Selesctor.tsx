@@ -4,7 +4,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import style from "./Selector.module.scss";
 
 import { IPaymentMethodData } from "@/componentscheckout/paymentSection/paymentItem.data";
-import { IUserAddressData } from "@/componentscheckout/deliverySection/userAdressInfo/userAddreess.data";
+import { IUserAddressData } from "@/componentscheckout/deliverySection/userAddreess.data";
 
 export interface IDropdown<T> {
   children?: ReactNode;

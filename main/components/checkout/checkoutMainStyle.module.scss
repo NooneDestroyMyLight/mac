@@ -33,6 +33,7 @@
     }
   }
 }
+
 @media (max-width: 420px) {
   .section {
     padding-left: 0;
@@ -52,9 +53,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
+
   span {
     position: absolute;
-    top: -10px;
+    top: -0.7em;
   }
   input {
     padding-left: 1em;

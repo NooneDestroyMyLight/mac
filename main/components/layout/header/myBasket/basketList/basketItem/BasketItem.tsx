@@ -2,19 +2,19 @@
 import { FC } from "react";
 import style from "./BasketItem.module.scss";
 
-import { IBasketItem } from "./basketI.interface";
 import { useActions } from "@/hooksuseActions";
 
 import BasketProductImage from "./basketImage/BasketProductImage";
-import OperationButton from "./operationButton/OperationButton";
+import OperationButton from "../../basketItem/operationButton/OperationButton";
 
+import { IBasketItem } from "./basketI.interface";
 interface IProductItem {
   product: IBasketItem;
 }
 
 const BasketItem: FC<IProductItem> = ({ product }) => {
-  const { addOneMoreProduct, removeOneProduct, removeFromCart } = useActions();
-  const { imageSrc, alt, name, price, count } = product;
+  const { removeFromCart } = useActions();
+  const { imageSrc, alt, name, price } = product;
 
   return (
     <div className={style.basketItemWrapper}>
@@ -24,10 +24,10 @@ const BasketItem: FC<IProductItem> = ({ product }) => {
           <span>{name}</span>
         </li>
         <li className={style.count}>
-          <div className={style.operation}>
+          <section className={style.operation}>
             <div className={style.price}>{price + "₴"}</div>
             <OperationButton product={product} />
-          </div>
+          </section>
           <button
             onClick={e => removeFromCart(product)}
             className={style.removeButton}

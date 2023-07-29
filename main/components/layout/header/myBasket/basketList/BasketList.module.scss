@@ -1,0 +1,30 @@
+@import "@/page";
+
+.basketListContainer {
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: $main-green-colorOP0;
+    border-radius: 5px;
+    opacity: 0.2;
+  }
+
+  .itemsList {
+    background-color: rgba(167, 158, 158, 0.35);
+    border-radius: 10px;
+    overflow-y: auto;
+
+    height: 300px;
+
+    .emptyBasket {
+      font-size: 1em;
+      color: rgb(76, 72, 72);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+  }
+}

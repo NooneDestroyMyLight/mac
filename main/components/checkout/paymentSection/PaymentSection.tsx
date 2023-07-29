@@ -28,6 +28,10 @@ const PaymentSection: FC = () => {
             property={paymentMethod}
             selectorValue="Select"
           />
+          <li className={style.inputColumn}>
+            <span className={style.uperInputText}>Have a promo code?</span>
+            <input type="text" />
+          </li>
         </ul>
       </div>
     </section>

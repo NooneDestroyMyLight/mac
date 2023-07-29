@@ -68,7 +68,7 @@ $default-opacity: 0.7;
   background-color: $main-green-color;
   color: white;
   // border: 3px solid $main-green-color;
-  border-radius: 1em;
+  border-radius: 0.2em;
   // box-shadow: $shadow;
 
   padding: 0.3em 1em 0.3em 1em;
@@ -79,6 +79,16 @@ $default-opacity: 0.7;
   &:active {
   }
 }
+
+@mixin basketOperationButton {
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid gray;
+  background-color: rgba(255, 255, 255, 0.734);
+  border-radius: 100px;
+}
+
 @mixin sectionNumber {
   background-color: $main-color-gray;
   display: flex;
@@ -94,7 +104,7 @@ $default-opacity: 0.7;
 }
 @mixin paddingMarginForParagraph {
   margin: 1em 0 1em 0;
-  padding: 0.5rem 0 0.5rem 3em;
+  padding: 1.5rem 0 1.5rem 3em;
   border-bottom: 1px solid $main-color-gray;
 }
 

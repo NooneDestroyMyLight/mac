@@ -1,22 +1,21 @@
 "use client";
-import { FC, useEffect, useRef } from "react";
-import style from "./BasketList.module.scss";
+import { FC, useEffect, useState } from "react";
+import Link from "next/link";
+import style from "./Basket.module.scss";
 
 import { useTypedSelector } from "@/hooksuseTypedSelector";
-import { useState } from "react";
-
-import BasketItem from "./basketItem/BasketItem";
-import { IBasketItem } from "./basketItem/basketI.interface";
-import Link from "next/link";
 import { useActions } from "@/hooksuseActions";
+
+import { IBasketItem } from "./basketItem/basketI.interface";
+
+import BasketList from "./basketList/BasketList";
+import BasketTotalCost from "./basketTotalCost/BasketTotalCost";
 
 const Basket: FC = () => {
   const { setTotalAmountCost } = useActions();
-
   const { cart: cartArray, totalАmountСost } = useTypedSelector(
     state => state.basket
   );
-
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
   // const dropdownMenu = useRef<HTMLDivElement>(null);
@@ -49,27 +48,14 @@ const Basket: FC = () => {
             <span>{cartArray.length}</span>
           </li>
         ) : null}
-        <button
-          onClick={e =>
-            !isDropdownOpen ? setDropdownOpen(true) : setDropdownOpen(false)
-          }
-        >
+        <button onClick={e => setDropdownOpen(!isDropdownOpen)}>
           My Basket
         </button>
-        {/* <button className={style.basketIcon}></button> */}
       </ul>
       <ul className={`${style.dropdown} ${isDropdownOpen ? style.open : null}`}>
-        <li className={style.itemsList}>
-          {cartArray.length === 0 ? (
-            <div className={style.emptyBasket}>Your basket is Empty</div>
-          ) : (
-            cartArray.map(item => <BasketItem key={item.name} product={item} />)
-          )}
-        </li>
+        <BasketList cartArray={cartArray} />
         <li className={style.totalcost}>
-          <div className={style.cost}>
-            {new Intl.NumberFormat("uk-UA").format(totalАmountСost)}₴
-          </div>
+          <BasketTotalCost totalАmountСost={totalАmountСost} />
           <Link href={"/checkout"}>
             <button disabled={cartArray.length === 0 ? true : false}>
               checkout

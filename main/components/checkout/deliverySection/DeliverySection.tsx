@@ -8,15 +8,12 @@ import ModelWindow from "../../../HOC/modelWindow/ModelWindow";
 import Selector from "../../../HOC/selector/Selesctor";
 
 import UserLocation from "./userLocation/UserLocation";
-import UserAdressInfo from "./userAdressInfo/UserAddressInfo";
+import AddAddressButton from "./addAddressButton/AddAddressButton";
 import Map from "./userLocation/map/Map";
 
 import { ImapCenter } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
-import {
-  userAddressData,
-  userAdressKey,
-} from "./userAdressInfo/userAddreess.data";
+import { userAddressData, userAdressKey } from "./userAddreess.data";
 
 interface IDeliverySection {
   isLoaded: boolean;
@@ -46,7 +43,7 @@ const DeliverySection: FC<IDeliverySection> = ({ isLoaded, center }) => {
             property={userAdressKey}
             selectorValue="Peremohy Avenue, 75, Kharkiv, Kharkiv Oblast"
           >
-            <UserAdressInfo
+            <AddAddressButton
               setOpen={setDropDownOpen}
               setActive={setUserLocationOpen}
             />

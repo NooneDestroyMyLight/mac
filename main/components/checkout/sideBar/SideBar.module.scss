@@ -1,0 +1,43 @@
+@import "@/page";
+
+.sideBarContainer {
+  height: 450px;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  gap: 1em;
+
+  top: 50px;
+
+  padding: 3em 3em 3em 3em;
+
+  box-shadow: $shadow;
+  border-radius: 0.2em;
+
+  position: sticky;
+
+  button {
+    font-size: 1.3em;
+    width: 100%;
+    @include checkoutPageButton;
+  }
+  .title {
+    font-size: 2.5em;
+    border-bottom: 1px solid $main-color-gray;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    .infoEl {
+      display: flex;
+      justify-content: space-between;
+      .discription {
+        @include uperText;
+      }
+    }
+  }
+}
