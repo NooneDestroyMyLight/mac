@@ -1,59 +1,54 @@
 "use client";
-import { FC, useState, useRef } from "react";
+import { FC, useState } from "react";
 import style from "./DeliverySection.module.scss";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
-import Autocomplete from "./autocomplete/Autocomplete";
-import Map from "./map/Map";
+import ModelWindow from "../../../HOC/modelWindow/ModelWindow";
+import Selector from "../../../HOC/selector/Selesctor";
+
+import UserLocation from "./userLocation/UserLocation";
+import AddAddressButton from "./addAddressButton/AddAddressButton";
+import Map from "./userLocation/map/Map";
 
 import { ImapCenter } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
-import ModelWindow from "../../../HOC/modelWindow/ModelWindow";
-import UserLocation from "./userLocation/UserLocation";
+import { userAddressData, userAdressKey } from "./userAddreess.data";
 
-import Dropdown from "../../../HOC/dropdown/Dropdown";
-import UserAdressInfo from "./userAdressInfo/UserAdressInfo";
-
-interface IdeliverySection {
+interface IDeliverySection {
   isLoaded: boolean;
   center: ImapCenter;
 }
 
-const DeliverySection: FC<IdeliverySection> = ({ isLoaded, center }) => {
-  const [active, setActive] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
+const DeliverySection: FC<IDeliverySection> = ({ isLoaded, center }) => {
+  const [isUserLocationOpen, setUserLocationOpen] = useState<boolean>(false);
+  const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
   const ref = useOnclickOutside(() => {
-    setOpen(false);
+    setDropDownOpen(false);
   });
 
   return (
-    <section className={style.deliverySection}>
-      <div className={style.deliveryContent}>
+    <section className={style.section}>
+      <div className={style.sectionContainer}>
         <div className={style.sectionTitle}>
           <div className={style.sectionNumber}>2</div>Delivery
         </div>
         <div className={style.mapContainer}>
           {isLoaded ? <Map center={center} /> : <div>EMPTY MAP</div>}
         </div>
-        <div className={style.deliveryInfosInput}>
-          <li ref={ref}>
-            <input
-              type="text"
-              value={"Peremohy Avenue, 75, Kharkiv, Kharkiv Oblast"}
-              className={style.deliveryButton}
-              readOnly
-              onClick={e => {
-                setOpen(!open);
-              }}
+        <ul className={style.deliveryInfosInput}>
+          <Selector
+            array={userAddressData}
+            property={userAdressKey}
+            selectorValue="Peremohy Avenue, 75, Kharkiv, Kharkiv Oblast"
+          >
+            <AddAddressButton
+              setOpen={setDropDownOpen}
+              setActive={setUserLocationOpen}
             />
-            {open ? (
-              <Dropdown active={open} setActive={setOpen}>
-                <UserAdressInfo setOpen={setOpen} setActive={setActive} />
-              </Dropdown>
-            ) : null}
-          </li>
+          </Selector>
+
           <li>
             <span className={style.uperInputText}>
               Sending to another person?
@@ -65,11 +60,11 @@ const DeliverySection: FC<IdeliverySection> = ({ isLoaded, center }) => {
               className={style.deliveryButton}
             />
           </li>
-        </div>
+        </ul>
       </div>
-      <ModelWindow active={active} setActive={setActive}>
+      <ModelWindow active={isUserLocationOpen} setActive={setUserLocationOpen}>
         <UserLocation
-          setActive={setActive}
+          setActive={setUserLocationOpen}
           isLoaded={isLoaded}
           center={center}
         />

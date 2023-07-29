@@ -1,40 +1,62 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import style from "./UserInfoSection.module.scss";
 
-import { useState } from "react";
+interface IState {
+  showPassword: boolean;
+  switchField: boolean;
+}
 
 const UserInfoSection: FC = () => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
-  const [switchField, setField] = useState<boolean>(false);
+  const [stateObj, setStateObj] = useState<IState>({
+    showPassword: false,
+    switchField: false,
+  });
 
   return (
-    <section className={style.userInfoSection}>
-      <div className={style.userInfoContainer}>
-        <div className={style.userInfoTitle}>
+    <section className={style.section}>
+      <div className={style.sectionContainer}>
+        <div className={style.sectionTitle}>
           <div className={style.sectionNumber}>1</div>Your contact information
         </div>
         <div className={style.userInfoButton}>
-          <button onClick={() => setField(false)}>I'am a new customer</button>
-          <button onClick={() => setField(true)}>I'am a loyal customer</button>
+          <button
+            onClick={() => setStateObj({ ...stateObj, switchField: false })}
+          >
+            I'am a new customer
+          </button>
+          <button
+            onClick={() => setStateObj({ ...stateObj, switchField: true })}
+          >
+            I'am a loyal customer
+          </button>
         </div>
         <div className={style.userInputContainer}>
-          {switchField ? (
-            <ul className={style.userAuth}>
+          {stateObj.switchField ? (
+            <div className={style.userAuth}>
               <ul className={style.authInputs}>
-                <li className={style.loginInput}>
+                <li className={style.inputColumn}>
                   <span className={style.uperInputText}>Email</span>
                   <input type="text" />
                 </li>
                 <li className={style.password}>
-                  <span className={style.uperInputText}>Password</span>
                   <div className={style.passwordInput}>
-                    <input type={showPassword ? "text" : "password"} />
+                    <li className={style.inputColumn}>
+                      <span className={style.uperInputText}>Password</span>
+                      <input
+                        type={stateObj.showPassword ? "text" : "password"}
+                      />
+                    </li>
                     <div
                       className={style.hidePassword}
-                      onClick={() => setShowPassword(!showPassword)}
+                      onClick={() =>
+                        setStateObj({
+                          ...stateObj,
+                          showPassword: !stateObj.showPassword,
+                        })
+                      }
                     >
-                      {showPassword ? (
+                      {stateObj.showPassword ? (
                         <img
                           src="/images/hidePassword.png"
                           alt="hidePassword"
@@ -62,22 +84,22 @@ const UserInfoSection: FC = () => {
                   Google
                 </li>
               </ul>
-            </ul>
+            </div>
           ) : (
             <ul className={style.userInfoInputs}>
-              <li>
-                <span className={style.uperInputText}>Middle name</span>
-                <input type="text" />
-              </li>
-              <li>
+              <li className={style.inputColumn}>
                 <span className={style.uperInputText}>Name</span>
                 <input type="text" />
               </li>
-              <li>
+              <li className={style.inputColumn}>
+                <span className={style.uperInputText}>Last name</span>
+                <input type="text" />
+              </li>
+              <li className={style.inputColumn}>
                 <span className={style.uperInputText}>Phone number</span>
                 <input type="text" />
               </li>
-              <li>
+              <li className={style.inputColumn}>
                 <span className={style.uperInputText}>Email</span>
                 <input type="text" />
               </li>

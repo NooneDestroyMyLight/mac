@@ -1,0 +1,12 @@
+@import "../checkoutMainStyle.module.scss";
+.paymentSelectContainer {
+  display: grid;
+  grid-template-columns: 0.5fr;
+  row-gap: 1em;
+}
+
+// &:focus-within {
+//   span {
+//    top: 1px;
+//   }
+// }

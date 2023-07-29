@@ -2,8 +2,8 @@
 import { FC, useState } from "react";
 import { ImapCenter } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
-import Autocomplete from "../autocomplete/Autocomplete";
-import Map from "../map/Map";
+import Autocomplete from "./autocomplete/Autocomplete";
+import Map from "./map/Map";
 import Image from "next/image";
 
 import style from "./UserLocation.module.scss";
@@ -26,6 +26,15 @@ const UserLocation: FC<UserLocation> = ({ isLoaded, center, setActive }) => {
           src="/images/closeIcon.png"
           alt="close"
           onClick={() => setActive(false)}
+        />
+      </div>
+      <div className={style.previousPageIcon}>
+        <Image
+          width={20}
+          height={20}
+          src="/images/previousIcon.png"
+          alt="close"
+          onClick={() => setOpenFindAdreess(false)}
         />
       </div>
       {openFindAdreess ? (

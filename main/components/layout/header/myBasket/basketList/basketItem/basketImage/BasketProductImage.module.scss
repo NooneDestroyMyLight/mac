@@ -1,0 +1,12 @@
+.image {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+  img {
+    align-self: center;
+    width: 100%;
+    height: auto;
+    filter: brightness(80%);
+  }
+}

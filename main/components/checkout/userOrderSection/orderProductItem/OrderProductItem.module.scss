@@ -20,6 +20,10 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+
+    .priceForOneUnit {
+      width: 4em;
+    }
     ul {
       align-self: center;
       display: flex;

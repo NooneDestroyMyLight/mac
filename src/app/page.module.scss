@@ -15,11 +15,13 @@ $main-duration: 0.5s;
 $font-color: black;
 $main-yellow-color: #fdbb13;
 $main-red-color: #e0200b;
-$main-green-color: rgba(28, 104, 28, 0.698);
+$main-green-color: rgba(73, 145, 73);
 $main-green-colorOP0: rgba(28, 104, 28);
 $main-color-gray: rgba(219, 219, 219, 0.7);
 $main-border-color: rgba(0, 0, 0, 0.5);
 $delivery-Info-Map-color: #eacbcb;
+
+$default-opacity: 0.7;
 
 @mixin currentButtonEffect {
   &::after {
@@ -62,10 +64,11 @@ $delivery-Info-Map-color: #eacbcb;
 @mixin checkoutPageButton {
   display: flex;
   justify-content: center;
-  font-weight: 600;
+  // font-weight: 600;
   background-color: $main-green-color;
+  color: white;
   // border: 3px solid $main-green-color;
-  border-radius: 1em;
+  border-radius: 0.2em;
   // box-shadow: $shadow;
 
   padding: 0.3em 1em 0.3em 1em;
@@ -76,6 +79,16 @@ $delivery-Info-Map-color: #eacbcb;
   &:active {
   }
 }
+
+@mixin basketOperationButton {
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid gray;
+  background-color: rgba(255, 255, 255, 0.734);
+  border-radius: 100px;
+}
+
 @mixin sectionNumber {
   background-color: $main-color-gray;
   display: flex;
@@ -91,7 +104,7 @@ $delivery-Info-Map-color: #eacbcb;
 }
 @mixin paddingMarginForParagraph {
   margin: 1em 0 1em 0;
-  padding: 0.5rem 0 0.5rem 3em;
+  padding: 1.5rem 0 1.5rem 3em;
   border-bottom: 1px solid $main-color-gray;
 }
 
@@ -101,9 +114,14 @@ $delivery-Info-Map-color: #eacbcb;
 }
 
 @mixin uperText {
-  padding-left: 1em;
+  background-color: white;
+  margin-left: 1em;
   font-size: 0.8em;
   color: gray;
+}
+
+@mixin hoverOpacity {
+  opacity: $default-opacity;
 }
 
 .checkoutPageButton {

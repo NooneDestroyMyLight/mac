@@ -6,12 +6,12 @@ import {
 } from "../../../../../main/components/layout/header/myBasket/basketItem/basketI.interface";
 import { ICompaund } from "../../../../../main/types/productI.interface";
 
-interface IbasketSlice {
+export interface IBasketSlice {
   cart: IBasketItem[];
   totalАmountСost: number;
 }
 
-const initialState: IbasketSlice = {
+const initialState: IBasketSlice = {
   cart: [],
   totalАmountСost: 0,
 };
@@ -46,11 +46,16 @@ export const basketSlice = createSlice({
       });
     },
     removeOneProduct(state, { payload: product }: PayloadAction<IBasketItem>) {
-      product.count - 1 === 0
-        ? (state.cart = state.cart.filter(item => item.name !== product.name))
-        : state.cart.filter(item => {
-            item.name === product.name ? item.count-- : item;
-          });
+      state.cart.filter(item => {
+        // item.name === product.name ? item.count++ : item;
+        if (item.name === product.name) {
+          item.count--;
+          item.subTotal = item.price * item.count;
+          return item;
+        } else {
+          return item;
+        }
+      });
     },
   },
 });

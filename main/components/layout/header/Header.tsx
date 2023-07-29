@@ -2,7 +2,7 @@ import { FC } from "react";
 import style from "./Header.module.scss";
 
 import HeaderSearch from "./headerSearch/HeaderSearch";
-import Basket from "./myBasket/BasketList";
+import Basket from "./myBasket/Basket";
 import MenuItem from "./header-menu/menuItem/MenuItem";
 import { menuData } from "./header-menu/menuItemData.data";
 

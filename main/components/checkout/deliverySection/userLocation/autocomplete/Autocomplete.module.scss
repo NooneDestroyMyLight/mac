@@ -1,0 +1,17 @@
+@import ".././../../checkoutMainStyle.module.scss";
+.autocompleteContainer {
+  width: 100%;
+  position: relative;
+  input {
+    width: 100%;
+  }
+  .hints {
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    border-radius: 1em;
+    padding: 1em;
+    top: 45px;
+    box-shadow: $shadow;
+  }
+}

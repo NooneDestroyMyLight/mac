@@ -1,83 +1,117 @@
 @import "../page.module.scss";
 
-.container {
-  font-size: 1rem;
-  width: 800px;
-  input {
-    border: 1px solid black;
-    border: 1px solid $main-border-color;
-    border-radius: 1em;
-    padding: 0.5em 0.4em 0.5em 0.4em;
-    transition: 0.3s ease;
-    &:focus {
-      outline: black;
-      box-shadow: $shadow;
-    }
-  }
-  @media (max-width: 420px) {
-    font-size: 1rem * 2;
-  }
+.checkoutPage {
+  display: flex;
+  flex-direction: column;
   .title {
     font-size: 1.5em;
-    margin: 1em 0 1em 0;
-    gap: 1em;
-    text-transform: uppercase;
     font-weight: 700;
+    text-transform: uppercase;
+
     display: flex;
     align-items: center;
+    gap: 1em;
+
     border-bottom: 1px solid $main-color-gray;
+
+    margin: 1em 0 1em 0;
     padding: 0.5em 0 0.5em 0;
   }
   h1 {
     font-size: 2.5em;
     font-weight: 700;
+
     margin: 0.5em 0 0.5em 0;
   }
-
-  .userLocationSection {
-    transition: 0.3s ease;
-    &:hover {
-      background-color: $main-color-gray;
-    }
+  .container {
+    font-size: 1rem;
     display: flex;
-    align-items: center;
-    .imageContainer {
-      width: 2em;
-      height: 2em;
-      img {
-        height: 100%;
-        width: 100%;
+    gap: 6em;
+    flex-direction: row;
+    .main {
+      width: 800px;
+      position: relative;
+      input {
+        border: 1px solid black;
+        border: 1px solid $main-border-color;
+        border-radius: 0.2em;
+
+        padding: 0.5em 0.4em 0.5em 0.4em;
+        transition: 0.3s ease;
+        &:focus {
+          outline: black;
+          box-shadow: $shadow;
+        }
+      }
+      @media (max-width: 420px) {
+        font-size: 1rem * 2;
+      }
+
+      // .title {
+      //   font-size: 1.5em;
+      //   font-weight: 700;
+      //   text-transform: uppercase;
+
+      //   display: flex;
+      //   align-items: center;
+      //   gap: 1em;
+
+      //   border-bottom: 1px solid $main-color-gray;
+
+      //   margin: 1em 0 1em 0;
+      //   padding: 0.5em 0 0.5em 0;
+      // }
+
+      .userLocationSection {
+        transition: 0.3s ease;
+
+        margin: 1em 0 1em 0;
+        padding: 1em 0 1em 0;
+
+        border: 1px solid gray;
+        border-radius: 0.5rem;
+
+        &:hover {
+          background-color: $main-color-gray;
+        }
+        display: flex;
+        align-items: center;
+        .imageContainer {
+          width: 2em;
+          height: 2em;
+          img {
+            height: 100%;
+            width: 100%;
+          }
+        }
+      }
+
+      .orderTitle {
+        font-size: 1.5em;
+        font-weight: 700;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        border-bottom: 1px solid $main-color-gray;
+
+        margin: 1em 0 1em 0;
+        padding: 0.5rem 0 0.5rem 0;
+        .orderTotalCost {
+          font-size: 1rem;
+          font-weight: 300;
+          span {
+            font-size: 1em * 1.2;
+          }
+        }
+      }
+
+      .paymentSection {
+        position: relative;
+        padding-left: 3em;
       }
     }
-
-    margin: 1em 0 1em 0;
-    padding: 1em 0 1em 0;
-
-    border: 1px solid gray;
-    border-radius: 0.5rem;
-  }
-
-  .orderTitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.5em;
-    margin: 1em 0 1em 0;
-    font-weight: 700;
-    border-bottom: 1px solid $main-color-gray;
-    padding: 0.5rem 0 0.5rem 0;
-    .orderTotalCost {
-      font-size: 1rem;
-      font-weight: 300;
-      span {
-        font-size: 1em * 1.2;
-      }
-    }
-  }
-
-  .paymentSection {
-    position: relative;
-    padding-left: 3em;
   }
 }
 @media (max-width: 420px) {
@@ -85,6 +119,7 @@
     padding: 0 1em 0 1em;
   }
 }
+
 .sectionNumber {
   @include sectionNumber;
 }
