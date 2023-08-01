@@ -1,6 +1,6 @@
 "use client";
 import { FC, KeyboardEvent } from "react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import style from "./HeaderSearch.module.scss";
 import Image from "next/image";
 import { useTypedSelector } from "@/hooksuseTypedSelector";

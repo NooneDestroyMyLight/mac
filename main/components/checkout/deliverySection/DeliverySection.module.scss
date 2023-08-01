@@ -18,9 +18,11 @@
     flex-direction: column;
   }
   .deliveryButton {
-    font-weight: 700;
     margin-right: 0.5em;
-    background-color: #eacbcb;
+
+    background-color: rgb(73, 145, 73);
+    color: white;
+
     border: none;
     cursor: pointer;
     &:hover {

@@ -3,14 +3,20 @@ import useOnclickOutside from "react-cool-onclickoutside";
 
 import style from "./Selector.module.scss";
 
-import { IPaymentMethodData } from "@/componentscheckout/paymentSection/paymentItem.data";
-import { IUserAddressData } from "@/componentscheckout/deliverySection/userAddreess.data";
+// import { IPaymentMethodData } from "@/componentscheckout/paymentSection/paymentItem.data";
+// import { IUserAddressData } from "@/componentscheckout/deliverySection/userAddreess.data";
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit/dist/createAction";
+import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
 export interface IDropdown<T> {
   children?: ReactNode;
   array: T[]; //Add
   property: keyof T;
   selectorValue: string; //currentValue
+  setSelectorValue: ActionCreatorWithPayload<
+    IUserAddress,
+    "googleMap/setCurrentAddress"
+  >;
 }
 
 const Selector: FC<IDropdown<any>> = ({
@@ -18,6 +24,7 @@ const Selector: FC<IDropdown<any>> = ({
   property,
   children,
   selectorValue,
+  setSelectorValue,
 }) => {
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
@@ -55,7 +62,13 @@ const Selector: FC<IDropdown<any>> = ({
           <div className={style.itemsList}>
             {children}
             {array.map(item => (
-              <button key={item[property]} className={style.dropdownItem}>
+              <button
+                onClick={() => {
+                  setSelectorValue(item);
+                }}
+                key={item[property]}
+                className={style.dropdownItem}
+              >
                 {item[property]}
               </button>
             ))}

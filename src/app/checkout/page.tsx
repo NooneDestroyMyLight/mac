@@ -17,16 +17,19 @@ const API_KEY = process.env.API_KEY;
 const libraries: Libraries = ["places"];
 
 const Checkout: FC = () => {
-  const { center } = useTypedSelector(state => state.googleMap);
+  const { center, userAddress, currentLocation } = useTypedSelector(
+    state => state.googleMap
+  );
+  const { cart: cartArray, totalАmountСost } = useTypedSelector(
+    //   const { cart: cartArray, totalАmountСost }: - that how i can typased
+    state => state.basket
+  );
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: API_KEY,
     libraries: libraries,
   });
-
-  const { cart: cartArray, totalАmountСost } = useTypedSelector(
-    state => state.basket
-  );
 
   return (
     <div className={style.checkoutPage}>
@@ -60,10 +63,15 @@ const Checkout: FC = () => {
             </div>
           </div>
           <UserOrderSection cartArray={cartArray} />
-          <DeliverySection center={center} isLoaded={isLoaded} />
+          <DeliverySection
+            center={center}
+            isLoaded={isLoaded}
+            userAddress={userAddress}
+            currentLocation={currentLocation}
+          />
           <PaymentSection />
         </div>
-        <Sidebar />
+        <Sidebar totalАmountСost={totalАmountСost} />
       </div>
     </div>
   );

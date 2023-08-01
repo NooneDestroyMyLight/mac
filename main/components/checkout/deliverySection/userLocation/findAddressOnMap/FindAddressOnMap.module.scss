@@ -1,0 +1,17 @@
+.mapAndDiscriptionWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1em;
+  .map {
+    width: 600px;
+    height: 300px;
+  }
+  .discription {
+    font-weight: 700;
+    font-size: 1.1rem;
+    text-align: center;
+    word-wrap: break-word;
+    width: 400px;
+  }
+}

@@ -11,22 +11,32 @@ import UserLocation from "./userLocation/UserLocation";
 import AddAddressButton from "./addAddressButton/AddAddressButton";
 import Map from "./userLocation/map/Map";
 
-import { ImapCenter } from "@/app/globalRedux/feature/checkout/googleMap.slice";
+import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
+import { useActions } from "@/hooksuseActions";
 
-import { userAddressData, userAdressKey } from "./userAddreess.data";
+// import { userAddressData, userAdressKey } from "./userAddreess.data";
 
 interface IDeliverySection {
   isLoaded: boolean;
-  center: ImapCenter;
+  center: google.maps.LatLngLiteral;
+  userAddress: IUserAddress[];
+  currentLocation: IUserAddress | undefined;
 }
 
-const DeliverySection: FC<IDeliverySection> = ({ isLoaded, center }) => {
+const DeliverySection: FC<IDeliverySection> = ({
+  isLoaded,
+  center,
+  userAddress,
+  currentLocation,
+}) => {
   const [isUserLocationOpen, setUserLocationOpen] = useState<boolean>(false);
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
   const ref = useOnclickOutside(() => {
     setDropDownOpen(false);
   });
+
+  const { setCurrentAddress, setNewUserAddress } = useActions();
 
   return (
     <section className={style.section}>
@@ -39,9 +49,12 @@ const DeliverySection: FC<IDeliverySection> = ({ isLoaded, center }) => {
         </div>
         <ul className={style.deliveryInfosInput}>
           <Selector
-            array={userAddressData}
-            property={userAdressKey}
-            selectorValue="Peremohy Avenue, 75, Kharkiv, Kharkiv Oblast"
+            array={userAddress}
+            property={"address"}
+            selectorValue={
+              !currentLocation ? " Chose address..." : currentLocation.address
+            }
+            setSelectorValue={setCurrentAddress}
           >
             <AddAddressButton
               setOpen={setDropDownOpen}

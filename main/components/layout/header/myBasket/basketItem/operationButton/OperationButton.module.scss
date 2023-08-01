@@ -11,6 +11,7 @@
 
 .operationButton {
   display: flex;
+  align-items: center;
 
   .countButton {
     @include basketOperationButton;

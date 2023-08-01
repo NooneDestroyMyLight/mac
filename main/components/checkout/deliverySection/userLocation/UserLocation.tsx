@@ -1,21 +1,26 @@
 "use client";
 import { FC, useState } from "react";
-import { ImapCenter } from "@/app/globalRedux/feature/checkout/googleMap.slice";
-
-import Autocomplete from "./autocomplete/Autocomplete";
-import Map from "./map/Map";
-import Image from "next/image";
+import { useActions } from "@/hooksuseActions";
 
 import style from "./UserLocation.module.scss";
 
+import Image from "next/image";
+
+import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
+import FindAddressOnMap from "./findAddressOnMap/FindAddressOnMap";
+import SearchShippingAddress from "./shippingAddress/SearchShippingAddress";
+
 interface UserLocation {
   isLoaded: boolean;
-  center: ImapCenter;
+  center: google.maps.LatLngLiteral;
   setActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const UserLocation: FC<UserLocation> = ({ isLoaded, center, setActive }) => {
   const [openFindAdreess, setOpenFindAdreess] = useState<boolean>(false);
+
+  const [location, setLocation] = useState<IUserAddress | null>(null); //Location
+  const { setNewUserAddress } = useActions();
 
   return (
     <div className={style.mainContainer}>
@@ -37,61 +42,27 @@ const UserLocation: FC<UserLocation> = ({ isLoaded, center, setActive }) => {
           onClick={() => setOpenFindAdreess(false)}
         />
       </div>
-      {openFindAdreess ? (
-        <>
-          <h2 className={style.h2Title}>Enter your address on the map</h2>
-          <div className={style.content}>
-            <div className={style.mapAndDiscriptionWrapper}>
-              <div className={style.map}>
-                {isLoaded ? <Map center={center} /> : <div>EMPTY MAP</div>}
-              </div>
-              <span className={style.discription}>
-                Pin your exact location to help the courier find your address
-              </span>
-            </div>
-          </div>
-          <button
-            onClick={() => setOpenFindAdreess(false)}
-            className={style.submitButton}
-          >
-            Submited adreess
-          </button>
-        </>
-      ) : (
-        <>
-          <h2 className={style.h2Title}>Enter your shipping address</h2>
-          <div className={style.content}>
-            <ul className={style.autocompleteContainer}>
-              <li>
-                <div className={style.inputField}>
-                  <span className={style.uperInputText}>
-                    Delivery addresses
-                  </span>
-                  <Autocomplete isLoaded={isLoaded} />
-                </div>
-                <div className={style.inputField}>
-                  <span className={style.uperInputText}>
-                    Floor, door, instructions...
-                  </span>
-                  <input type="text" />
-                </div>
-              </li>
-              <button
-                onClick={() => setOpenFindAdreess(true)}
-                className={style.checkoutPageButton}
-              >
-                Find place adreess in map
-              </button>
-            </ul>
-            <div className={style.mapContainer}>
-              <div className={style.map}>
-                {isLoaded ? <Map center={center} /> : <div>EMPTY MAP</div>}
-              </div>
-            </div>
-          </div>
-          <button className={style.submitButton}>Submited adreess</button>
-        </>
-      )}
+      <h2 className={style.h2Title}>Enter your shipping address</h2>
+      <div className={style.content}>
+        {openFindAdreess ? (
+          <FindAddressOnMap isLoaded={isLoaded} center={center} />
+        ) : (
+          <SearchShippingAddress
+            isLoaded={isLoaded}
+            center={center}
+            setOpenFindAdreess={setOpenFindAdreess}
+            setLocation={setLocation}
+          />
+        )}
+      </div>
+      <button
+        onClick={() => {
+          setNewUserAddress(location);
+        }}
+        className={style.submitButton}
+      >
+        Submit address
+      </button>
     </div>
   );
 };

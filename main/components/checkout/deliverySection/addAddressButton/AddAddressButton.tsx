@@ -18,7 +18,7 @@ const AddAddressButton: FC<IuserAddressInfo> = ({ setActive, setOpen }) => {
       className={`${style.dropdownItem} ${style.addAddressButton} `}
       onClick={toggle}
     >
-      ...Another address
+      + Find address
     </button>
   );
 };

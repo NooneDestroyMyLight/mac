@@ -8,6 +8,7 @@ interface IBasketList {
   cartArray: IBasketItem[];
 }
 
+
 const BasketList: FC<IBasketList> = ({ cartArray }) => {
   return (
     <div className={style.basketListContainer}>

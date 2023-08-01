@@ -48,7 +48,7 @@ const Map: FC<Imap> = ({ center }) => {
         options={defaultOptions}
         mapContainerStyle={containerStyle}
         center={center}
-        zoom={10}
+        zoom={16}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
