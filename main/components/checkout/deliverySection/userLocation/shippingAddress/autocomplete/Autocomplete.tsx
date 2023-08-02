@@ -3,7 +3,6 @@ import { ChangeEvent, FC, useEffect } from "react";
 import style from "./Autocomplete.module.scss";
 
 import useOnclickOutside from "react-cool-onclickoutside";
-
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -21,7 +20,7 @@ interface IAutocomplete {
 const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
   const coordinates: google.maps.CircleLiteral = {
     center: { lat: 49.9935, lng: 36.230383 },
-    radius: 5000,
+    radius: 500,
   };
 
   const {
@@ -34,9 +33,8 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
   } = usePlacesAutocomplete({
     requestOptions: {
       componentRestrictions: { country: "ua" },
-      types: ["address"],
-      language: "ua",
       locationBias: coordinates,
+      language: "uk",
     },
 
     initOnMount: false,

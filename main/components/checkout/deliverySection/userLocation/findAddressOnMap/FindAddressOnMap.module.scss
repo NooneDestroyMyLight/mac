@@ -2,16 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1em;
+  // gap: 1em;
+  justify-content: space-between;
   .map {
     width: 600px;
     height: 300px;
-  }
-  .discription {
-    font-weight: 700;
-    font-size: 1.1rem;
-    text-align: center;
-    word-wrap: break-word;
-    width: 400px;
   }
 }

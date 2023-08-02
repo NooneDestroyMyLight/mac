@@ -62,3 +62,9 @@
     padding-left: 1em;
   }
 }
+.deliverySectionButton {
+  margin: 0.5em auto 0.5em auto;
+  text-align: center;
+  font-size: $font-size-large;
+  @include checkoutPageButton;
+}

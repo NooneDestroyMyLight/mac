@@ -7,7 +7,7 @@ import useOnclickOutside from "react-cool-onclickoutside";
 import ModelWindow from "../../../HOC/modelWindow/ModelWindow";
 import Selector from "../../../HOC/selector/Selesctor";
 
-import UserLocation from "./userLocation/UserLocation";
+import UserLocation from "./userLocation/UserLocationMW";
 import AddAddressButton from "./addAddressButton/AddAddressButton";
 import Map from "./userLocation/map/Map";
 
@@ -36,7 +36,7 @@ const DeliverySection: FC<IDeliverySection> = ({
     setDropDownOpen(false);
   });
 
-  const { setCurrentAddress, setNewUserAddress } = useActions();
+  const { setCurrentAddress } = useActions();
 
   return (
     <section className={style.section}>
