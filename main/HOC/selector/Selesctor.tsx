@@ -17,6 +17,7 @@ export interface IDropdown<T> {
     IUserAddress,
     "googleMap/setCurrentAddress"
   >;
+  iconSrc?: string;
 }
 
 const Selector: FC<IDropdown<any>> = ({
@@ -25,6 +26,7 @@ const Selector: FC<IDropdown<any>> = ({
   children,
   selectorValue,
   setSelectorValue,
+  iconSrc,
 }) => {
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
@@ -40,17 +42,24 @@ const Selector: FC<IDropdown<any>> = ({
         setDropDownOpen(!isDropDownOpen);
       }}
     >
-      <input
-        type="text"
-        value={selectorValue}
-        readOnly
-        className={style.selectorInput}
-      />
-      <div
-        className={`${style.selectorIcon} ${
-          isDropDownOpen ? style.selectorIconActive : null
-        }`}
-      ></div>
+      <div className={style.inputContainer}>
+        {iconSrc && (
+          <div className={style.InputIcon}>
+            <img src={iconSrc} alt="Icon" />
+          </div>
+        )}
+        <input
+          type="text"
+          value={selectorValue}
+          readOnly
+          className={style.selectorInput}
+        />
+        <div
+          className={`${style.selectorIcon} ${
+            isDropDownOpen && style.selectorIconActive
+          }`}
+        ></div>
+      </div>
       {isDropDownOpen ? (
         <div
           className={

@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { FC, ReactNode, useState } from "react";
 import style from "./FindAddressOnMap.module.scss";
 
 import Map from "../map/Map";
@@ -14,11 +14,17 @@ const FindAddressOnMap: FC<IFindAddressOnMap> = ({
   center,
   children,
 }) => {
+  const [currentLocation, setCurrentLocation] = useState();
+
   return (
     <>
       <div className={style.mapAndDiscriptionWrapper}>
         <div className={style.map}>
-          {isLoaded ? <Map center={center} /> : <div>EMPTY MAP</div>}
+          {isLoaded ? (
+            <Map muteMap={true} center={center} />
+          ) : (
+            <div>EMPTY MAP</div>
+          )}
         </div>
         {children}
       </div>

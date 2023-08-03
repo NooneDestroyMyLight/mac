@@ -35,48 +35,40 @@ const UserInfoSection: FC = () => {
           {stateObj.switchField ? (
             <div className={style.userAuth}>
               <ul className={style.authInputs}>
-                <li className={style.inputColumn}>
+                <li className={style.inputColumn} tabIndex={0}>
                   <span className={style.uperInputText}>Email</span>
                   <input type="text" />
                 </li>
-                <li className={style.password}>
-                  <div className={style.passwordInput}>
-                    <li className={style.inputColumn}>
-                      <span className={style.uperInputText}>Password</span>
-                      <input
-                        type={stateObj.showPassword ? "text" : "password"}
-                      />
-                    </li>
-                    <div
-                      className={style.hidePassword}
-                      onClick={() =>
-                        setStateObj({
-                          ...stateObj,
-                          showPassword: !stateObj.showPassword,
-                        })
-                      }
-                    >
-                      {stateObj.showPassword ? (
-                        <img
-                          src="/images/hidePassword.png"
-                          alt="hidePassword"
-                        />
-                      ) : (
-                        <img
-                          src="/images/showPassword.png"
-                          alt="showPassword"
-                        />
-                      )}
-                    </div>
+
+                <li className={`${style.inputColumn} ${style.password}`}>
+                  <span className={style.uperInputText}>Password</span>
+                  <input type={stateObj.showPassword ? "text" : "password"} />
+                  <div
+                    className={style.hidePassword}
+                    onClick={() =>
+                      setStateObj({
+                        ...stateObj,
+                        showPassword: !stateObj.showPassword,
+                      })
+                    }
+                  >
+                    {stateObj.showPassword ? (
+                      <img src="/images/hidePassword.png" alt="hidePassword" />
+                    ) : (
+                      <img src="/images/showPassword.png" alt="showPassword" />
+                    )}
                   </div>
                 </li>
+
                 <div>
                   <input type="checkbox" /> noticed password
                 </div>
                 <button>Login</button>
               </ul>
               <ul className={style.authByService}>
-                <li className={style.uperInputText}>Login by Google</li>
+                <li className={`${style.uperInputText} ${style.login}`}>
+                  Login by Google
+                </li>
                 <li className={style.loginGoogle}>
                   <div className={style.googleIconContainer}>
                     <img src="/images/googleIcon.png" alt="google icon" />

@@ -1,20 +1,18 @@
 "use client";
 import { FC, useState } from "react";
 import style from "./DeliverySection.module.scss";
-
-import useOnclickOutside from "react-cool-onclickoutside";
+import { useActions } from "@/hooksuseActions";
 
 import ModelWindow from "../../../HOC/modelWindow/ModelWindow";
 import Selector from "../../../HOC/selector/Selesctor";
+import AnotherPersonInfo from "./anotherPersonInfo/AnotherPersonInfo";
 
 import UserLocation from "./userLocation/UserLocationMW";
 import AddAddressButton from "./addAddressButton/AddAddressButton";
 import Map from "./userLocation/map/Map";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
-import { useActions } from "@/hooksuseActions";
-
-// import { userAddressData, userAdressKey } from "./userAddreess.data";
+import { userAdressKey } from "./userAddreess.data";
 
 interface IDeliverySection {
   isLoaded: boolean;
@@ -32,10 +30,6 @@ const DeliverySection: FC<IDeliverySection> = ({
   const [isUserLocationOpen, setUserLocationOpen] = useState<boolean>(false);
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
-  const ref = useOnclickOutside(() => {
-    setDropDownOpen(false);
-  });
-
   const { setCurrentAddress } = useActions();
 
   return (
@@ -45,39 +39,36 @@ const DeliverySection: FC<IDeliverySection> = ({
           <div className={style.sectionNumber}>2</div>Delivery
         </div>
         <div className={style.mapContainer}>
-          {isLoaded ? <Map center={center} /> : <div>EMPTY MAP</div>}
+          {isLoaded ? (
+            <Map muteMap={false} center={center} />
+          ) : (
+            <div>EMPTY MAP</div>
+          )}
         </div>
         <ul className={style.deliveryInfosInput}>
           <Selector
             array={userAddress}
-            property={"address"}
+            property={userAdressKey}
             selectorValue={
-              !currentLocation ? " Chose address..." : currentLocation.address
+              !currentLocation ? " Choose address..." : currentLocation.address
             }
             setSelectorValue={setCurrentAddress}
+            iconSrc="/images/icon/free-icon-pin-3944427.png"
           >
             <AddAddressButton
               setOpen={setDropDownOpen}
               setActive={setUserLocationOpen}
             />
           </Selector>
-
-          <li>
-            <span className={style.uperInputText}>
-              Sending to another person?
-            </span>
-            <input
-              value={"Add recipient details to help the courier"}
-              type="text"
-              readOnly
-              className={style.deliveryButton}
-            />
-          </li>
+          <AnotherPersonInfo />
         </ul>
       </div>
-      <ModelWindow active={isUserLocationOpen} setActive={setUserLocationOpen}>
+      <ModelWindow
+        isModelWindowOpen={isUserLocationOpen}
+        setModelWindowOpen={setUserLocationOpen}
+      >
         <UserLocation
-          setActive={setUserLocationOpen}
+          setModelWindowOpen={setUserLocationOpen}
           isLoaded={isLoaded}
           center={center}
         />

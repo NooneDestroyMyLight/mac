@@ -17,16 +17,4 @@
     display: flex;
     flex-direction: column;
   }
-  .deliveryButton {
-    margin-right: 0.5em;
-
-    background-color: rgb(73, 145, 73);
-    color: white;
-
-    border: none;
-    cursor: pointer;
-    &:hover {
-      opacity: 0.5;
-    }
-  }
 }

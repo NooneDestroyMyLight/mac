@@ -1,12 +1,12 @@
 "use client";
-import { FC, useState, useCallback, useRef, useEffect, ReactNode } from "react";
-
+import { FC, useState, useCallback, useRef, useMemo } from "react";
+import style from "./Map.module.scss";
 import Image from "next/image";
 
-import { GoogleMap, Marker } from "@react-google-maps/api";
-import { mapDefaultTheme } from "./mapTheme";
+import Geocode from "react-geocode";
 
-import style from "./Map.module.scss";
+import { GoogleMap } from "@react-google-maps/api";
+import { mapDefaultTheme } from "./mapTheme";
 
 const containerStyle = {
   width: "100%",
@@ -19,20 +19,39 @@ interface Imap {
     lat: number;
     lng: number;
   };
+  muteMap: boolean;
 }
-const defaultOptions: google.maps.MapOptions = {
-  zoomControl: true,
-  mapTypeControl: false,
-  scaleControl: true,
-  streetViewControl: false,
-  rotateControl: false,
-  fullscreenControl: false,
-  disableDoubleClickZoom: false,
-  styles: mapDefaultTheme,
-  // draggable: false,
-};
 
-const Map: FC<Imap> = ({ center }) => {
+const API_KEY = process.env.API_KEY;
+
+const Map: FC<Imap> = ({ center, muteMap }) => {
+  const defaultOptions: google.maps.MapOptions = {
+    zoomControl: false,
+    mapTypeControl: false,
+    scaleControl: true,
+    streetViewControl: false,
+    rotateControl: false,
+    fullscreenControl: false,
+    disableDoubleClickZoom: false,
+    styles: mapDefaultTheme,
+    draggable: muteMap,
+  };
+
+  Geocode.setApiKey("AIzaSyA9jU7WAVpGmckzcSCcBY43ACLMiP4Kv18");
+
+  useMemo(() => {
+    Geocode.setLanguage("en");
+    Geocode.fromLatLng(center.lat.toString(), center.lng.toString()).then(
+      response => {
+        const address = response.results[0].formatted_address;
+        console.log(address);
+      },
+      error => {
+        console.error("Ошибка", error);
+      }
+    );
+  }, []);
+
   const [map, setMap] = useState(null);
   const [markerPosition, setMarkerPosition] = useState(center);
   const mapRef = useRef(null);
@@ -50,7 +69,6 @@ const Map: FC<Imap> = ({ center }) => {
       //@ts-ignore
       const newCenter = mapRef.current.getCenter().toJSON();
       setMarkerPosition(newCenter);
-      console.log(newCenter);
     }
   };
 

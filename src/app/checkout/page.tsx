@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import style from "./Checkout.module.scss";
 import Image from "next/image";
 
@@ -12,9 +12,18 @@ import DeliverySection from "@/components/checkout/deliverySection/DeliverySecti
 import PaymentSection from "@/componentscheckout/paymentSection/PaymentSection";
 import Sidebar from "@/componentscheckout/sideBar/SideBar";
 
+import { IUserAddress } from "../globalRedux/feature/checkout/googleMap.slice";
+
 const API_KEY = process.env.API_KEY;
 
 const libraries: Libraries = ["places"];
+
+interface IuserOrderInfo {
+  location: IUserAddress; // Change into OBJ address and addressName
+  fullName: string;
+  phoneNumber: string;
+  //For Form
+}
 
 const Checkout: FC = () => {
   const { center, userAddress, currentLocation } = useTypedSelector(
@@ -24,12 +33,13 @@ const Checkout: FC = () => {
     //   const { cart: cartArray, totalАmountСost }: - that how i can typased
     state => state.basket
   );
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: API_KEY,
     libraries: libraries,
   });
+
+  const [orderInfo, setOrderInfo] = useState<IuserOrderInfo>();
 
   return (
     <div className={style.checkoutPage}>
@@ -47,12 +57,6 @@ const Checkout: FC = () => {
       <div className={style.container}>
         <div className={style.main}>
           <UserInfoSection />
-          {/* <section className={style.userLocationSection}>
-          <div className={style.imageContainer}>
-            <img src="/images/mapIcon.png" alt="location icon" />
-          </div>
-          Choose your city
-        </section> */}
           <div className={style.orderTitle}>
             Order
             <div className={style.orderTotalCost}>

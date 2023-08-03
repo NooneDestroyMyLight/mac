@@ -4,19 +4,25 @@ import style from "./ModelWindow.module.scss";
 
 interface ImodelWindow {
   children: ReactNode;
-  active: boolean;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isModelWindowOpen: boolean;
+  setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModelWindow: FC<ImodelWindow> = ({ active, setActive, children }) => {
+const ModelWindow: FC<ImodelWindow> = ({
+  isModelWindowOpen,
+  setModelWindowOpen,
+  children,
+}) => {
   return (
     <div
-      onClick={() => setActive(false)}
-      className={active ? `${style.model} ${style.activeModel}` : style.model}
+      onClick={() => setModelWindowOpen(false)}
+      className={
+        isModelWindowOpen ? `${style.model} ${style.activeModel}` : style.model
+      }
     >
       <div
         className={
-          active
+          isModelWindowOpen
             ? `${style.modelContent} ${style.activeModelContent}`
             : style.modelContent
         }

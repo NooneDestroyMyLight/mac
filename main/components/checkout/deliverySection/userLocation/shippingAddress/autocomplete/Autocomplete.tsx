@@ -1,5 +1,6 @@
 "use client";
 import { ChangeEvent, FC, useEffect } from "react";
+import { useActions } from "@/hooksuseActions";
 import style from "./Autocomplete.module.scss";
 
 import useOnclickOutside from "react-cool-onclickoutside";
@@ -8,7 +9,6 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from "use-places-autocomplete";
 
-import { useActions } from "@/hooksuseActions";
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
 interface IAutocomplete {
@@ -40,7 +40,7 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
     initOnMount: false,
     debounce: 300,
   });
-  const { setNewUserAddress, setCoordinates } = useActions();
+  const { setCoordinates } = useActions();
 
   const ref = useOnclickOutside(() => {
     clearSuggestions();
@@ -89,9 +89,13 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
       } = suggestion;
 
       return (
-        <li key={place_id} onClick={handleSelect(suggestion)}>
+        <div
+          className={style.item}
+          key={place_id}
+          onClick={handleSelect(suggestion)}
+        >
           <strong>{main_text}</strong> <small>{secondary_text}</small>
-        </li>
+        </div>
       );
     });
 

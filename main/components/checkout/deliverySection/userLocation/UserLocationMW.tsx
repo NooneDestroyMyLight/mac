@@ -1,6 +1,5 @@
 "use client";
 import { FC, useState } from "react";
-import { useActions } from "@/hooksuseActions";
 
 import style from "./UserLocationMW..module.scss";
 
@@ -8,24 +7,30 @@ import Image from "next/image";
 
 import FindAddressOnMap from "./findAddressOnMap/FindAddressOnMap";
 import SearchShippingAddress from "./shippingAddress/SearchShippingAddress";
+import AddInfoAboutDelivery from "./addInfoAboutDelivery/AddInfoAboutDelivery";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
-import AddInfoAboutDelivery from "./addInfoAboutDelivery/AddInfoAboutDelivery";
 
 interface UserLocation {
   isLoaded: boolean;
   center: google.maps.LatLngLiteral;
-  setActive: React.Dispatch<React.SetStateAction<boolean>>;
+  setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const UserLocation: FC<UserLocation> = ({ isLoaded, center, setActive }) => {
+const UserLocation: FC<UserLocation> = ({
+  isLoaded,
+  center,
+  setModelWindowOpen,
+}) => {
   const [location, setLocation] = useState<IUserAddress | null>(null); //Location
   const [currentWidnowSlide, setCurrentWindowSlide] = useState<number>(1);
 
-  const { setNewUserAddress } = useActions();
   return (
     <div className={style.mainContainer}>
-      <button className={style.closeIcon} onClick={() => setActive(false)}>
+      <button
+        className={style.closeIcon}
+        onClick={() => setModelWindowOpen(false)}
+      >
         <Image width={20} height={20} src="/images/closeIcon.png" alt="close" />
       </button>
       <button
@@ -49,6 +54,7 @@ const UserLocation: FC<UserLocation> = ({ isLoaded, center, setActive }) => {
             setCurrentWindowSlide={setCurrentWindowSlide}
             setLocation={setLocation}
             location={location}
+            setModelWindowOpen={setModelWindowOpen}
           />
         )}
         {currentWidnowSlide === 2 && (
