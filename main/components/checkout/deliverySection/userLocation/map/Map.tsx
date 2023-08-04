@@ -37,8 +37,6 @@ const Map: FC<Imap> = ({ center, muteMap }) => {
     draggable: muteMap,
   };
 
-  Geocode.setApiKey("AIzaSyA9jU7WAVpGmckzcSCcBY43ACLMiP4Kv18");
-
   useMemo(() => {
     Geocode.setLanguage("en");
     Geocode.fromLatLng(center.lat.toString(), center.lng.toString()).then(
