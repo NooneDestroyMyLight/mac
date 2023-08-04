@@ -1,20 +1,28 @@
 "use client";
 import { ChangeEvent, FC, useEffect } from "react";
+import { useActions } from "@/hooksuseActions";
 import style from "./Autocomplete.module.scss";
 
+import useOnclickOutside from "react-cool-onclickoutside";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import useOnclickOutside from "react-cool-onclickoutside";
 
-import { useActions } from "@/hooksuseActions";
+import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
 interface IAutocomplete {
   isLoaded: boolean;
+  center: google.maps.LatLngLiteral;
+  setLocation: React.Dispatch<React.SetStateAction<IUserAddress | null>>;
 }
 
-const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
+const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
+  const coordinates: google.maps.CircleLiteral = {
+    center: { lat: 49.9935, lng: 36.230383 },
+    radius: 500,
+  };
+
   const {
     ready,
     value,
@@ -24,9 +32,9 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
     clearSuggestions,
   } = usePlacesAutocomplete({
     requestOptions: {
-      // radius: 5000,
       componentRestrictions: { country: "ua" },
-      // types: ["address"],
+      locationBias: coordinates,
+      language: "uk",
     },
 
     initOnMount: false,
@@ -44,19 +52,26 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
   };
 
   const handleSelect =
-    ({ description }: any) =>
+    ({ description, structured_formatting }: any) =>
     () => {
       // When user selects a place, we can replace the keyword without request data from API
       // by setting the second parameter to "false"
-      setValue(description, false);
-      console.log(description);
+
       clearSuggestions();
       // Get latitude and longitude via utility functions
 
       getGeocode({ address: description }).then(results => {
         const { lat, lng } = getLatLng(results[0]);
 
-        setCoordinates({ lat, lng });
+        setValue(description, false);
+        setCoordinates({
+          lat: lat,
+          lng: lng,
+        });
+        setLocation({
+          location: { lat: lat, lng: lng },
+          address: structured_formatting.main_text,
+        });
       });
     };
 
@@ -74,9 +89,13 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
       } = suggestion;
 
       return (
-        <li key={place_id} onClick={handleSelect(suggestion)}>
+        <div
+          className={style.item}
+          key={place_id}
+          onClick={handleSelect(suggestion)}
+        >
           <strong>{main_text}</strong> <small>{secondary_text}</small>
-        </li>
+        </div>
       );
     });
 
@@ -86,7 +105,7 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded }) => {
         value={value}
         onChange={handleInput}
         disabled={!ready}
-        placeholder="Where are you going?"
+        placeholder="Search..."
       />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && (

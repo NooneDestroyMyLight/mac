@@ -12,9 +12,9 @@ import { paymentMethod } from "./paymentItem.data";
 const PaymentSection: FC = () => {
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
-  const ref = useOnclickOutside(() => {
-    setDropDownOpen(false);
-  });
+  // const ref = useOnclickOutside(() => {
+  //   setDropDownOpen(false);
+  // });
 
   return (
     <section className={style.section}>
@@ -26,7 +26,8 @@ const PaymentSection: FC = () => {
           <Selector
             array={paymentMethodData}
             property={paymentMethod}
-            selectorValue="Select"
+            selectorValue="Choose payment method... "
+            iconSrc="/images/icon/payIcon.png"
           />
           <li className={style.inputColumn}>
             <span className={style.uperInputText}>Have a promo code?</span>

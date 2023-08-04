@@ -1,5 +1,5 @@
 import { FC } from "react";
-import style from "./operationButton.module.scss";
+import style from "./OperationButton.module.scss";
 
 import { IBasketItem } from "../basketI.interface";
 import { useActions } from "@/hooksuseActions";
@@ -9,7 +9,7 @@ interface IOperationButton {
 }
 
 const OperationButton: FC<IOperationButton> = ({ product }) => {
-  const { addOneMoreProduct, removeOneProduct, removeFromCart } = useActions();
+  const { addOneMoreProduct, removeOneProduct } = useActions();
   const { count } = product;
 
   return (

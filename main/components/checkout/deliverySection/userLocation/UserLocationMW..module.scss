@@ -1,11 +1,12 @@
 @import "@/page";
+@import "../../checkoutMainStyle.module.scss";
 .mainContainer {
   width: 700px;
-  height: 600px;
+  min-height: 600px;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+
   align-items: center;
 
   padding: 1em;
@@ -31,6 +32,7 @@
   .content {
     display: flex;
     gap: 2em;
+    flex: 1;
     .mapAndDiscriptionWrapper {
       display: flex;
       flex-direction: column;
@@ -81,10 +83,11 @@
       }
     }
   }
-  .submitButton {
-    margin: 0.5em auto 0.5em auto;
-    text-align: center;
-    font-size: $font-size-large;
-    @include checkoutPageButton;
-  }
+}
+.discription {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+  word-wrap: break-word;
+  width: 400px;
 }

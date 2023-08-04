@@ -1,0 +1,42 @@
+@import "@/page";
+@import "../../../checkoutMainStyle.module.scss";
+.SearchShippingAddressWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .content {
+    display: flex;
+    gap: 2em;
+    .autocompleteContainer {
+      width: 290px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5em;
+        .inputField {
+          input {
+            width: 100%;
+          }
+        }
+      }
+      button {
+        background-color: $main-green-color;
+      }
+    }
+    .mapContainer {
+      flex: 1;
+      height: 100%;
+      width: 100%;
+      display: flex;
+
+      justify-content: center;
+      .map {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  }
+}

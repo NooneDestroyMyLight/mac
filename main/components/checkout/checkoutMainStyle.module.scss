@@ -54,11 +54,27 @@
   flex-direction: column;
   position: relative;
 
+  border: 1px solid $main-border-color;
+  border-radius: 0.2em;
+
+  &:focus {
+    outline: black;
+    box-shadow: $shadow;
+  }
+
   span {
     position: absolute;
     top: -0.7em;
+    z-index: 10;
   }
   input {
     padding-left: 1em;
+    border-radius: 0.2em;
   }
+}
+.deliverySectionButton {
+  margin: 0.5em auto 0.5em auto;
+  text-align: center;
+  font-size: $font-size-large;
+  @include checkoutPageButton;
 }

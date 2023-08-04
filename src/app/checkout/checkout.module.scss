@@ -32,35 +32,18 @@
       width: 800px;
       position: relative;
       input {
-        border: 1px solid black;
-        border: 1px solid $main-border-color;
         border-radius: 0.2em;
 
         padding: 0.5em 0.4em 0.5em 0.4em;
         transition: 0.3s ease;
         &:focus {
-          outline: black;
-          box-shadow: $shadow;
+          outline: none;
+          // box-shadow: $shadow;
         }
       }
       @media (max-width: 420px) {
         font-size: 1rem * 2;
       }
-
-      // .title {
-      //   font-size: 1.5em;
-      //   font-weight: 700;
-      //   text-transform: uppercase;
-
-      //   display: flex;
-      //   align-items: center;
-      //   gap: 1em;
-
-      //   border-bottom: 1px solid $main-color-gray;
-
-      //   margin: 1em 0 1em 0;
-      //   padding: 0.5em 0 0.5em 0;
-      // }
 
       .userLocationSection {
         transition: 0.3s ease;

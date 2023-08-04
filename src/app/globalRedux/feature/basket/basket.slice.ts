@@ -46,16 +46,17 @@ export const basketSlice = createSlice({
       });
     },
     removeOneProduct(state, { payload: product }: PayloadAction<IBasketItem>) {
-      state.cart.filter(item => {
-        // item.name === product.name ? item.count++ : item;
-        if (item.name === product.name) {
-          item.count--;
-          item.subTotal = item.price * item.count;
-          return item;
-        } else {
-          return item;
-        }
-      });
+      product.count == 1
+        ? (state.cart = state.cart.filter(item => item.name !== product.name))
+        : state.cart.filter(item => {
+            if (item.name === product.name) {
+              item.count--;
+              item.subTotal = item.price * item.count;
+              return item;
+            } else {
+              return item;
+            }
+          });
     },
   },
 });
