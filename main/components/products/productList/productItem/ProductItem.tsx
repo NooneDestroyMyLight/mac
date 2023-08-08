@@ -10,11 +10,11 @@ import { useActions } from "@/hooksuseActions";
 
 import useOnclickOutside from "react-cool-onclickoutside";
 
-import { Iproduct } from "../../../../types/productI.interface";
+import { IDrinks, Iproduct } from "../../../../types/productI.interface";
 import ItemDiscription from "./itemDiscription/itemDiscription";
 
 interface IproductsItems {
-  product: Iproduct;
+  product: Iproduct | IDrinks;
 }
 
 const Product: FC<IproductsItems> = ({ product }) => {
@@ -59,12 +59,12 @@ const Product: FC<IproductsItems> = ({ product }) => {
           <span>{name}</span>
         </div>
         {!onFocus ? (
-          <ItemDiscription compaund={compaund} />
-        ) : (
           <div className={style.description}>
-            <span>Ingredients:</span>
+            <span> Discription:</span>
             <br /> {ingredients}
           </div>
+        ) : (
+          compaund && <ItemDiscription compaund={compaund} />
         )}
         <div className={style.price}>{price}₴</div>
         <button

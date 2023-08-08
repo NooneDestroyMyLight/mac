@@ -14,7 +14,8 @@ export const productData: Iproduct[] = [
       protein: 13,
     },
     price: 30,
-    ingredients: "",
+    ingredients:
+      "Beef steak with natural cowhide, cibula, a piece of marinated butter seasoned with gherkin and ketchup, on a wheat harrow bun. ",
     onFocus: false,
   },
   {
@@ -65,6 +66,22 @@ export const productData: Iproduct[] = [
     },
     price: 107,
     ingredients: "",
+    onFocus: false,
+  },
+  {
+    imageSrc: "/images/Product/colaProduct-removebg-preview2.png",
+    alt: "Coca-cola",
+    name: "Coca-cola",
+    category: "DRINKS",
+    compaund: {
+      calories: 163,
+      totalWeight: 250,
+      totalFat: 0,
+      totalCarbs: 41,
+      protein: 0,
+    },
+    price: 35,
+    ingredients: "All-worldly refreshing drink.",
     onFocus: false,
   },
 ];

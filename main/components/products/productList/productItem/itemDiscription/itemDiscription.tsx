@@ -1,10 +1,10 @@
 "use client";
 import { FC } from "react";
-import style from "./itemDiscription.module.scss";
+import style from "./ItemDiscription.module.scss";
 import { ICompaund } from "../../../../../types/productI.interface";
 
 interface IitemDiscription {
-  compaund: ICompaund;
+  compaund: ICompaund ;
 }
 
 const ItemDiscription: FC<IitemDiscription> = ({ compaund }) => {

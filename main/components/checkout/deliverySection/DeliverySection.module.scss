@@ -18,3 +18,8 @@
     flex-direction: column;
   }
 }
+@media (max-width: 420px) {
+  .deliveryInfosInput {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,9 +1,23 @@
 @import "../../../../../src/app/page.module.scss";
+
 .productContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   transition: transform 0.3s ease;
+
+  ::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
 }
 .imageContainer {
   position: relative;
@@ -16,6 +30,13 @@
     bottom: -85px;
     position: absolute;
     filter: brightness(80%);
+    width: 200px;
+    max-width: 200px;
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
   }
 }
 
@@ -61,9 +82,12 @@
     padding-top: 10px;
     width: 250px;
     height: 160px;
+
     text-align: justify;
     transition: 0.5s ease;
     @include overflowText;
+    overflow-y: scroll;
+
     ul {
       display: flex;
       justify-content: space-between;
@@ -115,11 +139,11 @@
     opacity: 1;
     color: $main-yellow-color;
     filter: brightness(90%);
-    .description {
-      transition: 0.3s ease;
-      color: rgb(86, 5, 5);
-      font-weight: 700;
-    }
+    // .description {
+    //   transition: 0.3s ease;
+    //   color: rgb(86, 5, 5);
+    //   font-weight: 700;
+    // }
     .button {
       background-color: $main-yellow-color;
       color: $main-red-color;
