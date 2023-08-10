@@ -14,33 +14,48 @@ import {
   Iproduct,
   TSizeRange,
 } from "../../../../types/productI.interface";
-import ItemDiscription from "./itemDiscription/itemDiscription";
-import SizeDropdown from "./sizeDropdown/SizeDropdown";
+import ChooseDrinksSize from "./chooseDrinksSize/ChooseDrinksSize";
 
 interface IproductsItems {
   product: Iproduct | IDrinks;
 }
 
 const Product: FC<IproductsItems> = ({ product }) => {
-  const { imageSrc, alt, name, price, compaund, ingredients, onFocus } =
+  const { imageSrc, alt, name, price, totalWeight, ingredients, onFocus } =
     product;
+  const { addToCart, focusCurrentProduct, removeFocusCurrentProduct } =
+    useActions();
+
+  const [CurrentDrinksSize, setCurrentDrinksSize] = useState<TSizeRange>({
+    size: "Defualt value", // defualt value that don't be undefined
+    price: 0, //defualt value that don't be undefined
+  });
+
+  const isOnCartCheack = useTypedSelector(
+    state =>
+      state.basket.cart.filter(item =>
+        "sizeRange" in product
+          ? item.name === product.name + ` ${CurrentDrinksSize.size}L`
+          : item.name === product.name
+      ) //Does product Already in Basket
+  );
 
   let sizeRange;
   if ("sizeRange" in product) {
     sizeRange = product.sizeRange;
-    const [sizeRangeArr, setSizeRangeArr] = useState<TSizeRange[]>(sizeRange);
   }
 
-  const { addToCart, focusCurrentProduct, removeFocusCurrentProduct } =
-    useActions();
-
-  const isOnCartCheack = useTypedSelector(
-    state => state.basket.cart.filter(item => item.name === product.name) //Does product Already in Basket
-  );
-
   const onAddToCartClick = (e: MouseEvent<HTMLButtonElement>) => {
+    let copyProduct = { ...product };
+    if ("sizeRange" in product) {
+      copyProduct = {
+        ...copyProduct,
+        totalWeight: CurrentDrinksSize.size,
+        price: CurrentDrinksSize.price,
+      };
+    }
     e.stopPropagation();
-    addToCart(product);
+    addToCart(copyProduct);
   };
 
   const productRef = useOnclickOutside(() => {
@@ -81,12 +96,18 @@ const Product: FC<IproductsItems> = ({ product }) => {
           )}
         </div>
         <div className={style.price}>
-          {price}₴
-          {sizeRange && (
-            <SizeDropdown
-              totalWeight={compaund.totalWeight}
+          {sizeRange ? (
+            <ChooseDrinksSize
               sizeRange={sizeRange}
+              setCurrentDrinksSize={setCurrentDrinksSize}
             />
+          ) : (
+            <>
+              {price}₴
+              <div className={style.weightAndDropdown}>
+                <span>{totalWeight}</span>
+              </div>
+            </>
           )}
         </div>
         <button

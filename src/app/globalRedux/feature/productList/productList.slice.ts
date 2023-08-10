@@ -60,9 +60,10 @@ export const productListSlice = createSlice({
     removeFocusCurrentProduct(state) {
       state.productList.map(product => (product.onFocus = false));
     },
-    // addDrinkSizeToDrink(state, { payload: size }:PayloadAction<string>) {
-
-    // },
+    addDrinkSizeToDrink(state, { payload: size }: PayloadAction<string>) {
+      // state.productList.filter = (item =>{
+      // })
+    },
   },
 });
 

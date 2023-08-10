@@ -5,7 +5,6 @@ import {
   IBasketItem,
 } from "../../../../../main/components/layout/header/myBasket/basketItem/basketI.interface";
 import {
-  ICompaund,
   IDrinks,
   Iproduct,
 } from "../../../../../main/types/productI.interface";
@@ -35,7 +34,7 @@ export const basketSlice = createSlice({
       const copyProduct = { ...product };
 
       if ("sizeRange" in copyProduct) {
-        copyProduct.name += ` ${product.compaund.totalWeight}`;
+        copyProduct.name += ` ${product.totalWeight}L`;
       }
       const productItem = new CBasketItem(copyProduct);
       state.cart.push({ ...productItem });

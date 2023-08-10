@@ -3,23 +3,22 @@ export interface Iproduct {
   alt: string;
   name: string;
   category: string;
-  compaund: ICompaund;
   ingredients?: string;
+  totalWeight: string;
   price: number;
   onFocus: boolean;
   //id:number;
 }
 
-export interface ICompaund {
-  calories: number;
-  totalWeight: number;
-  totalFat: number;
-  totalCarbs: number;
-  protein: number;
-}
+// export interface ICompaund {
+//   calories: number;
+//   totalFat: number;
+//   totalCarbs: number;
+//   protein: number;
+// }
 
 export type TSizeRange = {
-  size: number;
+  size: string;
   price: number;
 };
 export interface IDrinks extends Iproduct {

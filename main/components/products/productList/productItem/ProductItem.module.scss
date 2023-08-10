@@ -1,4 +1,5 @@
 @import "../../../../../src/app/page.module.scss";
+@import "./chooseDrinksSize/ChooseDrinksSize.module.scss";
 
 .productContainer {
   display: flex;
@@ -141,4 +142,9 @@
       color: $main-red-color;
     }
   }
+}
+.weightAndDropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
