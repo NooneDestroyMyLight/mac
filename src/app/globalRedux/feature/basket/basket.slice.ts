@@ -4,7 +4,11 @@ import {
   CBasketItem,
   IBasketItem,
 } from "../../../../../main/components/layout/header/myBasket/basketItem/basketI.interface";
-import { ICompaund } from "../../../../../main/types/productI.interface";
+import {
+  IDrinks,
+  Iproduct,
+} from "../../../../../main/types/productI.interface";
+import { categoryDRINKS } from "@/componentsproducts/productList/productData.data";
 
 export interface IBasketSlice {
   cart: IBasketItem[];
@@ -26,8 +30,13 @@ export const basketSlice = createSlice({
     ) {
       state.totalАmountСost = totalАmountСost;
     },
-    addToCart(state, { payload: product }) {
-      const productItem = new CBasketItem(product);
+    addToCart(state, { payload: product }: PayloadAction<Iproduct | IDrinks>) {
+      const copyProduct = { ...product };
+
+      if ("sizeRange" in copyProduct) {
+        copyProduct.name += ` ${product.totalWeight}L`;
+      }
+      const productItem = new CBasketItem(copyProduct);
       state.cart.push({ ...productItem });
     },
     removeFromCart(state, { payload: product }) {
@@ -35,7 +44,6 @@ export const basketSlice = createSlice({
     },
     addOneMoreProduct(state, { payload: product }: PayloadAction<IBasketItem>) {
       state.cart.filter(item => {
-        // item.name === product.name ? item.count++ : item;
         if (item.name === product.name) {
           item.count++;
           item.subTotal = item.price * item.count;

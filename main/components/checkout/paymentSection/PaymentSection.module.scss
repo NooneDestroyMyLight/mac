@@ -5,6 +5,12 @@
   row-gap: 1em;
 }
 
+@media (max-width: 420px) {
+  .paymentSelectContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
 // &:focus-within {
 //   span {
 //    top: 1px;

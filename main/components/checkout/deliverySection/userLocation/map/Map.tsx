@@ -37,8 +37,11 @@ const Map: FC<Imap> = ({ center, muteMap }) => {
     draggable: muteMap,
   };
 
+
+  Geocode.setApiKey(API_KEY);
+
   useMemo(() => {
-    Geocode.setLanguage("en");
+    // Geocode.setLanguage("en");
     Geocode.fromLatLng(center.lat.toString(), center.lng.toString()).then(
       response => {
         const address = response.results[0].formatted_address;

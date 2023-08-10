@@ -1,11 +1,12 @@
 import { FC } from "react";
 import style from "./Products.module.scss";
 import ProductsList from "./productList/ProductsList";
-import { Iproduct } from "../../types/productI.interface";
+
+import { IDrinks, Iproduct } from "../../types/productI.interface";
 
 interface IcategoryPage {
   category: string;
-  products: Iproduct[];
+  products: (Iproduct | IDrinks)[];
 }
 
 const Products: FC<IcategoryPage> = ({ category, products }) => {
@@ -13,6 +14,7 @@ const Products: FC<IcategoryPage> = ({ category, products }) => {
   //Change on CATEGORY component
 
   //useSelect product there!!!
+
   return (
     <div className={style.categoryWrapper}>
       <div className={style.title}>{category.toUpperCase()}</div>

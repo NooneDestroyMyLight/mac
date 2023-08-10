@@ -20,14 +20,14 @@
   h1 {
     font-size: 2.5em;
     font-weight: 700;
-
+    width: 100%;
     margin: 0.5em 0 0.5em 0;
   }
+
   .container {
     font-size: 1rem;
     display: flex;
     gap: 6em;
-    flex-direction: row;
     .main {
       width: 800px;
       position: relative;
@@ -38,12 +38,11 @@
         transition: 0.3s ease;
         &:focus {
           outline: none;
-          // box-shadow: $shadow;
         }
       }
-      @media (max-width: 420px) {
-        font-size: 1rem * 2;
-      }
+      // @media (max-width: 420px) {
+      //   font-size: 1rem * 2;
+      // }
 
       .userLocationSection {
         transition: 0.3s ease;
@@ -96,10 +95,16 @@
       }
     }
   }
-}
-@media (max-width: 420px) {
-  .container {
-    padding: 0 1em 0 1em;
+  @media (max-width: 420px) {
+    .container {
+      padding: 0 1em 0 1em;
+      flex-direction: column;
+      width: 100%;
+      gap: 0;
+      .main {
+        width: 100%;
+      }
+    }
   }
 }
 

@@ -2,9 +2,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Iproduct } from "../../../../../main/types/productI.interface";
 import { productData } from "@/componentsproducts/productList/productData.data";
+import { IDrinks } from "../../../../../main/types/productI.interface";
 
 interface IProductSlice {
-  productList: Iproduct[];
+  productList: (Iproduct | IDrinks)[];
   category: string;
 }
 
@@ -58,6 +59,10 @@ export const productListSlice = createSlice({
     },
     removeFocusCurrentProduct(state) {
       state.productList.map(product => (product.onFocus = false));
+    },
+    addDrinkSizeToDrink(state, { payload: size }: PayloadAction<string>) {
+      // state.productList.filter = (item =>{
+      // })
     },
   },
 });
