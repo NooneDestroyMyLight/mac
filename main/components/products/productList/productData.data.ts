@@ -1,6 +1,9 @@
 import { Iproduct } from "../../../types/productI.interface";
+import { IDrinks } from "../../../types/productI.interface";
 
-export const productData: Iproduct[] = [
+export const categoryDRINKS = "DRINKS";
+
+export const productData: (Iproduct | IDrinks)[] = [
   {
     imageSrc: "/images/Product/Item1.png",
     alt: "The Classic Burger",
@@ -15,7 +18,7 @@ export const productData: Iproduct[] = [
     },
     price: 30,
     ingredients:
-      "Beef steak with natural cowhide, cibula, a piece of marinated butter seasoned with gherkin and ketchup, on a wheat harrow bun. ",
+      "Beef steak with natural cowhide, cibula, a piece of marinated butter seasoned with gherkin and ketchup, on a wheat harrow bun.  ",
     onFocus: false,
   },
   {
@@ -72,7 +75,7 @@ export const productData: Iproduct[] = [
     imageSrc: "/images/Product/colaProduct-removebg-preview2.png",
     alt: "Coca-cola",
     name: "Coca-cola",
-    category: "DRINKS",
+    category: categoryDRINKS,
     compaund: {
       calories: 163,
       totalWeight: 250,
@@ -83,5 +86,27 @@ export const productData: Iproduct[] = [
     price: 35,
     ingredients: "All-worldly refreshing drink.",
     onFocus: false,
+    sizeRange: [
+      {
+        size: 0.75,
+        price: 45,
+      },
+      {
+        size: 0.5,
+        price: 40,
+      },
+      {
+        size: 0.25,
+        price: 30,
+      },
+      {
+        size: 0.11,
+        price: 22,
+      },
+      {
+        size: 1,
+        price: 54,
+      },
+    ],
   },
 ];

@@ -3,10 +3,10 @@ import style from "./ProductsList.module.scss";
 import Product from "./productItem/ProductItem";
 
 import { productData } from "./productData.data";
-import { Iproduct } from "../../../types/productI.interface";
+import { IDrinks, Iproduct } from "../../../types/productI.interface";
 
 interface IproductList {
-  products: Iproduct[];
+  products: (Iproduct | IDrinks)[];
 }
 
 const ProductsList: FC<IproductList> = ({ products }) => {

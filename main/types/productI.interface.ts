@@ -3,7 +3,7 @@ export interface Iproduct {
   alt: string;
   name: string;
   category: string;
-  compaund?: ICompaund;
+  compaund: ICompaund;
   ingredients?: string;
   price: number;
   onFocus: boolean;
@@ -18,11 +18,10 @@ export interface ICompaund {
   protein: number;
 }
 
-type TSizeRange = {
+export type TSizeRange = {
   size: number;
   price: number;
 };
 export interface IDrinks extends Iproduct {
-  size: number;
   sizeRange: TSizeRange[];
 }

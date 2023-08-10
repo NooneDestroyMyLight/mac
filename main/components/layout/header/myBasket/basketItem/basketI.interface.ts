@@ -1,5 +1,10 @@
-import { Iproduct } from "../../../../../types/productI.interface";
+import {
+  IDrinks,
+  Iproduct,
+  TSizeRange,
+} from "../../../../../types/productI.interface";
 import { ICompaund } from "../../../../../types/productI.interface";
+
 export interface IBasketItem extends Iproduct {
   //id
   count: number;
@@ -12,10 +17,12 @@ export class CBasketItem implements IBasketItem {
   category: string;
   compaund: ICompaund;
   price: number;
-  ingredients: string;
+  ingredients?: string;
   onFocus: boolean;
   count: number = 1;
   subTotal: number;
+  totalWeight: number;
+  sizeRange?: TSizeRange[];
   constructor(productObj: Iproduct) {
     this.imageSrc = productObj.imageSrc;
     this.alt = productObj.alt;
@@ -26,5 +33,7 @@ export class CBasketItem implements IBasketItem {
     this.ingredients = productObj.ingredients;
     this.onFocus = productObj.onFocus;
     this.subTotal = this.price * this.count; //Change this one
+    this.totalWeight = productObj.compaund.totalWeight;
+    this.sizeRange = (productObj as IDrinks)?.sizeRange;
   }
 }
