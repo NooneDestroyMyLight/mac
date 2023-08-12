@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, MutableRefObject } from "react";
 import style from "./SearchShippingAddress.module.scss";
 import { useActions } from "@/hooksuseActions";
 
@@ -6,25 +6,24 @@ import Autocomplete from "./autocomplete/Autocomplete";
 import Map from "../map/Map";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
+import { IPropsUserLocationWM } from "../userLocationMW.interface";
 
 interface ISearchShippingAddress {
-  isLoaded: boolean;
-  center: google.maps.LatLngLiteral;
-  setCurrentWindowSlide: React.Dispatch<React.SetStateAction<number>>;
   setLocation: React.Dispatch<React.SetStateAction<IUserAddress | null>>;
   location: IUserAddress | null;
   setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  stateObj: IPropsUserLocationWM;
 }
 
 const SearchShippingAddress: FC<ISearchShippingAddress> = ({
-  isLoaded,
-  center,
-  setCurrentWindowSlide,
   setLocation,
   location,
   setModelWindowOpen,
+  stateObj,
 }) => {
   const { setNewUserAddress } = useActions();
+
+  console.log(stateObj.isLoaded);
 
   return (
     <div className={style.SearchShippingAddressWrapper}>
@@ -34,8 +33,8 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
             <div className={style.inputColumn}>
               <span className={style.uperInputText}>Delivry address</span>
               <Autocomplete
-                isLoaded={isLoaded}
-                center={center}
+                isLoaded={stateObj.isLoaded}
+                center={stateObj.center}
                 setLocation={setLocation}
               />
             </div>
@@ -47,7 +46,7 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
             </div>
           </li>
           <button
-            onClick={() => setCurrentWindowSlide(2)}
+            onClick={() => stateObj.setCurrentWindowSlide(2)}
             className={style.checkoutPageButton}
           >
             Find place adreess in map
@@ -55,8 +54,13 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
         </ul>
         <div className={style.mapContainer}>
           <div className={style.map}>
-            {isLoaded ? (
-              <Map muteMap={false} center={center} />
+            {stateObj.isLoaded ? (
+              <Map
+                muteMap={false}
+                center={stateObj.center}
+                onLoad={stateObj.onLoad}
+                onUnmount={stateObj.onUnmount}
+              />
             ) : (
               <div>EMPTY MAP</div>
             )}

@@ -1,0 +1,10 @@
+.clearIconButton {
+  display: flex;
+  align-self: center;
+  justify-content: center;
+  position: absolute;
+  right: 1em;
+  &:hover {
+    opacity: 0.7;
+  }
+}

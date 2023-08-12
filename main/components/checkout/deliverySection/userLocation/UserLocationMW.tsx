@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, MutableRefObject, useState } from "react";
 
 import style from "./UserLocationMW..module.scss";
 
@@ -10,20 +10,36 @@ import SearchShippingAddress from "./shippingAddress/SearchShippingAddress";
 import AddInfoAboutDelivery from "./addInfoAboutDelivery/AddInfoAboutDelivery";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
+import { IPropsUserLocationWM } from "./userLocationMW.interface";
 
 interface UserLocation {
   isLoaded: boolean;
   center: google.maps.LatLngLiteral;
   setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onLoad: (map: google.maps.Map) => void;
+  onUnmount: (map: google.maps.Map) => void;
+  mapRef: MutableRefObject<google.maps.Map | null>;
 }
 
 const UserLocation: FC<UserLocation> = ({
   isLoaded,
   center,
   setModelWindowOpen,
+  onLoad,
+  onUnmount,
+  mapRef,
 }) => {
   const [location, setLocation] = useState<IUserAddress | null>(null); //Location
   const [currentWidnowSlide, setCurrentWindowSlide] = useState<number>(1);
+
+  const [stateObj, setstateObj] = useState<IPropsUserLocationWM>({
+    isLoaded: isLoaded,
+    center: center,
+    mapRef: mapRef,
+    setCurrentWindowSlide: setCurrentWindowSlide,
+    onLoad: onLoad,
+    onUnmount: onUnmount,
+  });
 
   return (
     <div className={style.mainContainer}>
@@ -49,27 +65,17 @@ const UserLocation: FC<UserLocation> = ({
       <div className={style.content}>
         {currentWidnowSlide === 1 && (
           <SearchShippingAddress
-            isLoaded={isLoaded}
-            center={center}
-            setCurrentWindowSlide={setCurrentWindowSlide}
+            stateObj={{ ...stateObj, isLoaded: isLoaded }}
             setLocation={setLocation}
             location={location}
             setModelWindowOpen={setModelWindowOpen}
           />
         )}
         {currentWidnowSlide === 2 && (
-          <FindAddressOnMap isLoaded={isLoaded} center={center}>
-            <span className={style.discription}>
+          <FindAddressOnMap stateObj={{ ...stateObj, isLoaded: isLoaded }}>
+            <span>
               Pin your exact location to help the courier find your address
             </span>
-            <button
-              onClick={() => {
-                setCurrentWindowSlide(3);
-              }}
-              className={style.deliverySectionButton}
-            >
-              Continue
-            </button>
           </FindAddressOnMap>
         )}
         {currentWidnowSlide === 3 && <AddInfoAboutDelivery />}

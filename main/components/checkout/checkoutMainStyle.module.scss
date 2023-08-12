@@ -1,5 +1,7 @@
 @import "@/page";
 
+$main-color-gray: rgba(219, 219, 219, 0.7);
+
 .section {
   @include paddingMarginForParagraph;
   position: relative;

@@ -1,17 +1,48 @@
 import { FC } from "react";
+import Image from "next/image";
 import style from "./AddInfoAboutDelivery.module.scss";
+import ClearIcon from "./clearIcon/ClearIcon";
 
 const AddInfoAboutDelivery: FC = () => {
   return (
-    <ul className={style.Container}>
-      <ul className={style.inputsContainer}>
-        <li>address(streeet)</li>
-        <li>№</li>
-        <li>№floor,№door</li>
-        <li>some add info: (Discriotion...)</li>
-      </ul>
-      <button>continue</button>
-    </ul>
+    <div className={style.Container}>
+      <form>
+        <ul className={style.inputsContainer}>
+          <li>
+            <span className={style.uperInputText}>*Streeet name</span>
+            <div className={style.inputContainer}>
+              <input type="text" />
+              <ClearIcon />
+            </div>
+          </li>
+
+          <li>
+            <span className={style.uperInputText}>*№ </span>
+            <div className={style.inputContainer}>
+              <input type="text" />
+              <ClearIcon />
+            </div>
+          </li>
+
+          <li>
+            <span className={style.uperInputText}>*№ Floor,door</span>
+            <div className={style.inputContainer}>
+              <input type="text" />
+              <ClearIcon />
+            </div>
+          </li>
+
+          <li>
+            <span className={style.uperInputText}>*Some add info:</span>
+            <div className={style.inputContainer}>
+              <input type="text" />
+              <ClearIcon />
+            </div>
+          </li>
+          <button className={style.deliverySectionButton}>Submite</button>
+        </ul>
+      </form>
+    </div>
   );
 };
 export default AddInfoAboutDelivery;

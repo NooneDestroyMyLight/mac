@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import style from "./DeliverySection.module.scss";
 import { useActions } from "@/hooksuseActions";
 
@@ -29,8 +29,18 @@ const DeliverySection: FC<IDeliverySection> = ({
 }) => {
   const [isUserLocationOpen, setUserLocationOpen] = useState<boolean>(false);
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
-
   const { setCurrentAddress } = useActions();
+
+  const mapRef = useRef<google.maps.Map | null>(null);
+  const onLoad = useCallback(function callback(map: google.maps.Map) {
+    mapRef.current = map;
+  }, []);
+
+  const onUnmount = useCallback(function callback(map: google.maps.Map) {
+    mapRef.current = null;
+  }, []);
+
+  console.log("DeliverySection", isLoaded);
 
   return (
     <section className={style.section}>
@@ -40,7 +50,12 @@ const DeliverySection: FC<IDeliverySection> = ({
         </div>
         <div className={style.mapContainer}>
           {isLoaded ? (
-            <Map muteMap={false} center={center} />
+            <Map
+              muteMap={false}
+              center={center}
+              onLoad={onLoad}
+              onUnmount={onUnmount}
+            />
           ) : (
             <div>EMPTY MAP</div>
           )}
@@ -71,6 +86,9 @@ const DeliverySection: FC<IDeliverySection> = ({
           setModelWindowOpen={setUserLocationOpen}
           isLoaded={isLoaded}
           center={center}
+          onUnmount={onUnmount}
+          onLoad={onLoad}
+          mapRef={mapRef}
         />
       </ModelWindow>
     </section>

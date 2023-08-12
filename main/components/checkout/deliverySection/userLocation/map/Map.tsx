@@ -1,9 +1,14 @@
 "use client";
-import { FC, useState, useCallback, useRef, useMemo } from "react";
+import {
+  FC,
+  useState,
+  useCallback,
+  useRef,
+  useMemo,
+  MutableRefObject,
+} from "react";
 import style from "./Map.module.scss";
 import Image from "next/image";
-
-import Geocode from "react-geocode";
 
 import { GoogleMap } from "@react-google-maps/api";
 import { mapDefaultTheme } from "./mapTheme";
@@ -20,11 +25,18 @@ interface Imap {
     lng: number;
   };
   muteMap: boolean;
+  handleCenterChanged?: any;
+  onLoad: (map: google.maps.Map) => void;
+  onUnmount: (map: google.maps.Map) => void;
 }
 
-const API_KEY = process.env.API_KEY;
-
-const Map: FC<Imap> = ({ center, muteMap }) => {
+const Map: FC<Imap> = ({
+  center,
+  muteMap,
+  handleCenterChanged,
+  onLoad,
+  onUnmount,
+}) => {
   const defaultOptions: google.maps.MapOptions = {
     zoomControl: false,
     mapTypeControl: false,
@@ -35,41 +47,6 @@ const Map: FC<Imap> = ({ center, muteMap }) => {
     disableDoubleClickZoom: false,
     styles: mapDefaultTheme,
     draggable: muteMap,
-  };
-
-  Geocode.setApiKey(API_KEY);
-
-  useMemo(() => {
-    // Geocode.setLanguage("en");
-    Geocode.fromLatLng(center.lat.toString(), center.lng.toString()).then(
-      response => {
-        const address = response.results[0].formatted_address;
-        console.log(address);
-      },
-      error => {
-        console.error("Ошибка", error);
-      }
-    );
-  }, []);
-
-  const [map, setMap] = useState(null);
-  const [markerPosition, setMarkerPosition] = useState(center);
-  const mapRef = useRef(null);
-
-  const onLoad = useCallback(function callback(map: any) {
-    mapRef.current = map;
-  }, []);
-
-  const onUnmount = useCallback(function callback(map: any) {
-    mapRef.current = null;
-  }, []);
-
-  const handleCenterChanged = () => {
-    if (mapRef.current) {
-      //@ts-ignore
-      const newCenter = mapRef.current.getCenter().toJSON();
-      setMarkerPosition(newCenter);
-    }
   };
 
   return (

@@ -14,7 +14,8 @@ import {
   Iproduct,
   TSizeRange,
 } from "../../../../types/productI.interface";
-import ChooseDrinksSize from "./chooseDrinksSize/ChooseDrinksSize";
+
+import ChooseSize from "./chooseSize/ChooseSize";
 
 interface IproductsItems {
   product: Iproduct | IDrinks;
@@ -26,32 +27,31 @@ const Product: FC<IproductsItems> = ({ product }) => {
   const { addToCart, focusCurrentProduct, removeFocusCurrentProduct } =
     useActions();
 
-  const [CurrentDrinksSize, setCurrentDrinksSize] = useState<TSizeRange>({
+  let sizeRange: TSizeRange[] | undefined;
+  if ("sizeRange" in product) {
+    sizeRange = product.sizeRange;
+  }
+
+  const [productCurrentSize, setproductCurrentSize] = useState<TSizeRange>({
     size: "Defualt value", // defualt value that don't be undefined
     price: 0, //defualt value that don't be undefined
   });
 
-  const isOnCartCheack = useTypedSelector(
-    state =>
-      state.basket.cart.filter(item =>
-        "sizeRange" in product
-          ? item.name === product.name + ` ${CurrentDrinksSize.size}L`
-          : item.name === product.name
-      ) //Does product Already in Basket
+  const isOnCartCheack = useTypedSelector(state =>
+    state.basket.cart.filter(item =>
+      "sizeRange" in product
+        ? item.name === product.name + ` ${productCurrentSize.size}L`
+        : item.name === product.name
+    )
   );
-
-  let sizeRange;
-  if ("sizeRange" in product) {
-    sizeRange = product.sizeRange;
-  }
 
   const onAddToCartClick = (e: MouseEvent<HTMLButtonElement>) => {
     let copyProduct = { ...product };
     if ("sizeRange" in product) {
       copyProduct = {
         ...copyProduct,
-        totalWeight: CurrentDrinksSize.size,
-        price: CurrentDrinksSize.price,
+        totalWeight: productCurrentSize.size,
+        price: productCurrentSize.price,
       };
     }
     e.stopPropagation();
@@ -97,9 +97,9 @@ const Product: FC<IproductsItems> = ({ product }) => {
         </div>
         <div className={style.price}>
           {sizeRange ? (
-            <ChooseDrinksSize
+            <ChooseSize
               sizeRange={sizeRange}
-              setCurrentDrinksSize={setCurrentDrinksSize}
+              setproductCurrentSize={setproductCurrentSize}
             />
           ) : (
             <>

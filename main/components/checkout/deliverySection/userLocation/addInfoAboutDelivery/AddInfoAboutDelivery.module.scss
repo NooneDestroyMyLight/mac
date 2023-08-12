@@ -1,0 +1,30 @@
+@import "../../../checkoutMainStyle.module.scss";
+@import "@/page";
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+
+  .inputsContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 80%);
+    row-gap: 2em;
+    justify-content: center;
+    li {
+      display: flex;
+      flex-direction: column;
+      .inputContainer {
+        display: flex;
+
+        position: relative;
+        input {
+          width: 100%;
+          border-bottom: 2px solid $main-color-gray;
+
+          padding-right: 2.7em;
+        }
+      }
+    }
+  }
+}

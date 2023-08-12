@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import style from "./AnotherPersonInfo.module.scss";
+import style from "./";
 
 import ModelWindow from "../../../../HOC/modelWindow/ModelWindow";
 

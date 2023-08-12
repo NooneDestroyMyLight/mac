@@ -1,32 +1,78 @@
-import { FC, ReactNode, useState } from "react";
+import { FC, MutableRefObject, ReactNode, useMemo, useState } from "react";
 import style from "./FindAddressOnMap.module.scss";
 
 import Map from "../map/Map";
+import Geocode from "react-geocode";
+import { IPropsUserLocationWM } from "../userLocationMW.interface";
 
 interface IFindAddressOnMap {
   children: ReactNode;
-  isLoaded: boolean;
-  center: google.maps.LatLngLiteral;
+  stateObj: IPropsUserLocationWM;
 }
 
-const FindAddressOnMap: FC<IFindAddressOnMap> = ({
-  isLoaded,
-  center,
-  children,
-}) => {
-  const [currentLocation, setCurrentLocation] = useState();
+const API_KEY = process.env.API_KEY;
+
+const FindAddressOnMap: FC<IFindAddressOnMap> = ({ stateObj, children }) => {
+  const [markerPosition, setMarkerPosition] =
+    useState<google.maps.LatLngLiteral>(stateObj.center);
+
+  const [currentLocation, setCurrentLocation] = useState<string | null>(null);
+
+  useMemo(() => {
+    Geocode.setApiKey(API_KEY);
+    Geocode.setLanguage("uk");
+    Geocode.fromLatLng(
+      markerPosition.lat.toString(),
+      markerPosition.lng.toString()
+    ).then(
+      response => {
+        console.log(response.results);
+        setCurrentLocation(response.results[0].formatted_address);
+      },
+      error => {
+        console.error("Ошибка", error);
+      }
+    );
+  }, [markerPosition]);
+
+  let timeoutId: any = null;
+
+  const handleCenterChanged = () => {
+    timeoutId && clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      stateObj.mapRef.current &&
+        //@ts-ignore
+        setMarkerPosition(stateObj.mapRef.current.getCenter().toJSON());
+    }, 1000);
+  };
 
   return (
     <>
       <div className={style.mapAndDiscriptionWrapper}>
         <div className={style.map}>
-          {isLoaded ? (
-            <Map muteMap={true} center={center} />
+          {stateObj.isLoaded ? (
+            <Map
+              handleCenterChanged={handleCenterChanged}
+              muteMap={true}
+              center={stateObj.center}
+              onLoad={stateObj.onLoad}
+              onUnmount={stateObj.onUnmount}
+            />
           ) : (
             <div>EMPTY MAP</div>
           )}
         </div>
-        {children}
+        <span className={style.discription}>
+          {!currentLocation ? children : currentLocation}
+        </span>
+        <button
+          onClick={() => {
+            stateObj.setCurrentWindowSlide(3);
+          }}
+          className={style.deliverySectionButton}
+        >
+          Continue
+        </button>
       </div>
     </>
   );
