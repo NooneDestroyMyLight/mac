@@ -3,11 +3,12 @@ import { FC, MutableRefObject, useState } from "react";
 
 import style from "./UserLocationMW..module.scss";
 
-import Image from "next/image";
-
 import FindAddressOnMap from "./findAddressOnMap/FindAddressOnMap";
 import SearchShippingAddress from "./shippingAddress/SearchShippingAddress";
 import AddInfoAboutDelivery from "./addInfoAboutDelivery/AddInfoAboutDelivery";
+
+import CloseIcon from "../icons/closeIcon/CloseIcon";
+import PreviousIcon from "../icons/previousIcon/PreviousIcon";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 import { IPropsUserLocationWM } from "./userLocationMW.interface";
@@ -30,7 +31,7 @@ const UserLocation: FC<UserLocation> = ({
   mapRef,
 }) => {
   const [location, setLocation] = useState<IUserAddress | null>(null); //Location
-  const [currentWidnowSlide, setCurrentWindowSlide] = useState<number>(1);
+  const [currentWidnowSlide, setCurrentWindowSlide] = useState<number>(1); // Like routing in Model window
 
   const [stateObj, setstateObj] = useState<IPropsUserLocationWM>({
     isLoaded: isLoaded,
@@ -47,19 +48,14 @@ const UserLocation: FC<UserLocation> = ({
         className={style.closeIcon}
         onClick={() => setModelWindowOpen(false)}
       >
-        <Image width={20} height={20} src="/images/closeIcon.png" alt="close" />
+        <CloseIcon />
       </button>
       <button
         className={style.previousPageIcon}
         onClick={() => setCurrentWindowSlide(currentWidnowSlide - 1)}
         disabled={currentWidnowSlide === 1 && true}
       >
-        <Image
-          width={20}
-          height={20}
-          src="/images/previousIcon.png"
-          alt="close"
-        />
+        <PreviousIcon />
       </button>
       <h2 className={style.h2Title}>Enter your shipping address</h2>
       <div className={style.content}>

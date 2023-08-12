@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
-import style from "./";
+import style from "./AnotherPersonInfo";
 
-import ModelWindow from "../../../../HOC/modelWindow/ModelWindow";
+import ModelWindow from "../../../../../HOC/modelWindow";
 
 interface IAnotherPersonInfo {}
 

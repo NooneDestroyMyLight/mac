@@ -1,47 +1,42 @@
 import { FC } from "react";
 import Image from "next/image";
 import style from "./AddInfoAboutDelivery.module.scss";
-import ClearIcon from "./clearIcon/ClearIcon";
+import { useForm } from "react-hook-form";
 
 const AddInfoAboutDelivery: FC = () => {
+  const {} = useForm();
+
   return (
     <div className={style.Container}>
-      <form>
-        <ul className={style.inputsContainer}>
-          <li>
-            <span className={style.uperInputText}>*Streeet name</span>
-            <div className={style.inputContainer}>
-              <input type="text" />
-              <ClearIcon />
-            </div>
-          </li>
-
-          <li>
-            <span className={style.uperInputText}>*№ </span>
-            <div className={style.inputContainer}>
-              <input type="text" />
-              <ClearIcon />
-            </div>
-          </li>
-
-          <li>
-            <span className={style.uperInputText}>*№ Floor,door</span>
-            <div className={style.inputContainer}>
-              <input type="text" />
-              <ClearIcon />
-            </div>
-          </li>
-
-          <li>
-            <span className={style.uperInputText}>*Some add info:</span>
-            <div className={style.inputContainer}>
-              <input type="text" />
-              <ClearIcon />
-            </div>
-          </li>
-          <button className={style.deliverySectionButton}>Submite</button>
-        </ul>
-      </form>
+      {/* <form> */}
+      <ul className={style.inputsContainer}>
+        <li>
+          <span className={style.uperInputText}>*Streeet name</span>
+          <div className={style.inputContainer}>
+            <input type="search" />
+          </div>
+        </li>
+        <li>
+          <span className={style.uperInputText}>*House № </span>
+          <div className={style.inputContainer}>
+            <input type="search" />
+          </div>
+        </li>
+        <li>
+          <span className={style.uperInputText}>*Floor,door </span>
+          <div className={style.inputContainer}>
+            <input type="search" />
+          </div>
+        </li>
+        <li>
+          <span className={style.uperInputText}>*Some add info:</span>
+          <div className={style.inputContainer}>
+            <input type="search" />
+          </div>
+        </li>
+        <button className={style.deliverySectionButton}>Submit</button>
+      </ul>
+      {/* </form> */}
     </div>
   );
 };

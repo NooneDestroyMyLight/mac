@@ -1,5 +1,6 @@
 @import "@/page";
 @import "../../../checkoutMainStyle.module.scss";
+
 .SearchShippingAddressWrapper {
   display: flex;
   flex-direction: column;
@@ -12,16 +13,34 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      //REFACTORING====================================================
       li {
         display: flex;
         flex-direction: column;
-        gap: 1.5em;
-        .inputField {
+        // gap: 1em;
+        span {
+          display: flex;
+          font-size: 1rem;
+          position: relative;
+        }
+        .inputContainer {
+          display: flex;
+          position: relative;
           input {
             width: 100%;
+            border-bottom: 2px solid $main-color-gray;
+            &::-webkit-search-cancel-button {
+              appearance: none;
+              width: 30px;
+              height: 30px;
+              background-image: url("/images/clearIcon.png");
+              background-size: cover;
+              cursor: pointer;
+            }
           }
         }
       }
+      //REFACTORING====================================================
       button {
         background-color: $main-green-color;
       }

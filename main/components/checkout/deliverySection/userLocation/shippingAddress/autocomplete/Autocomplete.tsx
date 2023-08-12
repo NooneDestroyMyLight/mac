@@ -19,7 +19,7 @@ interface IAutocomplete {
 
 const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
   const coordinates: google.maps.CircleLiteral = {
-    center: { lat: 49.9935, lng: 36.230383 },
+    center: { lat: 49.9935, lng: 36.230383 }, //Kharkiv District restrict
     radius: 500,
   };
 

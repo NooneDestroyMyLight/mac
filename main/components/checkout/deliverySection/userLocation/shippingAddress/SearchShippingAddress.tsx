@@ -3,10 +3,11 @@ import style from "./SearchShippingAddress.module.scss";
 import { useActions } from "@/hooksuseActions";
 
 import Autocomplete from "./autocomplete/Autocomplete";
-import Map from "../map/Map";
+import Map from "../../map/Map";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 import { IPropsUserLocationWM } from "../userLocationMW.interface";
+import MapPlaceholder from "../../icons/mapPlaceHolder/MapPlaceHolder";
 
 interface ISearchShippingAddress {
   setLocation: React.Dispatch<React.SetStateAction<IUserAddress | null>>;
@@ -23,25 +24,25 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
 }) => {
   const { setNewUserAddress } = useActions();
 
-  console.log(stateObj.isLoaded);
-
   return (
     <div className={style.SearchShippingAddressWrapper}>
       <div className={style.content}>
         <ul className={style.autocompleteContainer}>
           <li>
-            <div className={style.inputColumn}>
-              <span className={style.uperInputText}>Delivry address</span>
+            <span className={style.uperInputText}>Delivry address</span>
+            <div className={style.inputContainer}>
               <Autocomplete
                 isLoaded={stateObj.isLoaded}
                 center={stateObj.center}
                 setLocation={setLocation}
               />
             </div>
-            <div className={style.inputColumn}>
-              <span className={style.uperInputText}>
-                Floor, door, instructions
-              </span>
+          </li>
+          <li>
+            <span className={style.uperInputText}>
+              Floor, door, instructions
+            </span>
+            <div className={style.inputContainer}>
               <input type="text" />
             </div>
           </li>
@@ -62,7 +63,7 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
                 onUnmount={stateObj.onUnmount}
               />
             ) : (
-              <div>EMPTY MAP</div>
+              <MapPlaceholder />
             )}
           </div>
         </div>

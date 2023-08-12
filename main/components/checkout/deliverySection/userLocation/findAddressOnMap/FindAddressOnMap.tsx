@@ -1,8 +1,10 @@
-import { FC, MutableRefObject, ReactNode, useMemo, useState } from "react";
+import { FC, ReactNode, useMemo, useState } from "react";
 import style from "./FindAddressOnMap.module.scss";
 
-import Map from "../map/Map";
+import Map from "../../map/Map";
+import MapPlaceholder from "../../icons/mapPlaceHolder/MapPlaceHolder";
 import Geocode from "react-geocode";
+
 import { IPropsUserLocationWM } from "../userLocationMW.interface";
 
 interface IFindAddressOnMap {
@@ -59,10 +61,15 @@ const FindAddressOnMap: FC<IFindAddressOnMap> = ({ stateObj, children }) => {
               onUnmount={stateObj.onUnmount}
             />
           ) : (
-            <div>EMPTY MAP</div>
+            <MapPlaceholder />
           )}
         </div>
         <span className={style.discription}>
+          <img
+            className={style.icon}
+            src="/images/icon/free-icon-pin-3944427.png"
+            alt="LocationIcon"
+          />
           {!currentLocation ? children : currentLocation}
         </span>
         <button
