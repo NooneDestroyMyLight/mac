@@ -61,14 +61,16 @@ const UserLocation: FC<UserLocation> = ({
       <div className={style.content}>
         {currentWidnowSlide === 1 && (
           <SearchShippingAddress
-            stateObj={{ ...stateObj, isLoaded: isLoaded }}
+            stateObj={{ ...stateObj, isLoaded: isLoaded, center: center }}
             setLocation={setLocation}
             location={location}
             setModelWindowOpen={setModelWindowOpen}
           />
         )}
         {currentWidnowSlide === 2 && (
-          <FindAddressOnMap stateObj={{ ...stateObj, isLoaded: isLoaded }}>
+          <FindAddressOnMap
+            stateObj={{ ...stateObj, isLoaded: isLoaded, center: center }}
+          >
             <span>
               Pin your exact location to help the courier find your address
             </span>

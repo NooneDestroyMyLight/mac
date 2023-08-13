@@ -17,7 +17,6 @@ const API_KEY = process.env.API_KEY;
 const FindAddressOnMap: FC<IFindAddressOnMap> = ({ stateObj, children }) => {
   const [markerPosition, setMarkerPosition] =
     useState<google.maps.LatLngLiteral>(stateObj.center);
-
   const [currentLocation, setCurrentLocation] = useState<string | null>(null);
 
   useMemo(() => {
@@ -28,7 +27,7 @@ const FindAddressOnMap: FC<IFindAddressOnMap> = ({ stateObj, children }) => {
       markerPosition.lng.toString()
     ).then(
       response => {
-        console.log(response.results);
+        console.log("массив", response.results[0].address_components);
         setCurrentLocation(response.results[0].formatted_address);
       },
       error => {

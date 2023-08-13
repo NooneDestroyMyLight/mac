@@ -102,10 +102,11 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
   return (
     <div className={style.autocompleteContainer} ref={ref}>
       <input
+        type="search"
         value={value}
         onChange={handleInput}
         disabled={!ready}
-        placeholder="Search..."
+        // placeholder="Search..."
       />
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && (

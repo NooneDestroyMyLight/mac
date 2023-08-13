@@ -12,23 +12,40 @@
       width: 290px;
       display: flex;
       flex-direction: column;
+
       justify-content: space-between;
+
+      gap: 4em;
+
       //REFACTORING====================================================
       li {
         display: flex;
         flex-direction: column;
         // gap: 1em;
-        span {
-          display: flex;
-          font-size: 1rem;
-          position: relative;
-        }
         .inputContainer {
           display: flex;
+          flex-direction: column;
+
           position: relative;
+          .inputTitle {
+            display: flex;
+            align-items: center;
+
+            height: 100%;
+
+            // z-index: 10;
+            // left: 0.5em;
+            // position: absolute;
+            position: static;
+            transition: position 0.3s;
+            padding-left: 1em;
+            color: gray;
+          }
+
           input {
             width: 100%;
             border-bottom: 2px solid $main-color-gray;
+
             &::-webkit-search-cancel-button {
               appearance: none;
               width: 30px;

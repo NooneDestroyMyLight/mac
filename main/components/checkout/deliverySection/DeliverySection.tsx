@@ -5,11 +5,12 @@ import { useActions } from "@/hooksuseActions";
 
 import ModelWindow from "../../../HOC/modelWindow/ModelWindow";
 import Selector from "../../../HOC/selector/Selesctor";
-import AnotherPersonInfo from "./anotherPersonInfo/AnotherPersonInfo";
 
+import AnotherPersonInfo from "./anotherPersonInfo/AnotherPersonInfo";
 import UserLocation from "./userLocation/UserLocationMW";
 import AddAddressButton from "./addAddressButton/AddAddressButton";
 import Map from "./map/Map";
+import MapPlaceholder from "./icons/mapPlaceHolder/MapPlaceHolder";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 import { userAdressKey } from "./userAddreess.data";
@@ -57,10 +58,7 @@ const DeliverySection: FC<IDeliverySection> = ({
               onUnmount={onUnmount}
             />
           ) : (
-            <img
-              src="/images/mapPlaceholder.png"
-              className={style.mapPlaceholderContainer}
-            />
+            <MapPlaceholder />
           )}
         </div>
         <ul className={style.deliveryInfosInput}>

@@ -29,7 +29,7 @@ const AddInfoAboutDelivery: FC = () => {
           </div>
         </li>
         <li>
-          <span className={style.uperInputText}>*Some add info:</span>
+          <span className={style.uperInputText}>*Some add info(optional)</span>
           <div className={style.inputContainer}>
             <input type="search" />
           </div>

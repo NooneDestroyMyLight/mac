@@ -1,4 +1,4 @@
-import { FC, MutableRefObject } from "react";
+import { FC } from "react";
 import style from "./SearchShippingAddress.module.scss";
 import { useActions } from "@/hooksuseActions";
 
@@ -29,8 +29,8 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
       <div className={style.content}>
         <ul className={style.autocompleteContainer}>
           <li>
-            <span className={style.uperInputText}>Delivry address</span>
             <div className={style.inputContainer}>
+              <span className={style.inputTitle}>Delivry address</span>
               <Autocomplete
                 isLoaded={stateObj.isLoaded}
                 center={stateObj.center}
@@ -39,11 +39,11 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
             </div>
           </li>
           <li>
-            <span className={style.uperInputText}>
-              Floor, door, instructions
-            </span>
             <div className={style.inputContainer}>
-              <input type="text" />
+              <span className={style.inputTitle}>
+                Floor, door, instructions
+              </span>
+              <input type="search" />
             </div>
           </li>
           <button
