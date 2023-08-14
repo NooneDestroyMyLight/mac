@@ -39,7 +39,19 @@ const Checkout: FC = () => {
     libraries: libraries,
   });
 
-  const [orderInfo, setOrderInfo] = useState<IuserOrderInfo>();
+  const [isError, setError] = useState(false);
+  const [orederObj, setOrederObj] = useState({
+    address: { addressName: "", addressCoordinates: "" },
+    paytionMethod: "",
+  });
+  const submitCheckout = () => {
+    if (!orederObj.address.addressName && !orederObj.paytionMethod) {
+      //fetching DATA ORDER TO AdminPanel
+    }
+    // else {
+    //   setError(true);
+    // }
+  };
 
   return (
     <div className={style.checkoutPage}>
@@ -54,6 +66,7 @@ const Checkout: FC = () => {
         Macdonalds
       </div>
       <h1>Checkout page</h1>
+
       <div className={style.container}>
         <div className={style.main}>
           <UserInfoSection />

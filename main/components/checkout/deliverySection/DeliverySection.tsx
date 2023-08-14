@@ -65,9 +65,8 @@ const DeliverySection: FC<IDeliverySection> = ({
           <Selector
             array={userAddress}
             property={userAdressKey}
-            selectorValue={
-              !currentLocation ? " Choose address..." : currentLocation.address
-            }
+            selectorValue={currentLocation ? currentLocation.address : ""}
+            placeholder={" Choose address..."}
             setSelectorValue={setCurrentAddress}
             iconSrc="/images/icon/free-icon-pin-3944427.png"
           >

@@ -47,7 +47,7 @@ const Sidebar: FC<IsideBar> = ({ totalАmountСost }) => {
           </span>
         </li>
       </ul>
-      <button>Confirm order</button>
+      <button type="submit">Confirm order</button>
     </section>
   );
 };

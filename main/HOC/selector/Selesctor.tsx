@@ -18,6 +18,7 @@ export interface IDropdown<T> {
     "googleMap/setCurrentAddress"
   >;
   iconSrc?: string;
+  placeholder?: string;
 }
 
 const Selector: FC<IDropdown<any>> = ({
@@ -27,6 +28,7 @@ const Selector: FC<IDropdown<any>> = ({
   selectorValue,
   setSelectorValue,
   iconSrc,
+  placeholder,
 }) => {
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
@@ -51,6 +53,7 @@ const Selector: FC<IDropdown<any>> = ({
         <input
           type="text"
           value={selectorValue}
+          placeholder={placeholder ? placeholder : ""}
           readOnly
           className={style.selectorInput}
         />
