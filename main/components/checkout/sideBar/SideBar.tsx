@@ -4,9 +4,10 @@ import style from "./SideBar.module.scss";
 import Image from "next/image";
 interface IsideBar {
   totalАmountСost: number;
+  submitCheckout: () => void;
 }
 
-const Sidebar: FC<IsideBar> = ({ totalАmountСost }) => {
+const Sidebar: FC<IsideBar> = ({ totalАmountСost, submitCheckout }) => {
   //Add with delivery considering delivery price
   return (
     <section className={style.sideBarContainer}>
@@ -47,7 +48,7 @@ const Sidebar: FC<IsideBar> = ({ totalАmountСost }) => {
           </span>
         </li>
       </ul>
-      <button type="submit">Confirm order</button>
+      <button onClick={() => submitCheckout()}>Confirm order</button>
     </section>
   );
 };

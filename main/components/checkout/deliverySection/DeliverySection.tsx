@@ -14,8 +14,12 @@ import MapPlaceholder from "./icons/mapPlaceHolder/MapPlaceHolder";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 import { userAdressKey } from "./userAddreess.data";
+import { IUserOrder } from "@/app/checkout/checkoutOrder.interface";
 
 interface IDeliverySection {
+  isError: boolean;
+  orederObj: IUserOrder;
+  setOrederObj: React.Dispatch<React.SetStateAction<IUserOrder>>;
   isLoaded: boolean;
   center: google.maps.LatLngLiteral;
   userAddress: IUserAddress[];
@@ -27,9 +31,12 @@ const DeliverySection: FC<IDeliverySection> = ({
   center,
   userAddress,
   currentLocation,
+  orederObj,
+  setOrederObj,
 }) => {
   const [isUserLocationOpen, setUserLocationOpen] = useState<boolean>(false);
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
+
   const { setCurrentAddress } = useActions();
 
   const mapRef = useRef<google.maps.Map | null>(null);
@@ -40,8 +47,6 @@ const DeliverySection: FC<IDeliverySection> = ({
   const onUnmount = useCallback(function callback(map: google.maps.Map) {
     mapRef.current = null;
   }, []);
-
-  console.log("DeliverySection", isLoaded);
 
   return (
     <section className={style.section}>
@@ -63,17 +68,26 @@ const DeliverySection: FC<IDeliverySection> = ({
         </div>
         <ul className={style.deliveryInfosInput}>
           <Selector
-            array={userAddress}
-            property={userAdressKey}
-            selectorValue={currentLocation ? currentLocation.address : ""}
+            selectorValue={orederObj.addressName ? orederObj.addressName : ""}
             placeholder={" Choose address..."}
-            setSelectorValue={setCurrentAddress}
             iconSrc="/images/icon/free-icon-pin-3944427.png"
           >
             <AddAddressButton
               setOpen={setDropDownOpen}
               setActive={setUserLocationOpen}
             />
+            {userAddress.map(item => (
+              <button
+                onClick={() => {
+                  setCurrentAddress(item);
+                  setOrederObj({ ...orederObj, addressName: item.address });
+                }}
+                key={item.address}
+                className={style.dropdownItem}
+              >
+                {item.address}
+              </button>
+            ))}
           </Selector>
           <AnotherPersonInfo />
         </ul>
@@ -83,12 +97,15 @@ const DeliverySection: FC<IDeliverySection> = ({
         setModelWindowOpen={setUserLocationOpen}
       >
         <UserLocation
+          setOrederObj={setOrederObj}
+          orederObj={{ ...orederObj }}
           setModelWindowOpen={setUserLocationOpen}
           isLoaded={isLoaded}
           center={center}
           onUnmount={onUnmount}
           onLoad={onLoad}
           mapRef={mapRef}
+          isUserLocationOpen={isUserLocationOpen}
         />
       </ModelWindow>
     </section>

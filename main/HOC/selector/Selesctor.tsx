@@ -10,23 +10,18 @@ import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice
 
 export interface IDropdown<T> {
   children?: ReactNode;
-  array: T[]; //Add
-  property: keyof T;
   selectorValue: string; //currentValue
-  setSelectorValue: ActionCreatorWithPayload<
-    IUserAddress,
-    "googleMap/setCurrentAddress"
-  >;
+  // setSelectorValue: ActionCreatorWithPayload<
+  //   IUserAddress,
+  //   "googleMap/setCurrentAddress"
+  // >;
   iconSrc?: string;
   placeholder?: string;
 }
 
 const Selector: FC<IDropdown<any>> = ({
-  array,
-  property,
   children,
   selectorValue,
-  setSelectorValue,
   iconSrc,
   placeholder,
 }) => {
@@ -71,20 +66,7 @@ const Selector: FC<IDropdown<any>> = ({
               : style.dropdown
           }
         >
-          <div className={style.itemsList}>
-            {children}
-            {array.map(item => (
-              <button
-                onClick={() => {
-                  setSelectorValue(item);
-                }}
-                key={item[property]}
-                className={style.dropdownItem}
-              >
-                {item[property]}
-              </button>
-            ))}
-          </div>
+          <div className={style.itemsList}>{children}</div>
         </div>
       ) : null}
     </li>

@@ -89,6 +89,10 @@ $main-color-gray: rgba(219, 219, 219, 0.7);
   text-align: center;
   font-size: $font-size-large;
   @include checkoutPageButton;
+  &:disabled {
+    background-color: gray;
+    opacity: 50%;
+  }
 }
 @media (max-width: 420px) {
   .deliverySectionButton {

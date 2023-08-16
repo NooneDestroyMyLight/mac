@@ -7,12 +7,11 @@ export interface IShippingAddress {
   anotherInfo?: string;
 }
 
-export interface IUserInfo {
-  address: {
-    addressName: IShippingAddress;
-    addressCoordinate: google.maps.LatLngLiteral;
-  };
-  orderItems: IBasketSlice;
-  deliveryPerson: "";
-  paymentMethod: "";
+export interface IUserOrder {
+  addressName: string;
+  addressCoordinates: google.maps.LatLngLiteral;
+  //   orderItems: IBasketSlice;
+  deliveryPerson?: string;
+  instruction?: string;
+  paymentMethod: string;
 }

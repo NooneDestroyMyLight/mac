@@ -38,7 +38,7 @@ const Map: FC<Imap> = ({
   onUnmount,
 }) => {
   const defaultOptions: google.maps.MapOptions = {
-    zoomControl: false,
+    zoomControl: muteMap,
     mapTypeControl: false,
     scaleControl: true,
     streetViewControl: false,

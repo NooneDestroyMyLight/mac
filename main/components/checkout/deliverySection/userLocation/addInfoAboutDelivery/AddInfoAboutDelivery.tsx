@@ -4,9 +4,27 @@ import style from "./AddInfoAboutDelivery.module.scss";
 import { useForm, SubmitHandler } from "react-hook-form";
 import FormErrors from "./formErrors/FormErrors";
 
-import { IShippingAddress } from "@/app/checkout/checkoutOrder.interface";
+import {
+  IShippingAddress,
+  IUserOrder,
+} from "@/app/checkout/checkoutOrder.interface";
+import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
+import { IAddressInfo } from "../UserLocationMW";
+import { useActions } from "@/hooksuseActions";
 
-const AddInfoAboutDelivery: FC = () => {
+interface IAddInfoAboutDelivery {
+  locationOnMap: IAddressInfo | null;
+  orederObj: IUserOrder;
+  setOrederObj: React.Dispatch<React.SetStateAction<IUserOrder>>;
+  setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AddInfoAboutDelivery: FC<IAddInfoAboutDelivery> = ({
+  locationOnMap,
+  orederObj,
+  setOrederObj,
+  setModelWindowOpen,
+}) => {
   const {
     register,
     handleSubmit,
@@ -14,15 +32,28 @@ const AddInfoAboutDelivery: FC = () => {
     reset,
   } = useForm<IShippingAddress>({
     defaultValues: {
-      streetName: "Ave.Peremogi 75", //Set There Value from previous Slide
+      streetName: locationOnMap?.address,
+      houseNumber: locationOnMap?.houseNumber,
     },
   });
+
+  const {} = useActions();
+
   const onSubmit: SubmitHandler<IShippingAddress> = data => {
     console.log(data);
+
+    setOrederObj({
+      ...orederObj,
+      addressName:
+        data.streetName + " " + data.houseNumber + " " + data.floorAndDoor,
+      instruction: data.floorAndDoor,
+    });
+
     console.log(`Your street ${data.streetName}`);
     console.log(`Your house № ${data.houseNumber}`);
     console.log(`Your floor and Door ${data.floorAndDoor}`);
     console.log(`Your some info ${data.anotherInfo}`);
+    setModelWindowOpen(false);
     reset();
   };
 
@@ -59,7 +90,9 @@ const AddInfoAboutDelivery: FC = () => {
             )}
           </li>
           <li>
-            <span className={style.uperInputText}>*Floor,door </span>
+            <span className={style.uperInputText}>
+              *Floor,door, instruction{" "}
+            </span>
             <div className={style.inputContainer}>
               <input
                 type="search"
