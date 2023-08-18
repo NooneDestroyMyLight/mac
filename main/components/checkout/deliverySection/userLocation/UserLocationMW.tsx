@@ -43,14 +43,15 @@ const UserLocation: FC<UserLocation> = ({
 }) => {
   const [currentWidnowSlide, setCurrentWindowSlide] = useState<number>(1); // Like routing in Model window
 
-  const [stateObj, setstateObj] = useState<IPropsUserLocationWM>({
+  const stateObj: IPropsUserLocationWM = {
+    //Refactor that into default variable
     isLoaded: isLoaded,
     center: center,
     mapRef: mapRef,
     setCurrentWindowSlide: setCurrentWindowSlide,
     onLoad: onLoad,
     onUnmount: onUnmount,
-  });
+  };
 
   const [locationOnMap, setLocationOnMap] = useState<IAddressInfo | null>(null); //Location
 
@@ -59,52 +60,49 @@ const UserLocation: FC<UserLocation> = ({
   }, [isUserLocationOpen]);
 
   return (
-    <div className={style.mainContainer}>
-      <button
-        className={style.closeIcon}
-        onClick={() => {
-          setModelWindowOpen(false);
-        }}
-      >
-        <CloseIcon />
-      </button>
-      <button
-        className={style.previousPageIcon}
-        onClick={() => setCurrentWindowSlide(currentWidnowSlide - 1)}
-        disabled={currentWidnowSlide === 1 && true}
-      >
-        <PreviousIcon />
-      </button>
-      <h2 className={style.h2Title}>Enter your shipping address</h2>
-      <div className={style.content}>
-        {currentWidnowSlide === 1 && (
-          <SearchShippingAddress
-            setOrederObj={setOrederObj}
-            orederObj={{ ...orederObj }}
-            stateObj={{ ...stateObj, isLoaded: isLoaded, center: center }}
-            setModelWindowOpen={setModelWindowOpen}
-          />
-        )}
-        {currentWidnowSlide === 2 && (
-          <FindAddressOnMap
-            stateObj={{ ...stateObj, isLoaded: isLoaded, center: center }}
-            setLocationOnMap={setLocationOnMap}
-          >
-            <span>
-              Pin your exact location to help the courier find your address
-            </span>
-          </FindAddressOnMap>
-        )}
-        {currentWidnowSlide === 3 && (
-          <AddInfoAboutDelivery
-            locationOnMap={locationOnMap}
-            setOrederObj={setOrederObj}
-            orederObj={{ ...orederObj }}
-            setModelWindowOpen={setModelWindowOpen}
-          />
-        )}
-      </div>
-    </div>
+    <>
+      {currentWidnowSlide === 1 && (
+        <SearchShippingAddress
+          setCurrentWindowSlide={setCurrentWindowSlide}
+          currentWidnowSlide={currentWidnowSlide}
+          setModelWindowOpen={setModelWindowOpen}
+          ///=///
+          setOrederObj={setOrederObj}
+          orederObj={{ ...orederObj }}
+          stateObj={{ ...stateObj, isLoaded: isLoaded, center: center }}
+        />
+      )}
+      {currentWidnowSlide === 2 && (
+        <FindAddressOnMap
+          setCurrentWindowSlide={setCurrentWindowSlide}
+          currentWidnowSlide={currentWidnowSlide}
+          setModelWindowOpen={setModelWindowOpen}
+          ///=///
+          stateObj={{ ...stateObj, isLoaded: isLoaded, center: center }}
+          setLocationOnMap={setLocationOnMap}
+        >
+          <span>
+            Pin your exact location to help the courier find your address
+          </span>
+        </FindAddressOnMap>
+      )}
+      {currentWidnowSlide === 3 && (
+        <AddInfoAboutDelivery
+          setCurrentWindowSlide={setCurrentWindowSlide}
+          currentWidnowSlide={currentWidnowSlide}
+          setModelWindowOpen={setModelWindowOpen}
+          ///=///
+          locationOnMap={
+            locationOnMap && {
+              ...locationOnMap,
+              location: { ...locationOnMap.location },
+            }
+          }
+          setOrederObj={setOrederObj}
+          orederObj={{ ...orederObj }}
+        />
+      )}
+    </>
   );
 };
 export default UserLocation;

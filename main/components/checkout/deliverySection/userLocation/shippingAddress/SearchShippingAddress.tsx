@@ -11,12 +11,16 @@ import MapPlaceholder from "../../icons/mapPlaceHolder/MapPlaceHolder";
 import { IUserOrder } from "@/app/checkout/checkoutOrder.interface";
 import { SubmitHandler, useForm } from "react-hook-form";
 import FormErrors from "../addInfoAboutDelivery/formErrors/FormErrors";
+import UserLocationContainer from "../../../../../HOC/modelWindow/userLocationContainer/UserLocationContainer";
 
 interface ISearchShippingAddress {
+  setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentWindowSlide: React.Dispatch<React.SetStateAction<number>>;
+  currentWidnowSlide: number;
+
   orederObj: IUserOrder;
   setOrederObj: React.Dispatch<React.SetStateAction<IUserOrder>>;
   stateObj: IPropsUserLocationWM;
-  setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface IFloorAndDoor {
@@ -25,24 +29,17 @@ interface IFloorAndDoor {
 
 const SearchShippingAddress: FC<ISearchShippingAddress> = ({
   setModelWindowOpen,
+  setCurrentWindowSlide,
+  currentWidnowSlide,
+
+  setOrederObj,
   stateObj,
   orederObj,
-  setOrederObj,
 }) => {
   const [location, setLocation] = useState<IUserAddress | null>(null); //Location
   const { setNewUserAddress } = useActions();
 
   const autocompleteRef = useRef<HTMLInputElement | null>(null);
-
-  // const onHandleSubmit = () => {
-  //   setNewUserAddress(location);
-  //   if (location != null) {
-  //     setModelWindowOpen(false);
-  //     setOrederObj({ ...orederObj, addressName: location.address });
-  //     setLocation(null);
-  //     autocompleteRef.current!.value = "";
-  //   }
-  // };
 
   const {
     register,
@@ -51,8 +48,12 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
     reset,
   } = useForm<IFloorAndDoor>();
   const onSubmit: SubmitHandler<IFloorAndDoor> = data => {
-    setNewUserAddress(location);
     if (location != null) {
+      setNewUserAddress({
+        location: location.location,
+        address: location.address + ", " + data.floorAndDoor,
+      });
+
       setModelWindowOpen(false);
       setOrederObj({
         ...orederObj,
@@ -65,15 +66,25 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
     }
   };
 
+  const wipeInput = () => {
+    autocompleteRef.current!.value = "";
+    reset();
+  };
+
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className={style.SearchShippingAddressWrapper}
+    <UserLocationContainer
+      setCurrentWindowSlide={setCurrentWindowSlide}
+      setModelWindowOpen={setModelWindowOpen}
+      currentWidnowSlide={currentWidnowSlide}
+      actionsWhenClose={wipeInput}
     >
-      <div className={style.content}>
-        <ul className={style.autocompleteContainer}>
-          <li>
-            <div className={style.inputContainer}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={style.SearchShippingAddressWrapper}
+      >
+        <div className={style.content}>
+          <ul className={style.autocompleteContainer}>
+            <fieldset>
               <span className={style.inputTitle}>*Delivry address</span>
               <Autocomplete
                 isLoaded={stateObj.isLoaded}
@@ -81,10 +92,8 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
                 setLocation={setLocation}
                 autocompleteRef={autocompleteRef}
               />
-            </div>
-          </li>
-          <li>
-            <div className={style.inputContainer}>
+            </fieldset>
+            <fieldset>
               <span className={style.inputTitle}>
                 *Floor, door, some instructions
               </span>
@@ -97,41 +106,34 @@ const SearchShippingAddress: FC<ISearchShippingAddress> = ({
               {errors.floorAndDoor && (
                 <FormErrors errors={errors.floorAndDoor.message} />
               )}
+            </fieldset>
+            <button
+              onClick={() => stateObj.setCurrentWindowSlide(2)}
+              className={style.checkoutPageButton}
+            >
+              Find place adreess in map
+            </button>
+          </ul>
+          <div className={style.mapContainer}>
+            <div className={style.map}>
+              {stateObj.isLoaded ? (
+                <Map
+                  muteMap={false}
+                  center={stateObj.center}
+                  onLoad={stateObj.onLoad}
+                  onUnmount={stateObj.onUnmount}
+                />
+              ) : (
+                <MapPlaceholder />
+              )}
             </div>
-          </li>
-          <button
-            onClick={() => stateObj.setCurrentWindowSlide(2)}
-            className={style.checkoutPageButton}
-          >
-            Find place adreess in map
-          </button>
-        </ul>
-        <div className={style.mapContainer}>
-          <div className={style.map}>
-            {stateObj.isLoaded ? (
-              <Map
-                muteMap={false}
-                center={stateObj.center}
-                onLoad={stateObj.onLoad}
-                onUnmount={stateObj.onUnmount}
-              />
-            ) : (
-              <MapPlaceholder />
-            )}
           </div>
         </div>
-      </div>
-      <button
-        // disabled={location === null && true}
-        // onClick={() => {
-        //   onHandleSubmit();
-        // }}
-        type="submit"
-        className={style.deliverySectionButton}
-      >
-        Submit address
-      </button>
-    </form>
+        <button type="submit" className={style.deliverySectionButton}>
+          Submit address
+        </button>
+      </form>
+    </UserLocationContainer>
   );
 };
 export default SearchShippingAddress;

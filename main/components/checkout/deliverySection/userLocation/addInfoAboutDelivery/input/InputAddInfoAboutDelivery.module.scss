@@ -1,0 +1,64 @@
+@import "../../../../checkoutMainStyle.module.scss";
+@import "@/page";
+fieldset {
+  display: flex;
+  flex-direction: column;
+  span {
+    display: flex;
+    font-size: 1rem;
+  }
+  .inputContainer {
+    display: flex;
+    position: relative;
+    input {
+      width: 100%;
+      border-bottom: 2px solid $main-color-gray;
+
+      padding-right: 2.7em;
+
+      &::-webkit-search-cancel-button {
+        appearance: none;
+        width: 30px;
+        height: 30px;
+        background-image: url("/images/clearIcon.png");
+        background-size: cover;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  fieldset {
+    display: flex;
+    flex-direction: column;
+    span {
+      display: flex;
+      font-size: 1rem;
+    }
+    .inputContainer {
+      display: flex;
+      position: relative;
+      input {
+        width: 100%;
+        border-bottom: 2px solid $main-color-gray;
+
+        // padding-right: 2.7em;
+
+        &::-webkit-search-cancel-button {
+          position: absolute;
+
+          right: 0.5em;
+          appearance: none;
+
+          width: 30px;
+          height: 30px;
+
+          background-image: url("/images/clearIcon.png");
+          background-size: cover;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

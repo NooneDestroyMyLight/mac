@@ -1,0 +1,95 @@
+@import "@/page";
+@import "../../../components/checkout/checkoutMainStyle.module.scss";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 700px;
+  min-height: 600px;
+
+  padding: 1em;
+  position: relative;
+
+  .closeIcon {
+    cursor: pointer;
+    &:hover {
+      @include hoverOpacity;
+    }
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .previousPageIcon {
+    cursor: pointer;
+    &:hover {
+      @include hoverOpacity;
+    }
+    top: 0;
+    left: 0;
+    position: absolute;
+  }
+  .content {
+    display: flex;
+    flex: 1;
+    gap: 2em;
+
+    width: 100%;
+    .mapAndDiscriptionWrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+      .map {
+        width: 600px;
+        height: 300px;
+      }
+      .discription {
+        font-weight: 700;
+        font-size: 1.1rem;
+        text-align: center;
+        word-wrap: break-word;
+
+        width: 400px;
+      }
+    }
+
+    .autocompleteContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      width: 290px;
+      li {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+        .inputField {
+          input {
+            width: 100%;
+          }
+        }
+      }
+      button {
+        background-color: $delivery-Info-Map-color;
+      }
+    }
+    .mapContainer {
+      display: flex;
+      flex: 1;
+      justify-content: center;
+
+      width: 100%;
+      height: 100%;
+      .map {
+        width: 300px;
+        height: 300px;
+      }
+    }
+  }
+}
+@media (max-width: 420px) {
+  .mainContainer {
+    padding: 0em;
+  }
+}

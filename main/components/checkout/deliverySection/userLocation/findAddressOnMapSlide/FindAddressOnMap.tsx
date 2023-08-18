@@ -13,19 +13,27 @@ import MapPlaceholder from "../../icons/mapPlaceHolder/MapPlaceHolder";
 import Geocode from "react-geocode";
 
 import { IPropsUserLocationWM } from "../userLocationMW.interface";
-import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
 import { IAddressInfo } from "../UserLocationMW";
+import UserLocationContainer from "../../../../../HOC/modelWindow/userLocationContainer/UserLocationContainer";
 
 interface IFindAddressOnMap {
-  children: ReactNode;
+  setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentWindowSlide: React.Dispatch<React.SetStateAction<number>>;
+  currentWidnowSlide: number;
+
   stateObj: IPropsUserLocationWM;
   setLocationOnMap: Dispatch<SetStateAction<IAddressInfo | null>>;
+  children: ReactNode;
 }
 
 const API_KEY = process.env.API_KEY;
 
 const FindAddressOnMap: FC<IFindAddressOnMap> = ({
+  setModelWindowOpen,
+  setCurrentWindowSlide,
+  currentWidnowSlide,
+
   stateObj,
   children,
   setLocationOnMap,
@@ -82,43 +90,49 @@ const FindAddressOnMap: FC<IFindAddressOnMap> = ({
 
   return (
     <>
-      <div className={style.mapAndDiscriptionWrapper}>
-        <div className={style.map}>
-          {stateObj.isLoaded ? (
-            <Map
-              handleCenterChanged={handleCenterChanged}
-              muteMap={true}
-              center={stateObj.center}
-              onLoad={stateObj.onLoad}
-              onUnmount={stateObj.onUnmount}
+      <UserLocationContainer
+        setCurrentWindowSlide={setCurrentWindowSlide}
+        setModelWindowOpen={setModelWindowOpen}
+        currentWidnowSlide={currentWidnowSlide}
+      >
+        <div className={style.mapAndDiscriptionWrapper}>
+          <div className={style.map}>
+            {stateObj.isLoaded ? (
+              <Map
+                handleCenterChanged={handleCenterChanged}
+                muteMap={true}
+                center={stateObj.center}
+                onLoad={stateObj.onLoad}
+                onUnmount={stateObj.onUnmount}
+              />
+            ) : (
+              <MapPlaceholder />
+            )}
+          </div>
+          <span className={style.discription}>
+            <img
+              className={style.icon}
+              src="/images/icon/free-icon-pin-3944427.png"
+              alt="LocationIcon"
             />
-          ) : (
-            <MapPlaceholder />
-          )}
+            {!currentLocation ? children : currentLocation}
+          </span>
+          <button
+            onClick={() => {
+              stateObj.setCurrentWindowSlide(3);
+              if (currentLocation && markerPosition) {
+                // setLocationOnMap({
+                //   address: currentLocation,
+                //   location: markerPosition,
+                // });
+              }
+            }}
+            className={style.deliverySectionButton}
+          >
+            Continue
+          </button>
         </div>
-        <span className={style.discription}>
-          <img
-            className={style.icon}
-            src="/images/icon/free-icon-pin-3944427.png"
-            alt="LocationIcon"
-          />
-          {!currentLocation ? children : currentLocation}
-        </span>
-        <button
-          onClick={() => {
-            stateObj.setCurrentWindowSlide(3);
-            if (currentLocation && markerPosition) {
-              // setLocationOnMap({
-              //   address: currentLocation,
-              //   location: markerPosition,
-              // });
-            }
-          }}
-          className={style.deliverySectionButton}
-        >
-          Continue
-        </button>
-      </div>
+      </UserLocationContainer>
     </>
   );
 };

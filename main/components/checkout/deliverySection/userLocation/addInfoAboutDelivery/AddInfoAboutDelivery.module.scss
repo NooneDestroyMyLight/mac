@@ -12,7 +12,7 @@
     row-gap: 2em;
     justify-content: center;
 
-    li {
+    fieldset {
       display: flex;
       flex-direction: column;
       span {
@@ -55,7 +55,7 @@
       row-gap: 2em;
       justify-content: center;
 
-      li {
+      fieldset {
         display: flex;
         flex-direction: column;
         span {
