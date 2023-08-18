@@ -1,6 +1,6 @@
 @import "@/page";
-@import "../../checkoutMainStyle.module.scss";
-.mainContainer {
+@import "../../../components/checkout/checkoutMainStyle.module.scss";
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;

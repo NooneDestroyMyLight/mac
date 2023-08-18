@@ -26,8 +26,9 @@ const PaymentSection: FC = () => {
           <Selector
             array={paymentMethodData}
             property={paymentMethod}
-            selectorValue="Choose payment method... "
+            // selectorValue={selectorValue ? value : ""}
             iconSrc="/images/icon/payIcon.png"
+            placeholder={"Choose payment method... "}
           />
           <li className={style.inputColumn}>
             <span className={style.uperInputText}>Have a promo code?</span>

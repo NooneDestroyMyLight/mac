@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import style from "./Checkout.module.scss";
 import Image from "next/image";
 
@@ -12,18 +12,11 @@ import DeliverySection from "@/components/checkout/deliverySection/DeliverySecti
 import PaymentSection from "@/componentscheckout/paymentSection/PaymentSection";
 import Sidebar from "@/componentscheckout/sideBar/SideBar";
 
-import { IUserAddress } from "../globalRedux/feature/checkout/googleMap.slice";
+import { IUserOrder } from "./checkoutOrder.interface";
 
 const API_KEY = process.env.API_KEY;
 
 const libraries: Libraries = ["places"];
-
-interface IuserOrderInfo {
-  location: IUserAddress; // Change into OBJ address and addressName
-  fullName: string;
-  phoneNumber: string;
-  //For Form
-}
 
 const Checkout: FC = () => {
   const { center, userAddress, currentLocation } = useTypedSelector(
@@ -33,13 +26,28 @@ const Checkout: FC = () => {
     //   const { cart: cartArray, totalАmountСost }: - that how i can typased
     state => state.basket
   );
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: API_KEY,
     libraries: libraries,
   });
 
-  const [orderInfo, setOrderInfo] = useState<IuserOrderInfo>();
+  const [isError, setError] = useState(false);
+  const [orederObj, setOrederObj] = useState<IUserOrder>({
+    addressName: "",
+    addressCoordinates: { lat: 0, lng: 0 },
+    instruction: "",
+    paymentMethod: "",
+  });
+
+  const submitCheckout = useCallback(() => {
+    if (!orederObj.addressName && !orederObj.paymentMethod) {
+      //fetching DATA ORDER TO AdminPanel
+    } else {
+      setError(true);
+    }
+  }, []);
 
   return (
     <div className={style.checkoutPage}>
@@ -68,6 +76,9 @@ const Checkout: FC = () => {
           </div>
           <UserOrderSection cartArray={cartArray} />
           <DeliverySection
+            isError={isError}
+            setOrederObj={setOrederObj}
+            orederObj={{ ...orederObj }}
             center={center}
             isLoaded={isLoaded}
             userAddress={userAddress}
@@ -75,7 +86,10 @@ const Checkout: FC = () => {
           />
           <PaymentSection />
         </div>
-        <Sidebar totalАmountСost={totalАmountСost} />
+        <Sidebar
+          totalАmountСost={totalАmountСost}
+          submitCheckout={submitCheckout}
+        />
       </div>
     </div>
   );

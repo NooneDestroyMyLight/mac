@@ -1,80 +1,108 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, MutableRefObject, useMemo, useState } from "react";
 
 import style from "./UserLocationMW..module.scss";
 
-import Image from "next/image";
-
-import FindAddressOnMap from "./findAddressOnMap/FindAddressOnMap";
+import FindAddressOnMap from "./findAddressOnMapSlide/FindAddressOnMap";
 import SearchShippingAddress from "./shippingAddress/SearchShippingAddress";
 import AddInfoAboutDelivery from "./addInfoAboutDelivery/AddInfoAboutDelivery";
 
+import CloseIcon from "../icons/closeIcon/CloseIcon";
+import PreviousIcon from "../icons/previousIcon/PreviousIcon";
+
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
+import { IPropsUserLocationWM } from "./userLocationMW.interface";
+import { IUserOrder } from "@/app/checkout/checkoutOrder.interface";
 
 interface UserLocation {
+  orederObj: IUserOrder;
+  setOrederObj: React.Dispatch<React.SetStateAction<IUserOrder>>;
   isLoaded: boolean;
   center: google.maps.LatLngLiteral;
   setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isUserLocationOpen: boolean;
+  onLoad: (map: google.maps.Map) => void;
+  onUnmount: (map: google.maps.Map) => void;
+  mapRef: MutableRefObject<google.maps.Map | null>;
+}
+
+export interface IAddressInfo extends IUserAddress {
+  houseNumber: string;
 }
 
 const UserLocation: FC<UserLocation> = ({
   isLoaded,
   center,
   setModelWindowOpen,
+  onLoad,
+  onUnmount,
+  mapRef,
+  orederObj,
+  setOrederObj,
+  isUserLocationOpen,
 }) => {
-  const [location, setLocation] = useState<IUserAddress | null>(null); //Location
-  const [currentWidnowSlide, setCurrentWindowSlide] = useState<number>(1);
+  const [currentWidnowSlide, setCurrentWindowSlide] = useState<number>(1); // Like routing in Model window
+
+  const stateObj: IPropsUserLocationWM = {
+    //Refactor that into default variable
+    isLoaded: isLoaded,
+    center: center,
+    mapRef: mapRef,
+    setCurrentWindowSlide: setCurrentWindowSlide,
+    onLoad: onLoad,
+    onUnmount: onUnmount,
+  };
+
+  const [locationOnMap, setLocationOnMap] = useState<IAddressInfo | null>(null); //Location
+
+  useMemo(() => {
+    isUserLocationOpen && setCurrentWindowSlide(1);
+  }, [isUserLocationOpen]);
 
   return (
-    <div className={style.mainContainer}>
-      <button
-        className={style.closeIcon}
-        onClick={() => setModelWindowOpen(false)}
-      >
-        <Image width={20} height={20} src="/images/closeIcon.png" alt="close" />
-      </button>
-      <button
-        className={style.previousPageIcon}
-        onClick={() => setCurrentWindowSlide(currentWidnowSlide - 1)}
-        disabled={currentWidnowSlide === 1 && true}
-      >
-        <Image
-          width={20}
-          height={20}
-          src="/images/previousIcon.png"
-          alt="close"
+    <>
+      {currentWidnowSlide === 1 && (
+        <SearchShippingAddress
+          setCurrentWindowSlide={setCurrentWindowSlide}
+          currentWidnowSlide={currentWidnowSlide}
+          setModelWindowOpen={setModelWindowOpen}
+          ///=///
+          setOrederObj={setOrederObj}
+          orederObj={{ ...orederObj }}
+          stateObj={{ ...stateObj, isLoaded: isLoaded, center: center }}
         />
-      </button>
-      <h2 className={style.h2Title}>Enter your shipping address</h2>
-      <div className={style.content}>
-        {currentWidnowSlide === 1 && (
-          <SearchShippingAddress
-            isLoaded={isLoaded}
-            center={center}
-            setCurrentWindowSlide={setCurrentWindowSlide}
-            setLocation={setLocation}
-            location={location}
-            setModelWindowOpen={setModelWindowOpen}
-          />
-        )}
-        {currentWidnowSlide === 2 && (
-          <FindAddressOnMap isLoaded={isLoaded} center={center}>
-            <span className={style.discription}>
-              Pin your exact location to help the courier find your address
-            </span>
-            <button
-              onClick={() => {
-                setCurrentWindowSlide(3);
-              }}
-              className={style.deliverySectionButton}
-            >
-              Continue
-            </button>
-          </FindAddressOnMap>
-        )}
-        {currentWidnowSlide === 3 && <AddInfoAboutDelivery />}
-      </div>
-    </div>
+      )}
+      {currentWidnowSlide === 2 && (
+        <FindAddressOnMap
+          setCurrentWindowSlide={setCurrentWindowSlide}
+          currentWidnowSlide={currentWidnowSlide}
+          setModelWindowOpen={setModelWindowOpen}
+          ///=///
+          stateObj={{ ...stateObj, isLoaded: isLoaded, center: center }}
+          setLocationOnMap={setLocationOnMap}
+        >
+          <span>
+            Pin your exact location to help the courier find your address
+          </span>
+        </FindAddressOnMap>
+      )}
+      {currentWidnowSlide === 3 && (
+        <AddInfoAboutDelivery
+          setCurrentWindowSlide={setCurrentWindowSlide}
+          currentWidnowSlide={currentWidnowSlide}
+          setModelWindowOpen={setModelWindowOpen}
+          ///=///
+          locationOnMap={
+            locationOnMap && {
+              ...locationOnMap,
+              location: { ...locationOnMap.location },
+            }
+          }
+          setOrederObj={setOrederObj}
+          orederObj={{ ...orederObj }}
+        />
+      )}
+    </>
   );
 };
 export default UserLocation;

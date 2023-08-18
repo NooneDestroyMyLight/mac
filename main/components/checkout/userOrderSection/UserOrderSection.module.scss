@@ -3,4 +3,7 @@
 .orderInfo {
   display: flex;
   flex-direction: column;
+  max-height: 400px;
+  overflow-y: scroll;
+  border-radius: 1rem;
 }

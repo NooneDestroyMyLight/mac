@@ -1,5 +1,5 @@
 "use client";
-import { ChangeEvent, FC, useEffect } from "react";
+import { ChangeEvent, FC, MutableRefObject, useEffect } from "react";
 import { useActions } from "@/hooksuseActions";
 import style from "./Autocomplete.module.scss";
 
@@ -11,23 +11,32 @@ import usePlacesAutocomplete, {
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
+import { UseFormRegister } from "react-hook-form";
+
 interface IAutocomplete {
   isLoaded: boolean;
   center: google.maps.LatLngLiteral;
   setLocation: React.Dispatch<React.SetStateAction<IUserAddress | null>>;
+  autocompleteRef: MutableRefObject<HTMLInputElement | null>;
+  // ref:
 }
 
-const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
+const Autocomplete: FC<IAutocomplete> = ({
+  isLoaded,
+  center,
+  setLocation,
+  autocompleteRef,
+}) => {
   const coordinates: google.maps.CircleLiteral = {
-    center: { lat: 49.9935, lng: 36.230383 },
+    center: { lat: 49.9935, lng: 36.230383 }, //Kharkiv District restrict
     radius: 500,
   };
 
   const {
     ready,
-    value,
     suggestions: { status, data },
     setValue,
+    value,
     init,
     clearSuggestions,
   } = usePlacesAutocomplete({
@@ -38,7 +47,7 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
     },
 
     initOnMount: false,
-    debounce: 300,
+    debounce: 400,
   });
   const { setCoordinates } = useActions();
 
@@ -54,16 +63,14 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
   const handleSelect =
     ({ description, structured_formatting }: any) =>
     () => {
-      // When user selects a place, we can replace the keyword without request data from API
-      // by setting the second parameter to "false"
-
       clearSuggestions();
-      // Get latitude and longitude via utility functions
 
       getGeocode({ address: description }).then(results => {
         const { lat, lng } = getLatLng(results[0]);
-
         setValue(description, false);
+
+        autocompleteRef.current!.value = structured_formatting.main_text;
+
         setCoordinates({
           lat: lat,
           lng: lng,
@@ -102,11 +109,12 @@ const Autocomplete: FC<IAutocomplete> = ({ isLoaded, center, setLocation }) => {
   return (
     <div className={style.autocompleteContainer} ref={ref}>
       <input
-        value={value}
+        type="search"
         onChange={handleInput}
         disabled={!ready}
-        placeholder="Search..."
+        ref={autocompleteRef}
       />
+
       {/* We can use the "status" to decide whether we should display the dropdown or not */}
       {status === "OK" && (
         <ul className={style.hints}>{renderSuggestions()}</ul>

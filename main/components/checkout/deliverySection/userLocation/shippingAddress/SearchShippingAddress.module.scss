@@ -1,9 +1,11 @@
 @import "@/page";
 @import "../../../checkoutMainStyle.module.scss";
+
 .SearchShippingAddressWrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   .content {
     display: flex;
     gap: 2em;
@@ -11,17 +13,48 @@
       width: 290px;
       display: flex;
       flex-direction: column;
+
       justify-content: space-between;
-      li {
+
+      gap: 4em;
+
+      //REFACTORING====================================================
+      fieldset {
         display: flex;
         flex-direction: column;
-        gap: 1.5em;
-        .inputField {
-          input {
-            width: 100%;
+        // gap: 1em;
+
+        position: relative;
+        .inputTitle {
+          display: flex;
+          align-items: center;
+
+          height: 100%;
+
+          // z-index: 10;
+          // left: 0.5em;
+          // position: absolute;
+          position: static;
+          transition: position 0.3s;
+          padding-left: 1em;
+          color: gray;
+        }
+
+        input {
+          width: 100%;
+          border-bottom: 2px solid $main-color-gray;
+
+          &::-webkit-search-cancel-button {
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            background-image: url("/images/clearIcon.png");
+            background-size: cover;
+            cursor: pointer;
           }
         }
       }
+      //REFACTORING====================================================
       button {
         background-color: $main-green-color;
       }

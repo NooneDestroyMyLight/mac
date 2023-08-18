@@ -34,15 +34,12 @@
       input {
         border-radius: 0.2em;
 
-        padding: 0.5em 0.4em 0.5em 0.4em;
+        // padding: 0.5em 0.4em 0.5em 0.4em;
         transition: 0.3s ease;
         &:focus {
           outline: none;
         }
       }
-      // @media (max-width: 420px) {
-      //   font-size: 1rem * 2;
-      // }
 
       .userLocationSection {
         transition: 0.3s ease;

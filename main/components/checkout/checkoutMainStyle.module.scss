@@ -1,20 +1,31 @@
 @import "@/page";
 
+$main-color-gray: rgba(219, 219, 219, 0.7);
+
 .section {
   @include paddingMarginForParagraph;
   position: relative;
 
+  // ::-webkit-scrollbar {
+  //   width: 0px;
+  // }
+
+  // ::-webkit-scrollbar-thumb {
+  //   background-color: #888;
+  //   border-radius: 5px;
+  // }
+
+  // ::-webkit-scrollbar-track {
+  //   background-color: #f1f1f1;
+  // }
+
   ::-webkit-scrollbar {
-    width: 0px;
+    width: 4px;
   }
-
   ::-webkit-scrollbar-thumb {
-    background-color: #888;
+    background-color: $main-green-colorOP0;
     border-radius: 5px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: #f1f1f1;
+    opacity: 0.2;
   }
 
   .sectionContainer {
@@ -72,9 +83,23 @@
     border-radius: 0.2em;
   }
 }
+
 .deliverySectionButton {
   margin: 0.5em auto 0.5em auto;
   text-align: center;
   font-size: $font-size-large;
   @include checkoutPageButton;
+  &:disabled {
+    background-color: gray;
+    opacity: 50%;
+  }
+}
+@media (max-width: 420px) {
+  .deliverySectionButton {
+    margin: 0.5em auto 0.5em auto;
+    text-align: center;
+    font-size: $font-size-large;
+    @include checkoutPageButton;
+    width: 100%;
+  }
 }

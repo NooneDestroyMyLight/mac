@@ -24,13 +24,7 @@
     transition: 0.3s ease;
     transform: scale(0.5);
   }
-  @media (max-width: 420px) {
-    .modelContent {
-      height: 100vh;
-      width: 100vw;
-      border-radius: 0;
-    }
-  }
+
   .activeModelContent {
     transform: scale(1);
   }
@@ -38,4 +32,45 @@
 .activeModel {
   opacity: 1;
   pointer-events: all;
+}
+@media (max-width: 420px) {
+  .model {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(0, 0, 0, 0.3);
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: 0.3s;
+
+    .modelContent {
+      display: flex;
+      padding: 1em;
+      background-color: white;
+      border-radius: 1rem;
+      transition: 0.3s ease;
+      transform: scale(0.5);
+
+      height: 100vh;
+      width: 100vw;
+      border-radius: 0;
+    }
+
+    .activeModelContent {
+      transform: scale(1);
+    }
+  }
+  .activeModel {
+    opacity: 1;
+    pointer-events: all;
+  }
 }

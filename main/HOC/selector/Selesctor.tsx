@@ -3,30 +3,22 @@ import useOnclickOutside from "react-cool-onclickoutside";
 
 import style from "./Selector.module.scss";
 
-// import { IPaymentMethodData } from "@/componentscheckout/paymentSection/paymentItem.data";
-// import { IUserAddressData } from "@/componentscheckout/deliverySection/userAddreess.data";
 import { ActionCreatorWithPayload } from "@reduxjs/toolkit/dist/createAction";
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
 
 export interface IDropdown<T> {
   children?: ReactNode;
-  array: T[]; //Add
-  property: keyof T;
   selectorValue: string; //currentValue
-  setSelectorValue: ActionCreatorWithPayload<
-    IUserAddress,
-    "googleMap/setCurrentAddress"
-  >;
+
   iconSrc?: string;
+  placeholder?: string;
 }
 
 const Selector: FC<IDropdown<any>> = ({
-  array,
-  property,
   children,
   selectorValue,
-  setSelectorValue,
   iconSrc,
+  placeholder,
 }) => {
   const [isDropDownOpen, setDropDownOpen] = useState<boolean>(false);
 
@@ -48,12 +40,15 @@ const Selector: FC<IDropdown<any>> = ({
             <img src={iconSrc} alt="Icon" />
           </div>
         )}
+
         <input
           type="text"
           value={selectorValue}
+          placeholder={placeholder ? placeholder : ""}
           readOnly
           className={style.selectorInput}
         />
+
         <div
           className={`${style.selectorIcon} ${
             isDropDownOpen && style.selectorIconActive
@@ -68,20 +63,7 @@ const Selector: FC<IDropdown<any>> = ({
               : style.dropdown
           }
         >
-          <div className={style.itemsList}>
-            {children}
-            {array.map(item => (
-              <button
-                onClick={() => {
-                  setSelectorValue(item);
-                }}
-                key={item[property]}
-                className={style.dropdownItem}
-              >
-                {item[property]}
-              </button>
-            ))}
-          </div>
+          <div className={style.itemsList}>{children}</div>
         </div>
       ) : null}
     </li>

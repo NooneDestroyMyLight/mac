@@ -1,78 +1,139 @@
-import { FC } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import style from "./SearchShippingAddress.module.scss";
 import { useActions } from "@/hooksuseActions";
 
 import Autocomplete from "./autocomplete/Autocomplete";
-import Map from "../map/Map";
+import Map from "../../map/Map";
 
 import { IUserAddress } from "@/app/globalRedux/feature/checkout/googleMap.slice";
+import { IPropsUserLocationWM } from "../userLocationMW.interface";
+import MapPlaceholder from "../../icons/mapPlaceHolder/MapPlaceHolder";
+import { IUserOrder } from "@/app/checkout/checkoutOrder.interface";
+import { SubmitHandler, useForm } from "react-hook-form";
+import FormErrors from "../addInfoAboutDelivery/formErrors/FormErrors";
+import UserLocationContainer from "../../../../../HOC/modelWindow/userLocationContainer/UserLocationContainer";
 
 interface ISearchShippingAddress {
-  isLoaded: boolean;
-  center: google.maps.LatLngLiteral;
-  setCurrentWindowSlide: React.Dispatch<React.SetStateAction<number>>;
-  setLocation: React.Dispatch<React.SetStateAction<IUserAddress | null>>;
-  location: IUserAddress | null;
   setModelWindowOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentWindowSlide: React.Dispatch<React.SetStateAction<number>>;
+  currentWidnowSlide: number;
+
+  orederObj: IUserOrder;
+  setOrederObj: React.Dispatch<React.SetStateAction<IUserOrder>>;
+  stateObj: IPropsUserLocationWM;
+}
+
+interface IFloorAndDoor {
+  floorAndDoor: string;
 }
 
 const SearchShippingAddress: FC<ISearchShippingAddress> = ({
-  isLoaded,
-  center,
-  setCurrentWindowSlide,
-  setLocation,
-  location,
   setModelWindowOpen,
+  setCurrentWindowSlide,
+  currentWidnowSlide,
+
+  setOrederObj,
+  stateObj,
+  orederObj,
 }) => {
+  const [location, setLocation] = useState<IUserAddress | null>(null); //Location
   const { setNewUserAddress } = useActions();
 
+  const autocompleteRef = useRef<HTMLInputElement | null>(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<IFloorAndDoor>();
+  const onSubmit: SubmitHandler<IFloorAndDoor> = data => {
+    if (location != null) {
+      setNewUserAddress({
+        location: location.location,
+        address: location.address + ", " + data.floorAndDoor,
+      });
+
+      setModelWindowOpen(false);
+      setOrederObj({
+        ...orederObj,
+        addressName: location.address + ", " + data.floorAndDoor,
+        instruction: data.floorAndDoor,
+      });
+      setLocation(null);
+      autocompleteRef.current!.value = "";
+      reset();
+    }
+  };
+
+  const wipeInput = () => {
+    autocompleteRef.current!.value = "";
+    reset();
+  };
+
   return (
-    <div className={style.SearchShippingAddressWrapper}>
-      <div className={style.content}>
-        <ul className={style.autocompleteContainer}>
-          <li>
-            <div className={style.inputColumn}>
-              <span className={style.uperInputText}>Delivry address</span>
+    <UserLocationContainer
+      setCurrentWindowSlide={setCurrentWindowSlide}
+      setModelWindowOpen={setModelWindowOpen}
+      currentWidnowSlide={currentWidnowSlide}
+      actionsWhenClose={wipeInput}
+    >
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={style.SearchShippingAddressWrapper}
+      >
+        <div className={style.content}>
+          <ul className={style.autocompleteContainer}>
+            <fieldset>
+              <span className={style.inputTitle}>*Delivry address</span>
               <Autocomplete
-                isLoaded={isLoaded}
-                center={center}
+                isLoaded={stateObj.isLoaded}
+                center={stateObj.center}
                 setLocation={setLocation}
+                autocompleteRef={autocompleteRef}
               />
-            </div>
-            <div className={style.inputColumn}>
-              <span className={style.uperInputText}>
-                Floor, door, instructions
+            </fieldset>
+            <fieldset>
+              <span className={style.inputTitle}>
+                *Floor, door, some instructions
               </span>
-              <input type="text" />
+              <input
+                type="search"
+                {...register("floorAndDoor", {
+                  required: "*Instructions is required field ",
+                })}
+              />
+              {errors.floorAndDoor && (
+                <FormErrors errors={errors.floorAndDoor.message} />
+              )}
+            </fieldset>
+            <button
+              onClick={() => stateObj.setCurrentWindowSlide(2)}
+              className={style.checkoutPageButton}
+            >
+              Find place adreess in map
+            </button>
+          </ul>
+          <div className={style.mapContainer}>
+            <div className={style.map}>
+              {stateObj.isLoaded ? (
+                <Map
+                  muteMap={false}
+                  center={stateObj.center}
+                  onLoad={stateObj.onLoad}
+                  onUnmount={stateObj.onUnmount}
+                />
+              ) : (
+                <MapPlaceholder />
+              )}
             </div>
-          </li>
-          <button
-            onClick={() => setCurrentWindowSlide(2)}
-            className={style.checkoutPageButton}
-          >
-            Find place adreess in map
-          </button>
-        </ul>
-        <div className={style.mapContainer}>
-          <div className={style.map}>
-            {isLoaded ? (
-              <Map muteMap={false} center={center} />
-            ) : (
-              <div>EMPTY MAP</div>
-            )}
           </div>
         </div>
-      </div>
-      <button
-        onClick={() => {
-          setNewUserAddress(location);
-          setModelWindowOpen(false); //Add disable when select value feald is none. And Img instade coordinate in map
-        }}
-        className={style.deliverySectionButton}
-      >
-        Submit address
-      </button>
-    </div>
+        <button type="submit" className={style.deliverySectionButton}>
+          Submit address
+        </button>
+      </form>
+    </UserLocationContainer>
   );
 };
 export default SearchShippingAddress;

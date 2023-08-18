@@ -4,6 +4,10 @@
 $dropdownBorder: 2px solid rgb(34, 75, 35);
 
 .selector {
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
   position: relative;
 
   .inputContainer {
@@ -30,9 +34,10 @@ $dropdownBorder: 2px solid rgb(34, 75, 35);
 
       background-color: initial;
 
-      padding-right: 40px;
+      padding: 0.5em 3em 0.5em 0.4em;
 
       cursor: pointer;
+      @include overflowText;
     }
     .selectorIcon {
       top: 15px;
@@ -110,6 +115,8 @@ $dropdownBorder: 2px solid rgb(34, 75, 35);
 
   transition: 0.3s;
   white-space: nowrap;
+
+  @include overflowText;
 
   &:hover {
     background-color: rgb(15, 68, 15);

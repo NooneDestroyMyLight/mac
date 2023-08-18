@@ -37,7 +37,6 @@ const Map: FC<Imap> = ({ center, muteMap }) => {
     draggable: muteMap,
   };
 
-
   Geocode.setApiKey(API_KEY);
 
   useMemo(() => {
